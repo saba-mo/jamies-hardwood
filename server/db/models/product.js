@@ -24,7 +24,7 @@ module.exports = db.define('product', {
 
   price: {
     //   confirm type for prices
-    type: Sequelize.DECIMAl,
+    type: Sequelize.DECIMAL,
     defaultValue: false,
     validate: {
       min: 0
