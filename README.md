@@ -1,6 +1,5 @@
 # KoolKiwis
 
-saba's change!
 Abbie's change!
 _Good things come in pairs_
 
