@@ -3,23 +3,23 @@ import {connect} from 'react-redux'
 import {fetchSingleProduct} from '../store/singleProduct'
 import axios from 'axios'
 
-class SingleProduct extends React.Component {
-  constructor() {
-    super()
+export class SingleProduct extends React.Component {
+  //   constructor() {
+  //     super()
 
-    this.handleAddToCart = this.handleAddToCart.bind(this)
-  }
+  //     // this.handleAddToCart = this.handleAddToCart.bind(this)
+  //   }
 
-  componentDidMount() {
-    this.props.loadSingleProduct(this.props.match.params.productId)
-  }
+  //   componentDidMount() {
+  //     this.props.loadSingleProduct(this.props.match.params.productId)
+  //   }
 
-  async handleComplete() {
-    await axios.put(`/api/projects/${this.props.project.id}`, {
-      completed: true
-    })
-    this.props.loadSingleProject(this.props.project.id)
-  }
+  //   async handleComplete() {
+  //     await axios.put(`/api/projects/${this.props.project.id}`, {
+  //       completed: true,
+  //     })
+  //     this.props.loadSingleProject(this.props.project.id)
+  //   }
 
   render() {
     let product
@@ -41,9 +41,13 @@ class SingleProduct extends React.Component {
       <div>
         <h1>{product.name}</h1>
         Description: {product.description}
+        <br />
         Quantity: {product.quantity}
+        <br />
         Price: ${product.price}
-        {product.imageUrl}
+        <br />
+        <img src={product.imageUrl} />
+        <br />
         <button type="submit" onClick={this.handleAddToCart}>
           Add to Cart
         </button>
