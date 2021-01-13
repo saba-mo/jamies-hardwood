@@ -37,7 +37,7 @@ export class AllProducts extends React.Component {
 
 const mapState = (state) => {
   return {
-    projects: state.products,
+    products: state.products,
   }
 }
 
