@@ -5,6 +5,8 @@ import thunkMiddleware from 'redux-thunk'
 import {composeWithDevTools} from 'redux-devtools-extension'
 import user from './user'
 
+import usersReducer from './redux/users/usersReducer'
+
 const reducer = combineReducers({user})
 
 // this chunk was given to us in JPFP

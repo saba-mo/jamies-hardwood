@@ -28,7 +28,7 @@ router.get('/', async (req, res, next) => {
       // Also, it won't help if we just send everything to anyone who asks!
       attributes: ['id', 'firstName', 'lastName', 'email'],
     })
-    res.send(user)
+    res.json(user)
   } catch (error) {
     next(error)
   }

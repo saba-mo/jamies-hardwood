@@ -1,6 +1,6 @@
 import React from 'react'
 import {connect} from 'react-redux'
-import {fetchUsers, deleteUser} from '../../store/redux/robots/robotsReducer'
+import {fetchUsers, deleteUser} from '../../store/redux/users/usersReducer'
 import {Link} from 'react-router-dom'
 
 export class UserList extends React.Component {
