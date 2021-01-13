@@ -2,7 +2,6 @@ import React from 'react'
 import {connect} from 'react-redux'
 import {fetchUsers, deleteUser} from '../../store/redux/robots/robotsReducer'
 import {Link} from 'react-router-dom'
-import User from './user'
 
 export class UserList extends React.Component {
   constructor(props) {
@@ -37,14 +36,12 @@ export class UserList extends React.Component {
                         {user.firstname} {user.lastname}
                       </h4>
                     </Link>
-                    Click here to delete {user.firstname} {user.lastname} --->
                     <button
                       type="button"
                       onClick={() => this.handleDelete(user)}
                     >
-                      Delete
+                      Delete this account
                     </button>
-                    <User user={user} />
                   </div>
                 )
               })}
