@@ -9,7 +9,7 @@ router.delete('/:id', async (req, res, next) => {
     if (isNaN(id)) return res.status(404).end()
 
     const user = await User.findOne({
-      where: {id: id}
+      where: {id: id},
     })
 
     if (!user) return res.status(404).end()
@@ -24,9 +24,9 @@ router.delete('/:id', async (req, res, next) => {
 router.get('/', async (req, res, next) => {
   try {
     const user = await User.findAll({
-      // explicitly select only the id and email fields - even though users' passwords are encrypted, it is unnecessary for admin to view more on the view all page
+      // explicitly select only the id and email fields - even though users' passwords are encrypted, it is unnecessary to view more on the view all page
       // Also, it won't help if we just send everything to anyone who asks!
-      attributes: ['id', 'firstName', 'lastName', 'email']
+      attributes: ['id', 'firstName', 'lastName', 'email'],
     })
     res.send(user)
   } catch (error) {
@@ -44,8 +44,9 @@ router.get('/:id', async (req, res, next) => {
     }
     const user = await User.findOne({
       where: {
-        id: id
-      }
+        id: id,
+      },
+      attributes: ['id', 'firstName', 'lastName', 'email'],
       // include: Cart,
     })
 

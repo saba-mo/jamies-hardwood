@@ -12,7 +12,7 @@ export class UserList extends React.Component {
     this.props.loadUsers()
   }
 
-  handleDelete = userToDelete => {
+  handleDelete = (userToDelete) => {
     this.props.deleteUser(userToDelete)
   }
 
@@ -28,12 +28,13 @@ export class UserList extends React.Component {
         <div id="full-list-display">
           <div id="list">
             <ul>
-              {userList.map(user => {
+              {userList.map((user) => {
                 return (
                   <div key={`user-${user.id}`}>
                     <Link to={`/users/${user.id}`}>
                       <h4>
-                        {user.firstname} {user.lastname}
+                        {user.firstName} {user.lastName} <p />
+                        {user.email}
                       </h4>
                     </Link>
                     <button
@@ -53,13 +54,13 @@ export class UserList extends React.Component {
   }
 }
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   return {users: state.users}
 }
 
-const mapDispatchToProps = dispatch => ({
-  deleteUser: user => dispatch(deleteUser(user)),
-  loadUsers: () => dispatch(fetchUsers())
+const mapDispatchToProps = (dispatch) => ({
+  deleteUser: (user) => dispatch(deleteUser(user)),
+  loadUsers: () => dispatch(fetchUsers()),
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(UserList)
