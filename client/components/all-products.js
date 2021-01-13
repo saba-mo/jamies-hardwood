@@ -11,6 +11,7 @@ export class AllProducts extends React.Component {
   //is the link correct? Check
 
   render() {
+    console.log('all products: ', this.props)
     return (
       <div>
         {this.props.products.map(product => (
