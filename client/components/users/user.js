@@ -8,10 +8,10 @@ class User extends React.Component {
     return (
       <div className="user-individual">
         <p>
-          User name {user.firstname} {user.lastname}.
+          User name: {user.firstname} {user.lastname}.
         </p>
-        <p>User email {user.email}</p>
-        <p>User type {user.type}</p>
+        <p>User email: {user.email}</p>
+        <p>User type: {user.type}</p>
       </div>
     )
   }

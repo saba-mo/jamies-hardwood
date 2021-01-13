@@ -1,6 +1,6 @@
 import React from 'react'
 import {connect} from 'react-redux'
-import {fetchUsers, removeUser} from '../../store/redux/robots/robotsReducer'
+import {fetchUsers, deleteUser} from '../../store/redux/robots/robotsReducer'
 import {Link} from 'react-router-dom'
 import User from './user'
 
@@ -61,7 +61,7 @@ const mapStateToProps = state => {
 }
 
 const mapDispatchToProps = dispatch => ({
-  removeUser: user => dispatch(removeUser(user)),
+  deleteUser: user => dispatch(deleteUser(user)),
   loadUsers: () => dispatch(fetchUsers())
 })
 

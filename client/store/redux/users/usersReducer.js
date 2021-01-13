@@ -1,11 +1,9 @@
-import axios from 'axios'
-
 /**
  * ACTION TYPES
  */
 const SET_USERS = 'SET_USERS'
 const SET_A_USER = 'SET_A_USER'
-const REMOVE_USER = 'REMOVE_USER'
+const DELETE_USER = 'DELETE_USER'
 
 /**
  * INITIAL STATE
@@ -18,7 +16,7 @@ const initialState = []
  * ACTION CREATORS
  */
 export const destroyUser = user => ({
-  type: REMOVE_USER,
+  type: DELETE_USER,
   user: user
 })
 export const setUser = user => ({
@@ -39,7 +37,7 @@ export const deleteUser = user => async (dispatch, getState, {axios}) => {
     await axios.delete(`/api/users/${user.id}`)
     dispatch(destroyUser(user))
   } catch (error) {
-    console.error('could not delete user:', error)
+    console.error('could not delete user: ', error)
   }
 }
 
@@ -48,7 +46,7 @@ export const fetchUser = userId => async (dispatch, getState, {axios}) => {
     const {data} = await axios.get(`/api/users/${userId}`)
     dispatch(setUser(data))
   } catch (error) {
-    console.log('unable to fetch user:', error)
+    console.log('unable to fetch user: ', error)
   }
 }
 
