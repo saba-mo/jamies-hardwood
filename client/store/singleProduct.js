@@ -2,10 +2,10 @@ import axios from 'axios'
 
 const GET_SINGLE_PRODUCT = 'GET_SINGLE_PRODUCT'
 
-export const getSingleProduct = product => {
+export const getSingleProduct = singleProduct => {
   return {
     type: GET_SINGLE_PRODUCT,
-    product
+    singleProduct
   }
 }
 
@@ -25,7 +25,7 @@ const initialState = {}
 export default function singleProductReducer(state = initialState, action) {
   switch (action.type) {
     case GET_SINGLE_PRODUCT:
-      return action.product
+      return action.singleProduct
     default:
       return state
   }
