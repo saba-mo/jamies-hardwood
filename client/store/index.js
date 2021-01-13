@@ -4,6 +4,7 @@ import axios from 'axios'
 import thunkMiddleware from 'redux-thunk'
 import {composeWithDevTools} from 'redux-devtools-extension'
 import user from './user'
+import productsReducer from './products'
 import singleProduct from './singleProduct'
 import usersReducer from './redux/users/usersReducer'
 
