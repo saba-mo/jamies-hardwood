@@ -10,20 +10,18 @@ export class AllProducts extends React.Component {
   }
 
   //is the link correct? Check
-  //Should clicking image OR title OR price take you to the product?
-  //with jsx, can I just throw html like $ in there?
 
   render() {
     return (
       <div>
         <nav>{Navbar}</nav>
         <div>
-          {this.props.products.map((product) => (
+          {this.props.products.map(product => (
             <div key={product.id}>
               <Link to={`/products/${product.id}`}>
+                <img src={product.imageUrl} />
                 <h2>{product.name}</h2>
                 <h4>${product.price}</h4>
-                <img src={product.imageUrl} />
               </Link>
             </div>
           ))}
@@ -33,16 +31,14 @@ export class AllProducts extends React.Component {
   }
 }
 
-// name, price, image
-
-const mapState = (state) => {
+const mapState = state => {
   return {
-    products: state.products,
+    products: state.products
   }
 }
 
-const mapDispatch = (dispatch) => ({
-  getProducts: () => dispatch(fetchProducts()),
+const mapDispatch = dispatch => ({
+  getProducts: () => dispatch(fetchProducts())
 })
 
 export default connect(mapState, mapDispatch)(AllProducts)
