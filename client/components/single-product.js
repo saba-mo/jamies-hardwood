@@ -9,8 +9,8 @@ class SingleProduct extends React.Component {
   //   // this.handleAddToCart = this.handleAddToCart.bind(this)
   // }
 
-  async componentDidMount() {
-    await this.props.loadSingleProduct(this.props.match.params.productId)
+  componentDidMount() {
+    this.props.loadSingleProduct(this.props.match.params.productId)
   }
 
   render() {

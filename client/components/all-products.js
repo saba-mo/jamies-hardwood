@@ -4,14 +4,11 @@ import {connect} from 'react-redux'
 import {fetchProducts} from '../store/products'
 
 class AllProducts extends React.Component {
-  async componentDidMount() {
-    await this.props.getProducts()
+  componentDidMount() {
+    this.props.getProducts()
   }
 
   render() {
-    if (this.props.products === undefined) {
-      return <div>Loading...</div>
-    }
     return (
       <div>
         {this.props.products.map(product => (
