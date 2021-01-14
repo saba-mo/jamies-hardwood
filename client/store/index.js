@@ -8,7 +8,7 @@ import productsReducer from './products'
 import singleProduct from './singleProduct'
 import usersReducer from './redux/users/usersReducer'
 
-const reducer = combineReducers({
+export const reducer = combineReducers({
   user,
   singleProduct,
   usersReducer,
@@ -38,4 +38,5 @@ const store = createStore(reducer, middleware)
 
 export default store
 export * from './user'
-// export * from './singleProduct'
+export * from './singleProduct'
+export * from './products'

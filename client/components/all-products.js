@@ -3,15 +3,15 @@ import {Link} from 'react-router-dom'
 import {connect} from 'react-redux'
 import {fetchProducts} from '../store/products'
 
-export class AllProducts extends React.Component {
-  componentDidMount() {
-    this.props.getProducts()
+class AllProducts extends React.Component {
+  async componentDidMount() {
+    await this.props.getProducts()
   }
 
-  //is the link correct? Check
-
   render() {
-    console.log('all products: ', this.props)
+    if (this.props.products === undefined) {
+      return <div>Loading...</div>
+    }
     return (
       <div>
         {this.props.products.map(product => (
@@ -30,12 +30,14 @@ export class AllProducts extends React.Component {
 
 const mapState = state => {
   return {
-    products: state.products
+    products: state.productsReducer
   }
 }
 
-const mapDispatch = dispatch => ({
-  getProducts: () => dispatch(fetchProducts())
-})
+const mapDispatch = dispatch => {
+  return {
+    getProducts: () => dispatch(fetchProducts())
+  }
+}
 
 export default connect(mapState, mapDispatch)(AllProducts)
