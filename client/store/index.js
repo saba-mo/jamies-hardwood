@@ -8,8 +8,12 @@ import productsReducer from './products'
 import singleProduct from './singleProduct'
 import usersReducer from './redux/users/usersReducer'
 
-
-const reducer = combineReducers({user, singleProduct})
+export const reducer = combineReducers({
+  user,
+  singleProduct,
+  usersReducer,
+  productsReducer
+})
 
 // this chunk was given to us in JPFP
 // let middleware = [
@@ -23,7 +27,6 @@ const reducer = combineReducers({user, singleProduct})
 // }
 // I think by adding `.withExtraArgument({axios})` below it doesn't change is set up in BoilerMaker and enables us to access axios in the same way
 
-
 const middleware = composeWithDevTools(
   applyMiddleware(
     thunkMiddleware.withExtraArgument({axios}),
@@ -35,4 +38,5 @@ const store = createStore(reducer, middleware)
 
 export default store
 export * from './user'
-// export * from './singleProduct'
+export * from './singleProduct'
+export * from './products'
