@@ -1,6 +1,6 @@
-const {green, red} = require('chalk')
-const {User, Product} = require('../server/db/models')
-const db = require('../server/db/')
+const {green, red} = require('chalk');
+const {User, Product} = require('../server/db/models');
+const db = require('../server/db/');
 
 const firstNames = [
   'Alice',
@@ -38,7 +38,7 @@ const firstNames = [
   'Fox',
   'Sai',
   'Viotto',
-]
+];
 const lastNames = [
   'Johnson',
   'Abernathy',
@@ -85,7 +85,7 @@ const lastNames = [
   'Sapphirus',
   'Omega',
   'Umbra',
-]
+];
 
 const itemAdjective = [
   'fullness',
@@ -128,22 +128,23 @@ const itemAdjective = [
   'captivation',
   'love',
   'charisma',
-]
+];
 
-const emailHost = ['gmail', 'hotmail', 'yahoo']
-const userCount = 200
-const productCount = 200
+const emailHost = ['gmail', 'hotmail', 'yahoo'];
+const userCount = 200;
+const productCount = 200;
 
 // const images = [`images from either urls or csv files`]
-let bowlImage = `https://images.crateandbarrel.com/is/image/Crate/CarsonMedBowl12inSHS18/$web_pdp_main_carousel_high$/190411134912/carson-medium-bowl.jpg`
-let earringImage = `https://cdn.shopify.com/s/files/1/0736/8211/products/Tear_Drop_Earring_Large_422x.png?v=1568803221`
+let bowlImage = `https://images.crateandbarrel.com/is/image/Crate/CarsonMedBowl12inSHS18/$web_pdp_main_carousel_high$/190411134912/carson-medium-bowl.jpg`;
+let earringImage = `https://cdn.shopify.com/s/files/1/0736/8211/products/Tear_Drop_Earring_Large_422x.png?v=1568803221`;
 
 const users = async () => {
   for (let i = 0; i < userCount; i++) {
-    let first = firstNames[Math.floor(Math.random() * 1000) % firstNames.length]
-    let last = lastNames[Math.floor(Math.random() * 1000) % lastNames.length]
-    let host = emailHost[Math.floor(Math.random() * 1000) % emailHost.length]
-    let email = `${first}.${last}@${host}.com`
+    let first =
+      firstNames[Math.floor(Math.random() * 1000) % firstNames.length];
+    let last = lastNames[Math.floor(Math.random() * 1000) % lastNames.length];
+    let host = emailHost[Math.floor(Math.random() * 1000) % emailHost.length];
+    let email = `${first}.${last}@${host}.com`;
     try {
       await Promise.all([
         User.create({
@@ -151,21 +152,21 @@ const users = async () => {
           lastName: last,
           email: email,
         }),
-      ])
+      ]);
     } catch (error) {
-      console.log('UserOops!', red(error))
+      console.log('UserOops!', red(error));
     }
   }
-}
+};
 
 const productEarrings = async () => {
   for (let i = 0; i < productCount; i++) {
     let adjective =
-      itemAdjective[Math.floor(Math.random() * 1000) % itemAdjective.length]
-    let name = `Earrings of ${adjective}`
-    let description = 'This is the next thing you need to own!'
-    let quantity = Math.floor(Math.random() * 100)
-    let price = Math.random() * 100
+      itemAdjective[Math.floor(Math.random() * 1000) % itemAdjective.length];
+    let name = `Earrings of ${adjective}`;
+    let description = 'This is the next thing you need to own!';
+    let quantity = Math.floor(Math.random() * 100);
+    let price = Math.random() * 100;
     try {
       await Promise.all([
         Product.create({
@@ -175,21 +176,21 @@ const productEarrings = async () => {
           price: price,
           imageUrl: earringImage,
         }),
-      ])
+      ]);
     } catch (error) {
-      console.log('EarringOops!', red(error))
+      console.log('EarringOops!', red(error));
     }
   }
-}
+};
 
 const ProductBowls = async () => {
   for (let i = 0; i < productCount; i++) {
     let adjective =
-      itemAdjective[Math.floor(Math.random() * 1000) % itemAdjective.length]
-    let name = `Bowls of ${adjective}`
-    let description = 'This is the next thing you need to own!'
-    let quantity = Math.floor(Math.random() * 100)
-    let price = Math.random() * 100
+      itemAdjective[Math.floor(Math.random() * 1000) % itemAdjective.length];
+    let name = `Bowls of ${adjective}`;
+    let description = 'This is the next thing you need to own!';
+    let quantity = Math.floor(Math.random() * 100);
+    let price = Math.random() * 100;
 
     try {
       await Promise.all([
@@ -200,38 +201,39 @@ const ProductBowls = async () => {
           price: price,
           imageUrl: bowlImage,
         }),
-      ])
+      ]);
     } catch (error) {
-      console.log('BowlOops!', red(error))
+      console.log('BowlOops!', red(error));
     }
   }
-}
-async function seed() {
-  await db.sync({force: true})
-  console.log(green('db synced!'))
-  users()
-  productEarrings()
-  ProductBowls()
-}
+};
+
+const seed = async () => {
+  await db.sync({force: true});
+  console.log(green('db synced!'));
+  users();
+  productEarrings();
+  ProductBowls();
+};
 
 async function runSeed() {
-  console.log('seeding...')
+  console.log('seeding...');
   try {
-    await seed()
+    await seed();
   } catch (err) {
-    console.error('error seeding: ', red(err))
+    console.error('error seeding: ', red(err));
   }
 }
 if (module === require.main) {
-  runSeed()
+  runSeed();
 }
 
 // We've separated the `seed` function from the `runSeed` function. This way we can isolate the error handling and exit trapping. The `seed` function is concerned only with modifying the database.
 
 // Execute the `seed` function, IF we ran this module directly (`node seed`).
 if (module === require.main) {
-  runSeed()
+  runSeed();
 }
 
 // we export the seed function for testing purposes (see `./seed.spec.js`)
-module.exports = seed
+module.exports = seed;
