@@ -11,6 +11,7 @@ const Navbar = ({handleClick, isLoggedIn}) => (
   <div>
     <h1>Jamie's Hardwood and Heavy Metal</h1>
     <nav>
+      {/* curently made this !isLoggedIn instead of isLoggedIn in order to work on viewing the loggedIn page without Oath up and running. Eventually will be reversed and/or completely removed and replaced by "isAdmin" vvvvvv*/}
       {!isLoggedIn ? (
         <div>
           {/* The navbar will show these links after you log in */}
