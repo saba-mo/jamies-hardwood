@@ -22,32 +22,29 @@ class Cart extends React.Component {
     // await axios.put(`/api/projects/${this.props.project.id}`, { unassignId });
     console.log('button works');
     window.location.href = '/confirmation';
-    // check
-
-    // return <Redirect to="/confirmation" />;
   }
 
   render() {
     const {cart} = this.props;
-    const prices = cart.map(product =>
-      Number(product.totalPriceForThisProduct)
+
+    let orderTotal = cart.reduce(
+      (accumulator, currentValue) =>
+        accumulator + Number(currentValue.totalPriceForThisProduct),
+      0
     );
-    let orderTotal = 0;
-    prices.forEach(price => (orderTotal += price));
 
-    const quantity = cart.map(product => product.quantity);
-    let totalItems = 0;
-    quantity.forEach(item => (totalItems += item));
-
+    let totalItems = cart.reduce(
+      (accumulator, currentValue) => accumulator + currentValue.quantity,
+      0
+    );
+    console.log(cart);
     return (
       <div>
         <h1>Shopping Cart</h1>
-        {/* {carts model quantity sum} items */}
+        {/* If cart is empty, show 'Cart is emtpy' message, otherwise, show what's below */}
         Total Items: {totalItems}
         <br />
-        {/* If cart is empty, show 'Cart is emtpy' message, otherwise, show what's below */}
         Order Total: {orderTotal}
-        {/* ${orders model total Price} */}
         <br />
         {/* map over items in cart and show name, image, quantity (with ability to add/subtract), item price and total price */}
         <br />

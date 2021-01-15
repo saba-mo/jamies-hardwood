@@ -1,5 +1,6 @@
 const router = require('express').Router();
-// const Product = require('../db/models/product')
+const Sequelize = require('sequelize');
+const Product = require('../db/models/product');
 const Cart = require('../db/models/cart');
 // const Order = require('../db/models/order');
 
@@ -16,12 +17,24 @@ router.get('/', async (req, res, next) => {
 
 router.get('/:cartId', async (req, res, next) => {
   try {
-    // const thisCart = await Cart.findByPk(req.params.cartId);
+    // look up eager loading for many to many relationship
     const thisCart = await Cart.findAll({
       where: {
         orderId: req.params.cartId
-      },
-      attributes: ['quantity', 'totalPriceForThisProduct', 'orderId']
+      }
+      //   include: {
+      //     model: Product,
+      //     // required: true,
+      //     // where: {
+      //     //   id: Sequelize.col('cart.productId'),
+      //     // },
+      //     through: {
+      //       where: {
+      //         id: Sequelize.col('cart.productId'),
+      //       },
+      //     },
+      //   },
+      //   include Product model where productId: id or id: productId? want to load product info
     });
     if (!thisCart) res.sendStatus(404);
     res.send(thisCart);

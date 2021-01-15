@@ -25,9 +25,29 @@ class SingleProduct extends React.Component {
         <br />
         <img src={product.imageUrl} />
         <br />
-        <button type="submit" onClick={this.handleAddToCart}>
-          Add to Cart
-        </button>
+        <label htmlFor="quantity">Quantity: </label>
+        {/* <input type="number" min="1" max="100" value="1"> */}
+        <select
+          // value={props.fuelType}
+          // onChange={props.handleChange}
+          name="quantity"
+        >
+          <option value="1">1</option>
+          <option value="2">2</option>
+          <option value="3">3</option>
+          <option value="4">4</option>
+          <option value="5">5</option>
+          <option value="6">6</option>
+          <option value="7">7</option>
+          <option value="8">8</option>
+          <option value="9">9</option>
+          <option value="10">10</option>
+        </select>
+        <p>
+          <button type="submit" onClick={this.handleAddToCart}>
+            Add to Cart
+          </button>
+        </p>
       </div>
     );
   }
