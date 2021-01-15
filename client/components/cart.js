@@ -9,9 +9,8 @@ class Cart extends React.Component {
     this.handleCheckout = this.handleCheckout.bind(this);
   }
 
+  //   do we need async await?
   async componentDidMount() {
-    // this.props.loadCart();
-
     await this.props.loadCart(this.props.match.params.cartId);
   }
 
@@ -29,26 +28,23 @@ class Cart extends React.Component {
   }
 
   render() {
-    console.log('cart props: ', this.props);
-    const {cart} = this.props.cart || [];
+    const {cart} = this.props;
+    const prices = cart.map(product =>
+      Number(product.totalPriceForThisProduct)
+    );
+    let orderTotal = 0;
+    prices.forEach(price => (orderTotal += price));
 
-    const orderTotal = cart
-      .map(product => Number(product.totalPriceForThisProduct))
-      .reduce(function(a, b) {
-        return a + b;
-      });
-
-    const totalItems = cart
-      .map(product => product.quantity)
-      .reduce(function(a, b) {
-        return a + b;
-      });
+    const quantity = cart.map(product => product.quantity);
+    let totalItems = 0;
+    quantity.forEach(item => (totalItems += item));
 
     return (
       <div>
         <h1>Shopping Cart</h1>
         {/* {carts model quantity sum} items */}
         Total Items: {totalItems}
+        <br />
         {/* If cart is empty, show 'Cart is emtpy' message, otherwise, show what's below */}
         Order Total: {orderTotal}
         {/* ${orders model total Price} */}
