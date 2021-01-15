@@ -240,27 +240,53 @@ const orders = async () => {
 //   }
 //   })
 // }
+// const associations = async () => {
+//   await user.addProducts([productEarrings[1]]);
+// };
+// await associations();
+
+// const associated = async () => {
+//   const bowl = await Product.create({
+//     name: 'Earrings of charisma',
+//     description: 'the thing!',
+//     quantity: 1,
+//     price: 99.99
+//   })
+//   const shopper =
+// }
+
+async function associations() {
+  // gives an array of objects that are newly created users
+  let user = await User.findAll({
+    where: {
+      firstName: 'Pickle',
+    },
+  });
+  let one = user[1];
+
+  // gives an array of objects that are newly created products
+  let product = await Product.findAll({
+    where: {
+      quantity: 10,
+    },
+  });
+  let thing = product[1];
+
+  console.log('user1', one);
+  console.log('product1', thing);
+
+  let end = await one.addProducts([thing]);
+  console.log('end', end);
+  // return user
+}
 
 const seed = async () => {
   await db.sync({force: true});
   console.log(green('db synced!'));
-
-  users().then(() => {
-    let user = User.findAll({
-      where: {
-        firstName: 'Hank',
-      },
-    });
-    console.log('arr?', user);
-  });
-
+  users();
   productEarrings();
   productBowls();
   orders();
-  const associations = async () => {
-    await user.addProducts([productEarrings[1]]);
-  };
-  await associations();
 };
 
 async function runSeed() {
@@ -271,8 +297,10 @@ async function runSeed() {
     console.error('error seeding: ', red(err));
   }
 }
+
 if (module === require.main) {
   runSeed();
+  associations();
 }
 
 // We've separated the `seed` function from the `runSeed` function. This way we can isolate the error handling and exit trapping. The `seed` function is concerned only with modifying the database.
