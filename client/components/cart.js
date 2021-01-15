@@ -23,6 +23,7 @@ class Cart extends React.Component {
     // await axios.put(`/api/projects/${this.props.project.id}`, { unassignId });
     console.log('button works');
     window.location.href = '/confirmation';
+    // check
 
     // return <Redirect to="/confirmation" />;
   }
