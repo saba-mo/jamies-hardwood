@@ -2,7 +2,7 @@ import React from 'react';
 import {connect} from 'react-redux';
 import {fetchSingleProduct} from '../../store/redux/products/singleProduct';
 
-class SingleProduct extends React.Component {
+export class SingleProduct extends React.Component {
   constructor(props) {
     super(props);
     this.handleAddToCart = this.handleAddToCart.bind(this);
@@ -55,15 +55,15 @@ class SingleProduct extends React.Component {
   }
 }
 
-const mapState = state => {
+const mapState = (state) => {
   return {
-    product: state.singleProduct
+    product: state.singleProduct,
   };
 };
 
-const mapDispatch = dispatch => {
+const mapDispatch = (dispatch) => {
   return {
-    loadSingleProduct: id => dispatch(fetchSingleProduct(id))
+    loadSingleProduct: (id) => dispatch(fetchSingleProduct(id)),
   };
 };
 
