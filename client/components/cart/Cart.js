@@ -1,6 +1,6 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import {fetchCart} from '../store/redux/cart';
+import {fetchCart} from '../../store/redux/cart/cart';
 
 class Cart extends React.Component {
   constructor() {
