@@ -1,23 +1,30 @@
-const router = require('express').Router()
-const Product = require('../db/models/product')
+const router = require('express').Router();
+const Product = require('../db/models/product');
 
+// GET /products
 router.get('/', async (req, res, next) => {
   try {
-    const productList = await Product.findAll()
-    res.send(productList)
+    const productList = await Product.findAll();
+    res.json(productList);
   } catch (error) {
-    next(error)
+    next(error);
   }
-})
+});
 
+// GET /products/:id
 router.get('/:productId', async (req, res, next) => {
   try {
-    const thisProduct = await Product.findByPk(req.params.productId)
-    if (!thisProduct) res.sendStatus(404)
-    res.send(thisProduct)
+    const id = parseInt(req.params.productId);
+    if (isNaN(id)) {
+      res.status(400).end();
+      return;
+    }
+    const thisProduct = await Product.findByPk(id);
+    if (!thisProduct) res.sendStatus(404);
+    res.status(200).json(thisProduct);
   } catch (error) {
-    next(error)
+    next(error);
   }
-})
+});
 
-module.exports = router
+module.exports = router;

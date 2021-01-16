@@ -1,5 +1,5 @@
 const {green, red} = require('chalk');
-const {User, Product} = require('../server/db/models');
+const {User, Product, Order, Cart} = require('../server/db/models');
 const db = require('../server/db/');
 
 const firstNames = [
@@ -183,7 +183,7 @@ const productEarrings = async () => {
   }
 };
 
-const ProductBowls = async () => {
+const productBowls = async () => {
   for (let i = 0; i < productCount; i++) {
     let adjective =
       itemAdjective[Math.floor(Math.random() * 1000) % itemAdjective.length];
@@ -208,12 +208,30 @@ const ProductBowls = async () => {
   }
 };
 
+const orders = async () => {
+  let order = 1;
+  while (order < userCount) {
+    try {
+      await Promise.all([
+        Order.create({
+          totalPrice: 100,
+        }),
+      ]);
+      order++;
+    } catch (error) {
+      console.log('OrderOops!', red(error));
+    }
+  }
+};
+
 const seed = async () => {
   await db.sync({force: true});
   console.log(green('db synced!'));
+
   users();
   productEarrings();
-  ProductBowls();
+  productBowls();
+  orders();
 };
 
 async function runSeed() {
