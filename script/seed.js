@@ -154,7 +154,7 @@ const users = async () => {
         })
       ]);
     } catch (error) {
-      console.log('UserOops!', red(error));
+      console.log('UserOops!', error);
     }
   }
 };
@@ -178,7 +178,7 @@ const productEarrings = async () => {
         })
       ]);
     } catch (error) {
-      console.log('EarringOops!', red(error));
+      console.log('EarringOops!', error);
     }
   }
 };
@@ -203,7 +203,7 @@ const productBowls = async () => {
         })
       ]);
     } catch (error) {
-      console.log('BowlOops!', red(error));
+      console.log('BowlOops!', error);
     }
   }
 };
@@ -226,7 +226,7 @@ const orders = async () => {
 
 const seed = async () => {
   await db.sync({force: true});
-  console.log(green('db synced!'));
+  console.log('db synced!');
   users();
   productEarrings();
   productBowls();
@@ -238,7 +238,7 @@ async function runSeed() {
   try {
     await seed();
   } catch (err) {
-    console.error('error seeding: ', red(err));
+    console.error('error seeding: ', err);
   }
 }
 
