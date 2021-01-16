@@ -4,6 +4,7 @@ const Product = require('../db/models/product');
 const Cart = require('../db/models/cart');
 const Order = require('../db/models/order');
 
+// unsure if we need this route - shows everyone's carts
 router.get('/', async (req, res, next) => {
   try {
     const allCarts = await Cart.findAll({

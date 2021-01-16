@@ -14,7 +14,6 @@ import {
   Confirmation
 } from './components';
 import {me} from './store';
-//import Cart from './components/cart'
 
 /**
  * COMPONENT
@@ -34,7 +33,6 @@ class Routes extends Component {
         <Route path="/signup" component={Signup} />
         <Route exact path="/products" component={AllProducts} />
         <Route exact path="/products/:productId" component={SingleProduct} />
-        {/* vvvvvv add  to routes once cart component exists vvvvv */}
         <Route path="/cart/:cartId" component={Cart} />
         <Route path="/confirmation" component={Confirmation} />
         {isLoggedIn && (
