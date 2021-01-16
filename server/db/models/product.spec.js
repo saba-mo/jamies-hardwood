@@ -4,7 +4,7 @@ const {expect} = require('chai');
 const db = require('../index');
 const Product = db.model('product');
 
-describe('Sequelize Model', () => {
+describe('Product Model', () => {
   let product;
   before(() => db.sync({force: true}));
   beforeEach(() => {
