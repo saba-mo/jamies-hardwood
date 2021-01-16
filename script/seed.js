@@ -226,12 +226,6 @@ const orders = async () => {
 
 // user.addProject(project, { through: { status: 'started' }})
 
-// const associations = async () => {
-//   let user = users[1]
-//   console.log(user)
-//   await user.addProducts([productEarrings[1]])
-// }
-
 // const adminFolks = () => {
 //   return User.findAll({
 //   where: {
@@ -240,20 +234,21 @@ const orders = async () => {
 //   }
 //   })
 // }
-// const associations = async () => {
-//   await user.addProducts([productEarrings[1]]);
-// };
-// await associations();
 
-// const associated = async () => {
-//   const bowl = await Product.create({
-//     name: 'Earrings of charisma',
-//     description: 'the thing!',
-//     quantity: 1,
-//     price: 99.99
-//   })
-//   const shopper =
-// }
+const associated = async () => {
+  const bowl = await Product.create({
+    name: 'Earrings of charisma',
+    description: 'the thing!',
+    quantity: 1,
+    price: 99.99,
+  });
+  const shopper = await User.create({
+    firstName: 'Hillary',
+    lastName: 'Tester',
+    email: 'hillary.tester@gmail.com',
+  });
+  await shopper.addProducts([bowl]);
+};
 
 async function associations() {
   // gives an array of objects that are newly created users
@@ -283,10 +278,11 @@ async function associations() {
 const seed = async () => {
   await db.sync({force: true});
   console.log(green('db synced!'));
-  users();
-  productEarrings();
-  productBowls();
+  await users();
+  await productEarrings();
+  await productBowls();
   orders();
+  await associations();
 };
 
 async function runSeed() {
@@ -303,7 +299,6 @@ async function runSeed() {
 // Execute the `seed` function, IF we ran this module directly (`node seed`).
 if (module === require.main) {
   runSeed();
-  associations();
 }
 
 // we export the seed function for testing purposes (see `./seed.spec.js`)
