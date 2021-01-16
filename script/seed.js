@@ -37,7 +37,7 @@ const firstNames = [
   'Boone',
   'Fox',
   'Sai',
-  'Viotto'
+  'Viotto',
 ];
 const lastNames = [
   'Johnson',
@@ -84,7 +84,7 @@ const lastNames = [
   'Nadir',
   'Sapphirus',
   'Omega',
-  'Umbra'
+  'Umbra',
 ];
 
 const itemAdjective = [
@@ -127,7 +127,7 @@ const itemAdjective = [
   'magnificence',
   'captivation',
   'love',
-  'charisma'
+  'charisma',
 ];
 
 const emailHost = ['gmail', 'hotmail', 'yahoo'];
@@ -150,11 +150,11 @@ const users = async () => {
         User.create({
           firstName: first,
           lastName: last,
-          email: email
-        })
+          email: email,
+        }),
       ]);
     } catch (error) {
-      console.log('UserOops!', error);
+      console.log('User Oops!', red(error));
     }
   }
 };
@@ -174,11 +174,11 @@ const productEarrings = async () => {
           description: description,
           quantity: quantity,
           price: price,
-          imageUrl: earringImage
-        })
+          imageUrl: earringImage,
+        }),
       ]);
     } catch (error) {
-      console.log('EarringOops!', error);
+      console.log('Earring Oops!', red(error));
     }
   }
 };
@@ -199,11 +199,11 @@ const productBowls = async () => {
           description: description,
           quantity: quantity,
           price: price,
-          imageUrl: bowlImage
-        })
+          imageUrl: bowlImage,
+        }),
       ]);
     } catch (error) {
-      console.log('BowlOops!', error);
+      console.log('Bowl Oops!', red(error));
     }
   }
 };
@@ -214,19 +214,75 @@ const orders = async () => {
     try {
       await Promise.all([
         Order.create({
-          totalPrice: 100
-        })
+          totalPrice: 100,
+        }),
       ]);
       order++;
     } catch (error) {
-      console.log('OrderOops!', red(error));
+      console.log('Order Oops!', red(error));
     }
   }
 };
 
+// user.addProject(project, { through: { status: 'started' }})
+
+// const associations = async () => {
+//   let user = users[1]
+//   console.log(user)
+//   await user.addProducts([productEarrings[1]])
+// }
+
+// const adminFolks = () => {
+//   return User.findAll({
+//   where: {
+//     firstName: 'Pickle',
+//     lastName: 'Shrubs'
+//   }
+//   })
+// }
+// const associations = async () => {
+//   await user.addProducts([productEarrings[1]]);
+// };
+// await associations();
+
+// const associated = async () => {
+//   const bowl = await Product.create({
+//     name: 'Earrings of charisma',
+//     description: 'the thing!',
+//     quantity: 1,
+//     price: 99.99
+//   })
+//   const shopper =
+// }
+
+async function associations() {
+  // gives an array of objects that are newly created users
+  let user = await User.findAll({
+    where: {
+      firstName: 'Pickle',
+    },
+  });
+  let one = user[1];
+
+  // gives an array of objects that are newly created products
+  let product = await Product.findAll({
+    where: {
+      quantity: 10,
+    },
+  });
+  let thing = product[1];
+
+  console.log('user1', one);
+  console.log('product1', thing);
+
+  let end = await one.addProducts([thing]);
+  console.log('end', end);
+  // return user
+}
+
 const seed = async () => {
   await db.sync({force: true});
-  console.log('db synced!');
+  console.log(green('db synced!'));
   users();
   productEarrings();
   productBowls();
@@ -234,11 +290,11 @@ const seed = async () => {
 };
 
 async function runSeed() {
-  console.log('seeding...');
+  console.log(green('seeding...'));
   try {
     await seed();
   } catch (err) {
-    console.error('error seeding: ', err);
+    console.error('error seeding: ', red(error));
   }
 }
 
@@ -247,6 +303,7 @@ async function runSeed() {
 // Execute the `seed` function, IF we ran this module directly (`node seed`).
 if (module === require.main) {
   runSeed();
+  associations();
 }
 
 // we export the seed function for testing purposes (see `./seed.spec.js`)
