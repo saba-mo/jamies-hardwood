@@ -4,13 +4,13 @@ import axios from 'axios';
 const SET_PRODUCTS = 'SET_PRODUCTS';
 
 //action creator
-const setProducts = (products) => ({
+const setProducts = products => ({
   type: SET_PRODUCTS,
-  products,
+  products
 });
 
 //thunk creator
-export const fetchProducts = () => async (dispatch) => {
+export const fetchProducts = () => async dispatch => {
   try {
     const {data} = await axios.get('/api/products');
     dispatch(setProducts(data));

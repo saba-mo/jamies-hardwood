@@ -16,7 +16,7 @@ class SingleUser extends React.Component {
     }
 
     const user = userList.find(
-      (useritem) => useritem.id == this.props.match.params.id
+      useritem => useritem.id == this.props.match.params.id
     );
 
     return (
@@ -31,12 +31,12 @@ class SingleUser extends React.Component {
   }
 }
 
-const mapStateToProps = (state) => {
+const mapStateToProps = state => {
   return {users: state.users};
 };
 
-const mapDispatchToProps = (dispatch) => ({
-  loadUser: (userId) => dispatch(fetchUser(userId)),
+const mapDispatchToProps = dispatch => ({
+  loadUser: userId => dispatch(fetchUser(userId))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(SingleUser);

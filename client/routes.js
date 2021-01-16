@@ -10,9 +10,10 @@ import {
   SingleProduct,
   AllUsers,
   SingleUser,
+  Cart,
+  Confirmation
 } from './components';
 import {me} from './store';
-//import Cart from './components/cart'
 
 /**
  * COMPONENT
@@ -32,8 +33,8 @@ class Routes extends Component {
         <Route path="/signup" component={Signup} />
         <Route exact path="/products" component={AllProducts} />
         <Route exact path="/products/:productId" component={SingleProduct} />
-        {/* vvvvvv add  to routes once cart component exists vvvvv */}
-        {/* <Route path="/cart" component={Cart}/> */}
+        <Route path="/cart/:cartId" component={Cart} />
+        <Route path="/confirmation" component={Confirmation} />
         {isLoggedIn && (
           <Switch>
             {/* Routes placed here are only available after logging in */}
@@ -57,19 +58,19 @@ class Routes extends Component {
 /**
  * CONTAINER
  */
-const mapState = (state) => {
+const mapState = state => {
   return {
     // Being 'logged in' for our purposes will be defined has having a state.user that has a truthy id.
     // Otherwise, state.user will be an empty object, and state.user.id will be falsey
-    isLoggedIn: !!state.user.id,
+    isLoggedIn: !!state.user.id
   };
 };
 
-const mapDispatch = (dispatch) => {
+const mapDispatch = dispatch => {
   return {
     loadInitialData() {
       dispatch(me());
-    },
+    }
   };
 };
 
@@ -82,5 +83,5 @@ export default withRouter(connect(mapState, mapDispatch)(Routes));
  */
 Routes.propTypes = {
   loadInitialData: PropTypes.func.isRequired,
-  isLoggedIn: PropTypes.bool.isRequired,
+  isLoggedIn: PropTypes.bool.isRequired
 };

@@ -5,16 +5,16 @@ module.exports = db.define('cart', {
   id: {
     type: Sequelize.INTEGER,
     primaryKey: true,
-    autoIncrement: true,
+    autoIncrement: true
   },
   quantity: {
     type: Sequelize.INTEGER,
     validate: {
-      min: 0,
-    },
+      min: 0
+    }
   },
   //   product quantity * unit price
   totalPriceForThisProduct: {
-    type: Sequelize.DECIMAL(10, 2),
-  },
+    type: Sequelize.DECIMAL(10, 2)
+  }
 });

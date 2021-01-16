@@ -7,12 +7,14 @@ import user from './user';
 import productsReducer from './redux/products/products';
 import singleProduct from './redux/products/singleProduct';
 import usersReducer from './redux/users/usersReducer';
+import cartReducer from './redux/cart/cart';
 
 export const reducer = combineReducers({
   user,
   singleProduct,
   usersReducer,
   productsReducer,
+  cartReducer
 });
 
 // this chunk was given to us in JPFP
