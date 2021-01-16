@@ -110,7 +110,7 @@ const itemAdjective = [
   'engagement',
   'mirth',
   'spectacularity',
-  'stun',
+  'glitz',
   'glistening',
   'dazzle',
   'twinkling',
@@ -135,7 +135,7 @@ const userCount = 200;
 const productCount = 200;
 
 // const images = [`images from either urls or csv files`]
-let bowlImage = `https://images.crateandbarrel.com/is/image/Crate/CarsonMedBowl12inSHS18/$web_pdp_main_carousel_high$/190411134912/carson-medium-bowl.jpg`;
+let bowlImage = `https://i.etsystatic.com/16976526/d/il/7d4b54/2344187124/il_340x270.2344187124_rxpb.jpg?version=0`;
 let earringImage = `https://cdn.shopify.com/s/files/1/0736/8211/products/Tear_Drop_Earring_Large_422x.png?v=1568803221`;
 
 const users = async () => {
@@ -224,62 +224,6 @@ const orders = async () => {
   }
 };
 
-// user.addProject(project, { through: { status: 'started' }})
-
-// const associations = async () => {
-//   let user = users[1]
-//   console.log(user)
-//   await user.addProducts([productEarrings[1]])
-// }
-
-// const adminFolks = () => {
-//   return User.findAll({
-//   where: {
-//     firstName: 'Pickle',
-//     lastName: 'Shrubs'
-//   }
-//   })
-// }
-// const associations = async () => {
-//   await user.addProducts([productEarrings[1]]);
-// };
-// await associations();
-
-// const associated = async () => {
-//   const bowl = await Product.create({
-//     name: 'Earrings of charisma',
-//     description: 'the thing!',
-//     quantity: 1,
-//     price: 99.99
-//   })
-//   const shopper =
-// }
-
-async function associations() {
-  // gives an array of objects that are newly created users
-  let user = await User.findAll({
-    where: {
-      firstName: 'Pickle',
-    },
-  });
-  let one = user[1];
-
-  // gives an array of objects that are newly created products
-  let product = await Product.findAll({
-    where: {
-      quantity: 10,
-    },
-  });
-  let thing = product[1];
-
-  console.log('user1', one);
-  console.log('product1', thing);
-
-  let end = await one.addProducts([thing]);
-  console.log('end', end);
-  // return user
-}
-
 const seed = async () => {
   await db.sync({force: true});
   console.log(green('db synced!'));
@@ -296,11 +240,6 @@ async function runSeed() {
   } catch (err) {
     console.error('error seeding: ', red(err));
   }
-}
-
-if (module === require.main) {
-  runSeed();
-  associations();
 }
 
 // We've separated the `seed` function from the `runSeed` function. This way we can isolate the error handling and exit trapping. The `seed` function is concerned only with modifying the database.
