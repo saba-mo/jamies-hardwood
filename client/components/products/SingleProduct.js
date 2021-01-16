@@ -1,6 +1,6 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import {fetchSingleProduct} from '../../store/singleProduct';
+import {fetchSingleProduct} from '../../store/redux/products/singleProduct';
 
 class SingleProduct extends React.Component {
   constructor(props) {
