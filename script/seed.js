@@ -37,7 +37,7 @@ const firstNames = [
   'Boone',
   'Fox',
   'Sai',
-  'Viotto'
+  'Viotto',
 ];
 const lastNames = [
   'Johnson',
@@ -84,7 +84,7 @@ const lastNames = [
   'Nadir',
   'Sapphirus',
   'Omega',
-  'Umbra'
+  'Umbra',
 ];
 
 const itemAdjective = [
@@ -127,7 +127,7 @@ const itemAdjective = [
   'magnificence',
   'captivation',
   'love',
-  'charisma'
+  'charisma',
 ];
 
 const emailHost = ['gmail', 'hotmail', 'yahoo'];
@@ -150,11 +150,11 @@ const users = async () => {
         User.create({
           firstName: first,
           lastName: last,
-          email: email
-        })
+          email: email,
+        }),
       ]);
     } catch (error) {
-      console.log('UserOops!', error);
+      console.log('User Oops!', red(error));
     }
   }
 };
@@ -174,11 +174,11 @@ const productEarrings = async () => {
           description: description,
           quantity: quantity,
           price: price,
-          imageUrl: earringImage
-        })
+          imageUrl: earringImage,
+        }),
       ]);
     } catch (error) {
-      console.log('EarringOops!', error);
+      console.log('Earring Oops!', red(error));
     }
   }
 };
@@ -199,11 +199,11 @@ const productBowls = async () => {
           description: description,
           quantity: quantity,
           price: price,
-          imageUrl: bowlImage
-        })
+          imageUrl: bowlImage,
+        }),
       ]);
     } catch (error) {
-      console.log('BowlOops!', error);
+      console.log('Bowl Oops!', red(error));
     }
   }
 };
@@ -214,19 +214,19 @@ const orders = async () => {
     try {
       await Promise.all([
         Order.create({
-          totalPrice: 100
-        })
+          totalPrice: 100,
+        }),
       ]);
       order++;
     } catch (error) {
-      console.log('OrderOops!', red(error));
+      console.log('Order Oops!', red(error));
     }
   }
 };
 
 const seed = async () => {
   await db.sync({force: true});
-  console.log('db synced!');
+  console.log(green('db synced!'));
   users();
   productEarrings();
   productBowls();
@@ -234,11 +234,11 @@ const seed = async () => {
 };
 
 async function runSeed() {
-  console.log('seeding...');
+  console.log(green('seeding...'));
   try {
     await seed();
   } catch (err) {
-    console.error('error seeding: ', err);
+    console.error('error seeding: ', red(error));
   }
 }
 
