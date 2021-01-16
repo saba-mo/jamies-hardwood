@@ -1,11 +1,11 @@
-import React from 'react'
-import {Link} from 'react-router-dom'
-import {connect} from 'react-redux'
-import {fetchProducts} from '../store/products'
+import React from 'react';
+import {Link} from 'react-router-dom';
+import {connect} from 'react-redux';
+import {fetchProducts} from '../../store/products';
 
 class AllProducts extends React.Component {
   componentDidMount() {
-    this.props.getProducts()
+    this.props.getProducts();
   }
 
   render() {
@@ -21,20 +21,20 @@ class AllProducts extends React.Component {
           </div>
         ))}
       </div>
-    )
+    );
   }
 }
 
 const mapState = state => {
   return {
     products: state.productsReducer
-  }
-}
+  };
+};
 
 const mapDispatch = dispatch => {
   return {
     getProducts: () => dispatch(fetchProducts())
-  }
-}
+  };
+};
 
-export default connect(mapState, mapDispatch)(AllProducts)
+export default connect(mapState, mapDispatch)(AllProducts);
