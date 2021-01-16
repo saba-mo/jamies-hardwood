@@ -21,6 +21,7 @@ class Cart extends React.Component {
   }
 
   render() {
+    // Cart table needs data for lines 25-44 to work.
     const {cart} = this.props;
 
     let orderTotal = cart.reduce(
