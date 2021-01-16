@@ -224,43 +224,14 @@ const orders = async () => {
   }
 };
 
-// user.addProject(project, { through: { status: 'started' }})
-
-// const associations = async () => {
-//   let user = users[1]
-//   console.log(user)
-//   await user.addProducts([productEarrings[1]])
-// }
-
-// const adminFolks = () => {
-//   return User.findAll({
-//   where: {
-//     firstName: 'Pickle',
-//     lastName: 'Shrubs'
-//   }
-//   })
-// }
-
 const seed = async () => {
   await db.sync({force: true});
   console.log(green('db synced!'));
 
-  users().then(() => {
-    let user = User.findAll({
-      where: {
-        firstName: 'Hank',
-      },
-    });
-    console.log('arr?', user);
-  });
-
+  users();
   productEarrings();
   productBowls();
   orders();
-  const associations = async () => {
-    await user.addProducts([productEarrings[1]]);
-  };
-  await associations();
 };
 
 async function runSeed() {
