@@ -210,14 +210,16 @@ const productBowls = async () => {
 
 const orders = async () => {
   let order = 1;
-  while (order < userCount) {
+  while (order < 100) {
     try {
-      await Promise.all([
-        Order.create({
-          totalPrice: 100,
-        }),
-      ]);
-      order++;
+      for (let i = 1; i < 100; i++) {
+        await Promise.all([
+          Order.create({
+            totalPrice: i,
+          }),
+        ]);
+        order++;
+      }
     } catch (error) {
       console.log('Order Oops!', red(error));
     }
@@ -263,9 +265,7 @@ async function associations() {
   console.log('user1', one);
   console.log('product1', thing);
 
-  let end = await one.addProducts([thing]);
-  console.log('end', end);
-  // return user
+  await one.addProducts([thing]);
 }
 
 const seed = async () => {
