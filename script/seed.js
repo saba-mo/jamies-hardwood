@@ -226,15 +226,7 @@ const orders = async () => {
 
 // user.addProject(project, { through: { status: 'started' }})
 
-// const adminFolks = () => {
-//   return User.findAll({
-//   where: {
-//     firstName: 'Pickle',
-//     lastName: 'Shrubs'
-//   }
-//   })
-// }
-
+// function associated is first creating database items, then associating them
 const associated = async () => {
   const bowl = await Product.create({
     name: 'Earrings of charisma',
@@ -250,6 +242,7 @@ const associated = async () => {
   await shopper.addProducts([bowl]);
 };
 
+// function associations is first finding database items, then associating them
 async function associations() {
   // gives an array of objects that are newly created users
   let user = await User.findAll({
