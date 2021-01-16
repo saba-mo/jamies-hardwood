@@ -1,6 +1,6 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import {fetchSingleProduct} from '../../store/singleProduct';
+import {fetchSingleProduct} from '../../store/redux/products/singleProduct';
 
 class SingleProduct extends React.Component {
   constructor(props) {
@@ -17,26 +17,21 @@ class SingleProduct extends React.Component {
   }
 
   render() {
-    let product;
-    if (this.props.product && this.props.product.id) {
-      product = this.props.product;
-    } else {
-      // const {product} = this.props
-      return (
-        <div>
-          <h1>{product.name}</h1>
-          Description: {product.description}
-          <br />
-          Price: ${product.price}
-          <br />
-          <img src={product.imageUrl} />
-          <br />
-          <button type="submit" onClick={() => this.handleAddToCart()}>
-            Add to Cart
-          </button>
-        </div>
-      );
-    }
+    const {product} = this.props;
+    return (
+      <div>
+        <h1>{product.name}</h1>
+        Description: {product.description}
+        <br />
+        Price: ${product.price}
+        <br />
+        <img src={product.imageUrl} />
+        <br />
+        <button type="submit" onClick={() => this.handleAddToCart()}>
+          Add to Cart
+        </button>
+      </div>
+    );
   }
 }
 
