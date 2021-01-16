@@ -1,13 +1,16 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import {fetchSingleProduct} from '../store/singleProduct';
+import {fetchSingleProduct} from '../../store/redux/products/singleProduct';
 
 class SingleProduct extends React.Component {
-  // constructor() {
-  //   super()
+  constructor(props) {
+    super(props);
+    this.handleAddToCart = this.handleAddToCart.bind(this);
+  }
 
-  //   // this.handleAddToCart = this.handleAddToCart.bind(this)
-  // }
+  handleAddToCart = () => {
+    console.log('add to cart clicked');
+  };
 
   componentDidMount() {
     this.props.loadSingleProduct(this.props.match.params.productId);
@@ -15,7 +18,6 @@ class SingleProduct extends React.Component {
 
   render() {
     const {product} = this.props;
-
     return (
       <div>
         <h1>{product.name}</h1>

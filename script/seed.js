@@ -1,5 +1,5 @@
 const {green, red} = require('chalk');
-const {User, Product} = require('../server/db/models');
+const {User, Product, Order, Cart} = require('../server/db/models');
 const db = require('../server/db/');
 
 const firstNames = [
@@ -37,7 +37,7 @@ const firstNames = [
   'Boone',
   'Fox',
   'Sai',
-  'Viotto',
+  'Viotto'
 ];
 const lastNames = [
   'Johnson',
@@ -84,7 +84,7 @@ const lastNames = [
   'Nadir',
   'Sapphirus',
   'Omega',
-  'Umbra',
+  'Umbra'
 ];
 
 const itemAdjective = [
@@ -110,7 +110,7 @@ const itemAdjective = [
   'engagement',
   'mirth',
   'spectacularity',
-  'stun',
+  'glitz',
   'glistening',
   'dazzle',
   'twinkling',
@@ -127,7 +127,7 @@ const itemAdjective = [
   'magnificence',
   'captivation',
   'love',
-  'charisma',
+  'charisma'
 ];
 
 const emailHost = ['gmail', 'hotmail', 'yahoo'];
@@ -135,7 +135,7 @@ const userCount = 200;
 const productCount = 200;
 
 // const images = [`images from either urls or csv files`]
-let bowlImage = `https://images.crateandbarrel.com/is/image/Crate/CarsonMedBowl12inSHS18/$web_pdp_main_carousel_high$/190411134912/carson-medium-bowl.jpg`;
+let bowlImage = `https://i.etsystatic.com/16976526/d/il/7d4b54/2344187124/il_340x270.2344187124_rxpb.jpg?version=0`;
 let earringImage = `https://cdn.shopify.com/s/files/1/0736/8211/products/Tear_Drop_Earring_Large_422x.png?v=1568803221`;
 
 const users = async () => {
@@ -150,8 +150,8 @@ const users = async () => {
         User.create({
           firstName: first,
           lastName: last,
-          email: email,
-        }),
+          email: email
+        })
       ]);
     } catch (error) {
       console.log('UserOops!', red(error));
@@ -174,8 +174,8 @@ const productEarrings = async () => {
           description: description,
           quantity: quantity,
           price: price,
-          imageUrl: earringImage,
-        }),
+          imageUrl: earringImage
+        })
       ]);
     } catch (error) {
       console.log('EarringOops!', red(error));
@@ -183,7 +183,7 @@ const productEarrings = async () => {
   }
 };
 
-const ProductBowls = async () => {
+const productBowls = async () => {
   for (let i = 0; i < productCount; i++) {
     let adjective =
       itemAdjective[Math.floor(Math.random() * 1000) % itemAdjective.length];
@@ -199,11 +199,27 @@ const ProductBowls = async () => {
           description: description,
           quantity: quantity,
           price: price,
-          imageUrl: bowlImage,
-        }),
+          imageUrl: bowlImage
+        })
       ]);
     } catch (error) {
       console.log('BowlOops!', red(error));
+    }
+  }
+};
+
+const orders = async () => {
+  let order = 1;
+  while (order < userCount) {
+    try {
+      await Promise.all([
+        Order.create({
+          totalPrice: 100
+        })
+      ]);
+      order++;
+    } catch (error) {
+      console.log('OrderOops!', red(error));
     }
   }
 };
@@ -213,7 +229,8 @@ const seed = async () => {
   console.log(green('db synced!'));
   users();
   productEarrings();
-  ProductBowls();
+  productBowls();
+  orders();
 };
 
 async function runSeed() {
@@ -223,9 +240,6 @@ async function runSeed() {
   } catch (err) {
     console.error('error seeding: ', red(err));
   }
-}
-if (module === require.main) {
-  runSeed();
 }
 
 // We've separated the `seed` function from the `runSeed` function. This way we can isolate the error handling and exit trapping. The `seed` function is concerned only with modifying the database.

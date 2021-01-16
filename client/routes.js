@@ -2,12 +2,17 @@ import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {withRouter, Route, Switch} from 'react-router-dom';
 import PropTypes from 'prop-types';
-import {Login, Signup, UserHome} from './components';
-import AllProducts from './components/all-products';
-import SingleProduct from './components/single-product';
-import Cart from './components/cart';
-import Confirmation from './components/confirmation';
+import {
+  Login,
+  Signup,
+  UserHome,
+  AllProducts,
+  SingleProduct,
+  AllUsers,
+  SingleUser
+} from './components';
 import {me} from './store';
+//import Cart from './components/cart'
 
 /**
  * COMPONENT
@@ -27,12 +32,19 @@ class Routes extends Component {
         <Route path="/signup" component={Signup} />
         <Route exact path="/products" component={AllProducts} />
         <Route exact path="/products/:productId" component={SingleProduct} />
-        <Route exact path="/cart/:cartId" component={Cart} />
-        <Route exact path="/confirmation" component={Confirmation} />
+        {/* vvvvvv add  to routes once cart component exists vvvvv */}
+        {/* <Route path="/cart" component={Cart}/> */}
         {isLoggedIn && (
           <Switch>
             {/* Routes placed here are only available after logging in */}
             <Route path="/home" component={UserHome} />
+          </Switch>
+        )}
+        {isLoggedIn && (
+          <Switch>
+            {/* Routes placed here are only available after logging in AND user is admin*/}
+            <Route exact path="/users" component={AllUsers} />
+            <Route exact path="/users/:id" component={SingleUser} />
           </Switch>
         )}
         {/* Displays our Login component as a fallback */}
