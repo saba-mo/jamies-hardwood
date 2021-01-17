@@ -7,11 +7,21 @@ class Cart extends React.Component {
     super();
 
     this.handleCheckout = this.handleCheckout.bind(this);
+    // this.decreaseQuantity = this.decreaseQuantity.bind(this);
+    // this.increaseQuantity = this.increaseQuantity.bind(this);
   }
 
   componentDidMount() {
     this.props.loadCart(this.props.match.params.cartId);
   }
+
+  // decreaseQuantity() {
+  //   // decrement quantity in cart in db by 1
+  // }
+
+  // increaseQuantity() {
+  //   // increment quantity in cart in db by 1
+  // }
 
   handleCheckout() {
     // update quantity (inventory) in db
@@ -21,28 +31,58 @@ class Cart extends React.Component {
   }
 
   render() {
-    // Cart table on local database needs data for orderTotal and totalItems to work.
     const {cart} = this.props;
 
-    let orderTotal = cart.reduce(
-      (accumulator, currentValue) =>
-        accumulator + Number(currentValue.totalPriceForThisProduct),
-      0
-    );
+    let orderTotal;
+    let totalItems;
 
-    let totalItems = cart.reduce(
-      (accumulator, currentValue) => accumulator + currentValue.quantity,
-      0
-    );
-    console.log(cart);
+    if (cart.products && cart.products.length) {
+      // incorrect product price input, so orderTotal is wrong
+      orderTotal = cart.products.reduce(
+        (accumulator, currentValue) => accumulator + Number(currentValue.price),
+        0
+      );
+
+      totalItems = cart.products.reduce(
+        (accumulator, currentValue) =>
+          accumulator + currentValue.individual_product_order_details.quantity,
+        0
+      );
+    }
+
     return (
       <div>
         <h1>Shopping Cart</h1>
-        {cart.length ? (
+        {cart.products && cart.products.length ? (
           <div>
-            <p>Total Items: {totalItems}</p>
-            <p>Order Total: {orderTotal}</p>
-            {/* map over items in cart and show name, image, quantity (with ability to add/subtract), item price and total price */}
+            {cart.products.map((product) => {
+              return (
+                <div key={product.id}>
+                  <h3>{product.name}</h3>
+                  <br />
+                  <img src={product.imageUrl} />
+                  <br />
+                  Quantity:
+                  <br />
+                  <button type="submit" onClick={this.decreaseQuantity}>
+                    -
+                  </button>
+                  {product.individual_product_order_details.quantity}
+                  <button type="submit" onClick={this.increaseQuantity}>
+                    +
+                  </button>
+                  <br />
+                  Item Price: ${product.price}
+                  <br />
+                  {/* Not pulling total price from db because no calculation set up */}
+                  Total Price: $
+                  {Number(product.price) *
+                    product.individual_product_order_details.quantity}
+                </div>
+              );
+            })}
+            <h2>Total Items: {totalItems}</h2>
+            <h2>Order Total: {orderTotal}</h2>
             <button type="submit" onClick={this.handleCheckout}>
               Proceed to Checkout
             </button>
@@ -55,15 +95,15 @@ class Cart extends React.Component {
   }
 }
 
-const mapState = state => {
+const mapState = (state) => {
   return {
-    cart: state.cartReducer
+    cart: state.cartReducer,
   };
 };
 
-const mapDispatch = dispatch => {
+const mapDispatch = (dispatch) => {
   return {
-    loadCart: id => dispatch(fetchCart(id))
+    loadCart: (id) => dispatch(fetchCart(id)),
   };
 };
 

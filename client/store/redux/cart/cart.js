@@ -2,15 +2,15 @@ import axios from 'axios';
 
 const GET_CART = 'GET_CART';
 
-export const getCart = cart => {
+export const getCart = (cart) => {
   return {
     type: GET_CART,
-    cart
+    cart,
   };
 };
 
-export const fetchCart = id => {
-  return async dispatch => {
+export const fetchCart = (id) => {
+  return async (dispatch) => {
     try {
       const {data} = await axios.get(`/api/cart/${id}`);
       dispatch(getCart(data));
@@ -20,7 +20,7 @@ export const fetchCart = id => {
   };
 };
 
-const initialState = [];
+const initialState = {};
 
 export default function cartReducer(state = initialState, action) {
   switch (action.type) {
