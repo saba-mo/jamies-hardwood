@@ -1,23 +1,23 @@
-import React from 'react'
-import {connect} from 'react-redux'
-import {fetchUsers, deleteUser} from '../../store/redux/users/usersReducer'
-import {Link} from 'react-router-dom'
+import React from 'react';
+import {connect} from 'react-redux';
+import {fetchUsers, deleteUser} from '../../store/redux/users/usersReducer';
+import {Link} from 'react-router-dom';
 
-export class UserList extends React.Component {
+export class AllUsers extends React.Component {
   constructor(props) {
-    super(props)
-    this.handleDelete = this.handleDelete.bind(this)
+    super(props);
+    this.handleDelete = this.handleDelete.bind(this);
   }
   componentDidMount() {
-    this.props.loadUsers()
+    this.props.loadUsers();
   }
 
   handleDelete = (userToDelete) => {
-    this.props.deleteUser(userToDelete)
-  }
+    this.props.deleteUser(userToDelete);
+  };
 
   render() {
-    const userList = this.props.users
+    const userList = this.props.users;
     return (
       <div>
         <main>
@@ -44,23 +44,23 @@ export class UserList extends React.Component {
                       Delete this account
                     </button>
                   </div>
-                )
+                );
               })}
             </ul>
           </div>
         </div>
       </div>
-    )
+    );
   }
 }
 
 const mapStateToProps = (state) => {
-  return {users: state.users}
-}
+  return {users: state.usersReducer};
+};
 
 const mapDispatchToProps = (dispatch) => ({
   deleteUser: (user) => dispatch(deleteUser(user)),
   loadUsers: () => dispatch(fetchUsers()),
-})
+});
 
-export default connect(mapStateToProps, mapDispatchToProps)(UserList)
+export default connect(mapStateToProps, mapDispatchToProps)(AllUsers);

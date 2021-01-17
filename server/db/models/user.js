@@ -5,21 +5,20 @@ const db = require('../db');
 const User = db.define('user', {
   firstName: {
     type: Sequelize.STRING,
-    allowNull: false,
+    // allowNull: false,
   },
   lastName: {
     type: Sequelize.STRING,
-    allowNull: false,
+    // allowNull: false,
   },
   email: {
     type: Sequelize.STRING,
     unique: true,
     allowNull: false,
   },
-  type: {
-    type: Sequelize.ENUM,
-    values: ['customer', 'Admin'],
-    defaultValue: 'customer',
+  isAdmin: {
+    type: Sequelize.BOOLEAN,
+    defaultValue: false,
   },
   password: {
     type: Sequelize.STRING,
