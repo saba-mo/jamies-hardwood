@@ -31,8 +31,6 @@ router.post('/signup', async (req, res, next) => {
         include: [{association: User.Order}],
       }
     );
-    // how to set order to an order that doesn't already exist...might be create order
-    // user.setOrder(1);
     req.login(user, (err) => (err ? next(err) : res.json(user)));
   } catch (err) {
     if (err.name === 'SequelizeUniqueConstraintError') {
