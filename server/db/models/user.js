@@ -16,7 +16,6 @@ const User = db.define('user', {
     unique: true,
     allowNull: false,
   },
-  //should we make an "isAdmin" field, with true or false?
   isAdmin: {
     type: Sequelize.BOOLEAN,
     defaultValue: false,
