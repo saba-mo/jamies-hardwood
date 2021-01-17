@@ -1,6 +1,7 @@
 const {green, red} = require('chalk');
 const {User, Product, Order, Cart} = require('../server/db/models');
 const db = require('../server/db/');
+const {Op} = require('sequelize');
 
 const firstNames = [
   'Alice',
@@ -244,27 +245,37 @@ const associated = async () => {
   await shopper.addProducts([bowl]);
 };
 
-// function associations is first finding database items, then associating them
+// function associations is first finding some database items, then associating them
 async function associations() {
-  // gives an array of objects that are newly created users
-  let user = await User.findAll({
+  // gives an array of objects that are newly created orders meeting the where condition
+  let order = await Order.findAll({
     where: {
-      firstName: 'Pickle',
+      [Op.or]: [{totalPrice: 42}, {totalPrice: 47}, {totalPrice: 51}],
     },
   });
-  let one = user[1];
+  let one = order[1];
 
-  // gives an array of objects that are newly created products
+  // gives an array of objects that are newly created products meeting the where condition
+  // condition: where the name of the Product has this word in the string
   let product = await Product.findAll({
     where: {
-      quantity: 10,
+      name: {
+        [Op.or]: {
+          [Op.like]: '%vivacity%',
+          [Op.like]: '%generousity%',
+          [Op.like]: '%being plucky%',
+        },
+      },
     },
   });
   let thing = product[1];
 
-  console.log('user1', one);
+  console.log('order', one);
   console.log('product1', thing);
+  console.log('order length', order.length);
 
+  // only two associations so far. Will add more.
+  await order[2].addProducts([product[2]]);
   await one.addProducts([thing]);
 }
 
@@ -274,7 +285,7 @@ const seed = async () => {
   await users();
   await productEarrings();
   await productBowls();
-  orders();
+  await orders();
   await associations();
 };
 
@@ -282,8 +293,8 @@ async function runSeed() {
   console.log(green('seeding...'));
   try {
     await seed();
-  } catch (err) {
-    console.error('error seeding: ', red(error));
+  } catch (error) {
+    console.log('error seeding: ', red(error));
   }
 }
 
