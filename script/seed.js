@@ -1,6 +1,7 @@
 const {green, red} = require('chalk');
 const {User, Product, Order, Cart} = require('../server/db/models');
 const db = require('../server/db/');
+const {Op} = require('sequelize');
 
 const firstNames = [
   'Alice',
@@ -210,35 +211,96 @@ const productBowls = async () => {
 
 const orders = async () => {
   let order = 1;
-  while (order < userCount) {
+  while (order < 100) {
     try {
-      await Promise.all([
-        Order.create({
-          totalPrice: 100,
-        }),
-      ]);
-      order++;
+
+      for (let i = 1; i < 100; i++) {
+        await Promise.all([
+          Order.create({
+            totalPrice: i,
+          }),
+        ]);
+        order++;
+      }
+
     } catch (error) {
       console.log('Order Oops!', red(error));
     }
   }
 };
 
+// user.addProject(project, { through: { status: 'started' }})
+
+// function associated is first creating database items, then associating them
+const associated = async () => {
+  const bowl = await Product.create({
+    name: 'Earrings of charisma',
+    description: 'the thing!',
+    quantity: 1,
+    price: 99.99,
+  });
+  const shopper = await User.create({
+    firstName: 'Hillary',
+    lastName: 'Tester',
+    email: 'hillary.tester@gmail.com',
+  });
+  await shopper.addProducts([bowl]);
+};
+
+// function associations is first finding some database items, then associating them
+async function associations() {
+  // gives an array of objects that are newly created orders meeting the where condition
+  let order = await Order.findAll({
+    where: {
+      [Op.or]: [{totalPrice: 42}, {totalPrice: 47}, {totalPrice: 51}],
+    },
+  });
+  let one = order[1];
+
+  // gives an array of objects that are newly created products meeting the where condition
+  // condition: where the name of the Product has this word in the string
+  let product = await Product.findAll({
+    where: {
+      name: {
+        [Op.or]: {
+          [Op.like]: '%vivacity%',
+          [Op.like]: '%generousity%',
+          [Op.like]: '%being plucky%',
+        },
+      },
+    },
+  });
+  let thing = product[1];
+
+  console.log('order', one);
+  console.log('product1', thing);
+  console.log('order length', order.length);
+
+  // only two associations so far. Will add more.
+  await order[2].addProducts([product[2]]);
+  await one.addProducts([thing]);
+}
+
 const seed = async () => {
   await db.sync({force: true});
   console.log(green('db synced!'));
-  users();
-  productEarrings();
-  productBowls();
-  orders();
+
+  await users();
+  await productEarrings();
+  await productBowls();
+  await orders();
+  await associations();
+
 };
 
 async function runSeed() {
   console.log(green('seeding...'));
   try {
     await seed();
-  } catch (err) {
-    console.error('error seeding: ', red(error));
+
+  } catch (error) {
+    console.log('error seeding: ', red(error));
+
   }
 }
 
