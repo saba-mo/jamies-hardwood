@@ -5,21 +5,21 @@ const db = require('../db');
 const User = db.define('user', {
   firstName: {
     type: Sequelize.STRING,
-    allowNull: false,
+    // allowNull: false,
   },
   lastName: {
     type: Sequelize.STRING,
-    allowNull: false,
+    // allowNull: false,
   },
   email: {
     type: Sequelize.STRING,
     unique: true,
     allowNull: false,
   },
-  type: {
-    type: Sequelize.ENUM,
-    values: ['customer', 'Admin'],
-    defaultValue: 'customer',
+  //should we make an "isAdmin" field, with true or false?
+  isAdmin: {
+    type: Sequelize.BOOLEAN,
+    defaultValue: false,
   },
   password: {
     type: Sequelize.STRING,
