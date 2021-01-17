@@ -1,5 +1,6 @@
 const router = require('express').Router();
-const Cart = require('../db/models/cart');
+const Product = require('../db/models/product');
+const Order = require('../db/models/order');
 
 router.get('/:cartId', async (req, res, next) => {
   try {
@@ -7,10 +8,8 @@ router.get('/:cartId', async (req, res, next) => {
     if (isNaN(id)) {
       res.sendStatus(400);
     }
-    const thisCart = await Cart.findAll({
-      where: {
-        order_id: id
-      }
+    const thisCart = await Order.findByPk(id, {
+      include: {model: Product},
     });
     if (!thisCart) res.sendStatus(404);
     res.json(thisCart);
