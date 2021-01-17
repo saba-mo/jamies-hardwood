@@ -1,5 +1,6 @@
 const router = require('express').Router();
 const User = require('../db/models/user');
+const Order = require('../db/models/order');
 module.exports = router;
 
 router.post('/login', async (req, res, next) => {
@@ -21,7 +22,17 @@ router.post('/login', async (req, res, next) => {
 
 router.post('/signup', async (req, res, next) => {
   try {
-    const user = await User.create(req.body);
+    const user = await User.create(
+      {
+        ...req.body,
+        order: {totalPrice: 0},
+      },
+      {
+        include: [{association: User.Order}],
+      }
+    );
+    // how to set order to an order that doesn't already exist...might be create order
+    // user.setOrder(1);
     req.login(user, (err) => (err ? next(err) : res.json(user)));
   } catch (err) {
     if (err.name === 'SequelizeUniqueConstraintError') {
