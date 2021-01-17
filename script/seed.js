@@ -213,6 +213,7 @@ const orders = async () => {
   let order = 1;
   while (order < 100) {
     try {
+
       for (let i = 1; i < 100; i++) {
         await Promise.all([
           Order.create({
@@ -221,6 +222,7 @@ const orders = async () => {
         ]);
         order++;
       }
+
     } catch (error) {
       console.log('Order Oops!', red(error));
     }
@@ -282,19 +284,23 @@ async function associations() {
 const seed = async () => {
   await db.sync({force: true});
   console.log(green('db synced!'));
+
   await users();
   await productEarrings();
   await productBowls();
   await orders();
   await associations();
+
 };
 
 async function runSeed() {
   console.log(green('seeding...'));
   try {
     await seed();
+
   } catch (error) {
     console.log('error seeding: ', red(error));
+
   }
 }
 
