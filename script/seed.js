@@ -139,14 +139,23 @@ const productCount = 200;
 let bowlImage = `https://i.etsystatic.com/16976526/d/il/7d4b54/2344187124/il_340x270.2344187124_rxpb.jpg?version=0`;
 let earringImage = `https://cdn.shopify.com/s/files/1/0736/8211/products/Tear_Drop_Earring_Large_422x.png?v=1568803221`;
 
-// const adminUsers = async () => {
-//   let num = 1
-//   while (num < 11) {
-//     let adminUser = await User.findByPk(num);
-//     adminUser.dataValues.isAdmin = true
-//     num++
-//   }
-// }
+const orders = async () => {
+  let order = 1;
+  while (order < userCount) {
+    try {
+      for (let i = 1; i < userCount; i++) {
+        await Promise.all([
+          Order.create({
+            totalPrice: i,
+          }),
+        ]);
+        order++;
+      }
+    } catch (error) {
+      console.log('Order Oops!', red(error));
+    }
+  }
+};
 
 const users = async () => {
   for (let i = 0; i < 10; i++) {
@@ -239,24 +248,6 @@ const productBowls = async () => {
   }
 };
 
-const orders = async () => {
-  let order = 1;
-  while (order < 100) {
-    try {
-      for (let i = 1; i < 100; i++) {
-        await Promise.all([
-          Order.create({
-            totalPrice: i,
-          }),
-        ]);
-        order++;
-      }
-    } catch (error) {
-      console.log('Order Oops!', red(error));
-    }
-  }
-};
-
 // this function is first finding some items already in the database, then associating them
 async function associations() {
   // gives an array of objects that are newly created orders that meet the where condition
@@ -297,7 +288,7 @@ async function associations() {
 const seed = async () => {
   await db.sync({force: true});
   console.log(green('db synced!'));
-  await Promise.all([users(), productEarrings(), productBowls(), orders()]);
+  await Promise.all([orders(), users(), productEarrings(), productBowls()]);
   await associations();
 };
 
