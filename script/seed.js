@@ -97,7 +97,7 @@ const itemAdjective = [
   'brightness',
   'charm',
   'friends',
-  'generousity',
+  'generosity',
   'sincerity',
   'imagination',
   'luck',
@@ -107,7 +107,7 @@ const itemAdjective = [
   'power',
   'manners',
   'being plucky',
-  'beimg marvelous',
+  'being marvelous',
   'engagement',
   'mirth',
   'spectacularity',
@@ -213,7 +213,6 @@ const orders = async () => {
   let order = 1;
   while (order < 100) {
     try {
-
       for (let i = 1; i < 100; i++) {
         await Promise.all([
           Order.create({
@@ -222,85 +221,62 @@ const orders = async () => {
         ]);
         order++;
       }
-
     } catch (error) {
       console.log('Order Oops!', red(error));
     }
   }
 };
 
-// user.addProject(project, { through: { status: 'started' }})
-
-// function associated is first creating database items, then associating them
-const associated = async () => {
-  const bowl = await Product.create({
-    name: 'Earrings of charisma',
-    description: 'the thing!',
-    quantity: 1,
-    price: 99.99,
-  });
-  const shopper = await User.create({
-    firstName: 'Hillary',
-    lastName: 'Tester',
-    email: 'hillary.tester@gmail.com',
-  });
-  await shopper.addProducts([bowl]);
-};
-
-// function associations is first finding some database items, then associating them
+// this function is first finding some items already in the database, then associating them
 async function associations() {
-  // gives an array of objects that are newly created orders meeting the where condition
-  let order = await Order.findAll({
+  // gives an array of objects that are newly created orders that meet the where condition
+  let ordersToAssoc = await Order.findAll({
     where: {
-      [Op.or]: [{totalPrice: 42}, {totalPrice: 47}, {totalPrice: 51}],
-    },
-  });
-  let one = order[1];
-
-  // gives an array of objects that are newly created products meeting the where condition
-  // condition: where the name of the Product has this word in the string
-  let product = await Product.findAll({
-    where: {
-      name: {
+      totalPrice: {
         [Op.or]: {
-          [Op.like]: '%vivacity%',
-          [Op.like]: '%generousity%',
-          [Op.like]: '%being plucky%',
+          [Op.between]: [50, 90],
         },
       },
     },
   });
-  let thing = product[1];
 
-  console.log('order', one);
-  console.log('product1', thing);
-  console.log('order length', order.length);
+  // gives an array of objects that are newly created products that meet the where condition
+  // condition: where the name of the Product has this word in the string
+  let productsToAssoc = await Product.findAll({
+    where: {
+      name: {
+        [Op.or]: {
+          [Op.like]: '%vivacity%',
+          [Op.like]: '%generosity%',
+          [Op.like]: '%being plucky%',
+          [Op.like]: '%imagination%',
+          [Op.like]: '%luck%',
+        },
+      },
+    },
+  });
 
-  // only two associations so far. Will add more.
-  await order[2].addProducts([product[2]]);
-  await one.addProducts([thing]);
+  // associations loop
+  let productIndex = 0;
+  for (let i = 0; i < productsToAssoc.length; i++) {
+    await ordersToAssoc[i].addProducts([productsToAssoc[productIndex]]);
+    productIndex++;
+  }
 }
 
 const seed = async () => {
   await db.sync({force: true});
   console.log(green('db synced!'));
-
-  await users();
-  await productEarrings();
-  await productBowls();
-  await orders();
+  await Promise.all([users(), productEarrings(), productBowls(), orders()]);
   await associations();
-
 };
 
 async function runSeed() {
   console.log(green('seeding...'));
   try {
     await seed();
-
   } catch (error) {
     console.log('error seeding: ', red(error));
-
   }
 }
 
