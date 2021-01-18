@@ -97,7 +97,7 @@ const itemAdjective = [
   'brightness',
   'charm',
   'friends',
-  'generousity',
+  'generosity',
   'sincerity',
   'imagination',
   'luck',
@@ -107,7 +107,7 @@ const itemAdjective = [
   'power',
   'manners',
   'being plucky',
-  'beimg marvelous',
+  'being marvelous',
   'engagement',
   'mirth',
   'spectacularity',
@@ -262,12 +262,13 @@ async function associations() {
       name: {
         [Op.or]: {
           [Op.like]: '%vivacity%',
-          [Op.like]: '%generousity%',
+          [Op.like]: '%generosity%',
           [Op.like]: '%being plucky%',
         },
       },
     },
   });
+
   let thing = product[1];
 
   console.log('order', one);
