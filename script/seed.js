@@ -227,23 +227,7 @@ const orders = async () => {
   }
 };
 
-// function "associated" is first creating database items, then associating them
-const associated = async () => {
-  const bowl = await Product.create({
-    name: 'Earrings of charisma',
-    description: 'the thing!',
-    quantity: 1,
-    price: 99.99,
-  });
-  const shopper = await User.create({
-    firstName: 'Hillary',
-    lastName: 'Tester',
-    email: 'hillary.tester@gmail.com',
-  });
-  await shopper.addProducts([bowl]);
-};
-
-// function "associations" is first finding some items already in the database, then associating them
+// this function is first finding some items already in the database, then associating them
 async function associations() {
   // gives an array of objects that are newly created orders that meet the where condition
   let ordersToAssoc = await Order.findAll({
@@ -274,28 +258,10 @@ async function associations() {
 
   // associations loop
   let productIndex = 0;
-  for (let i = 0; i < ordersToAssoc.length; i++) {
+  for (let i = 0; i < productsToAssoc.length; i++) {
     await ordersToAssoc[i].addProducts([productsToAssoc[productIndex]]);
     productIndex++;
   }
-
-  // const associatedOrderNumbers = () => {
-  //   for (let i=0; i<ordersToAssoc.length; i++) {
-  //     console.log(ordersToAssoc[i].dataValues.totalPrice)
-  //   }
-  //   return 'finish'
-  // }
-  // const associatedProductsFound = () => {
-  //   for (let i=0; i<productsToAssoc.length; i++) {
-  //     console.log(productsToAssoc[i].dataValues.name)
-  //   }
-  //   return 'finish'
-  // }
-
-  // console.log('order ', associatedOrderNumbers());
-  // console.log('product Names ', associatedProductsFound())
-  // console.log('order length', ordersToAssoc.length);
-  // console.log('product length', productsToAssoc.length);
 }
 
 const seed = async () => {
