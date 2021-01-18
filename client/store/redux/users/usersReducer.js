@@ -7,22 +7,22 @@ const DELETE_USER = 'DELETE_USER';
 const initialState = [];
 
 //ACTION CREATORS
-export const destroyUser = user => ({
+export const destroyUser = (user) => ({
   type: DELETE_USER,
-  user: user
+  user: user,
 });
-export const setUser = user => ({
+export const setUser = (user) => ({
   type: SET_A_USER,
-  user: user
+  user: user,
 });
-export const setUsers = users => ({
+export const setUsers = (users) => ({
   type: SET_USERS,
-  users: users
+  users: users,
 });
 
 //THUNK CREATORS
 
-export const deleteUser = user => async (dispatch, getState, {axios}) => {
+export const deleteUser = (user) => async (dispatch, getState, {axios}) => {
   try {
     await axios.delete(`/api/users/${user.id}`);
     dispatch(destroyUser(user));
@@ -33,7 +33,7 @@ export const deleteUser = user => async (dispatch, getState, {axios}) => {
 
 // removed getState from the variables of the async function fetchUser. Test to see if works. If it does, then remove getState from the other functions (deleteUser and fetchUsers).
 
-export const fetchUser = userId => async (dispatch, {axios}) => {
+export const fetchUser = (userId) => async (dispatch, {axios}) => {
   try {
     const {data} = await axios.get(`/api/users/${userId}`);
     dispatch(setUser(data));
@@ -52,16 +52,16 @@ export const fetchUsers = () => async (dispatch, getState, {axios}) => {
 };
 
 //REDUCER
-export default function(users = initialState, action) {
+export default function (users = initialState, action) {
   switch (action.type) {
     case DELETE_USER:
       users = users.filter(
-        user => parseInt(user.id) !== parseInt(action.user.id)
+        (user) => parseInt(user.id) !== parseInt(action.user.id)
       );
       return users;
     case SET_A_USER:
       users = users.filter(
-        user => parseInt(user.id) !== parseInt(action.user.id)
+        (user) => parseInt(user.id) !== parseInt(action.user.id)
       );
       return users.concat([action.user]);
     case SET_USERS:

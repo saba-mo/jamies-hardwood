@@ -283,6 +283,7 @@ async function associations() {
 const seed = async () => {
   await db.sync({force: true});
   console.log(green('db synced!'));
+
   await users();
   await productEarrings();
   await productBowls();
