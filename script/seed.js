@@ -227,9 +227,7 @@ const orders = async () => {
   }
 };
 
-// user.addProject(project, { through: { status: 'started' }})
-
-// function associated is first creating database items, then associating them
+// function "associated" is first creating database items, then associating them
 const associated = async () => {
   const bowl = await Product.create({
     name: 'Earrings of charisma',
@@ -245,49 +243,65 @@ const associated = async () => {
   await shopper.addProducts([bowl]);
 };
 
-// function associations is first finding some database items, then associating them
+// function "associations" is first finding some items already in the database, then associating them
 async function associations() {
-  // gives an array of objects that are newly created orders meeting the where condition
-  let order = await Order.findAll({
+  // gives an array of objects that are newly created orders that meet the where condition
+  let ordersToAssoc = await Order.findAll({
     where: {
-      [Op.or]: [{totalPrice: 42}, {totalPrice: 47}, {totalPrice: 51}],
+      totalPrice: {
+        [Op.or]: {
+          [Op.between]: [50, 90],
+        },
+      },
     },
   });
-  let one = order[1];
 
-  // gives an array of objects that are newly created products meeting the where condition
+  // gives an array of objects that are newly created products that meet the where condition
   // condition: where the name of the Product has this word in the string
-  let product = await Product.findAll({
+  let productsToAssoc = await Product.findAll({
     where: {
       name: {
         [Op.or]: {
           [Op.like]: '%vivacity%',
           [Op.like]: '%generosity%',
           [Op.like]: '%being plucky%',
+          [Op.like]: '%imagination%',
+          [Op.like]: '%luck%',
         },
       },
     },
   });
 
-  let thing = product[1];
+  // associations loop
+  let productIndex = 0;
+  for (let i = 0; i < ordersToAssoc.length; i++) {
+    await ordersToAssoc[i].addProducts([productsToAssoc[productIndex]]);
+    productIndex++;
+  }
 
-  console.log('order', one);
-  console.log('product1', thing);
-  console.log('order length', order.length);
+  // const associatedOrderNumbers = () => {
+  //   for (let i=0; i<ordersToAssoc.length; i++) {
+  //     console.log(ordersToAssoc[i].dataValues.totalPrice)
+  //   }
+  //   return 'finish'
+  // }
+  // const associatedProductsFound = () => {
+  //   for (let i=0; i<productsToAssoc.length; i++) {
+  //     console.log(productsToAssoc[i].dataValues.name)
+  //   }
+  //   return 'finish'
+  // }
 
-  // only two associations so far. Will add more.
-  await order[2].addProducts([product[2]]);
-  await one.addProducts([thing]);
+  // console.log('order ', associatedOrderNumbers());
+  // console.log('product Names ', associatedProductsFound())
+  // console.log('order length', ordersToAssoc.length);
+  // console.log('product length', productsToAssoc.length);
 }
 
 const seed = async () => {
   await db.sync({force: true});
   console.log(green('db synced!'));
-
-  await users();
-  await productEarrings();
-  await productBowls();
-  await orders();
+  await Promise.all([users(), productEarrings(), productBowls(), orders()]);
   await associations();
 };
 
