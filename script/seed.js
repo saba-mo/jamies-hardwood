@@ -139,8 +139,17 @@ const productCount = 200;
 let bowlImage = `https://i.etsystatic.com/16976526/d/il/7d4b54/2344187124/il_340x270.2344187124_rxpb.jpg?version=0`;
 let earringImage = `https://cdn.shopify.com/s/files/1/0736/8211/products/Tear_Drop_Earring_Large_422x.png?v=1568803221`;
 
+// const adminUsers = async () => {
+//   let num = 1
+//   while (num < 11) {
+//     let adminUser = await User.findByPk(num);
+//     adminUser.dataValues.isAdmin = true
+//     num++
+//   }
+// }
+
 const users = async () => {
-  for (let i = 0; i < userCount; i++) {
+  for (let i = 0; i < 10; i++) {
     let first =
       firstNames[Math.floor(Math.random() * 1000) % firstNames.length];
     let last = lastNames[Math.floor(Math.random() * 1000) % lastNames.length];
@@ -152,6 +161,27 @@ const users = async () => {
           firstName: first,
           lastName: last,
           email: email,
+          isAdmin: true,
+          password: 'password',
+        }),
+      ]);
+    } catch (error) {
+      console.log('User Oops!', red(error));
+    }
+  }
+  for (let i = 10; i < userCount; i++) {
+    let first =
+      firstNames[Math.floor(Math.random() * 1000) % firstNames.length];
+    let last = lastNames[Math.floor(Math.random() * 1000) % lastNames.length];
+    let host = emailHost[Math.floor(Math.random() * 1000) % emailHost.length];
+    let email = `${first}.${last}@${host}.com`;
+    try {
+      await Promise.all([
+        User.create({
+          firstName: first,
+          lastName: last,
+          email: email,
+          password: 'password',
         }),
       ]);
     } catch (error) {
