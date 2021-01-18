@@ -1,6 +1,7 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import {fetchSingleProduct} from '../../store/redux/products/singleProduct';
+import {addToCartThunk} from '../../store/redux/cart/cart';
 
 export class SingleProduct extends React.Component {
   constructor(props) {
@@ -8,8 +9,9 @@ export class SingleProduct extends React.Component {
     this.handleAddToCart = this.handleAddToCart.bind(this);
   }
 
-  handleAddToCart = () => {
+  handleAddToCart = (orderId, item) => {
     console.log('add to cart clicked');
+    this.props.addToCart(orderId, item);
   };
 
   componentDidMount() {
@@ -18,6 +20,8 @@ export class SingleProduct extends React.Component {
 
   render() {
     const {product} = this.props;
+    const {user} = this.props;
+    console.log('props: ', this.props);
     return (
       <div>
         <h1>{product.name}</h1>
@@ -46,7 +50,10 @@ export class SingleProduct extends React.Component {
           <option value="10">10</option>
         </select>
         <p>
-          <button type="submit" onClick={this.handleAddToCart}>
+          <button
+            type="submit"
+            onClick={() => this.handleAddToCart(user.order.id, product)}
+          >
             Add to Cart
           </button>
         </p>
@@ -58,12 +65,14 @@ export class SingleProduct extends React.Component {
 const mapState = (state) => {
   return {
     product: state.singleProduct,
+    user: state.user,
   };
 };
 
 const mapDispatch = (dispatch) => {
   return {
     loadSingleProduct: (id) => dispatch(fetchSingleProduct(id)),
+    addToCart: (id, item) => dispatch(addToCartThunk(id, item)),
   };
 };
 

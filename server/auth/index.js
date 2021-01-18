@@ -5,7 +5,9 @@ module.exports = router;
 
 router.post('/login', async (req, res, next) => {
   try {
-    const user = await User.findOne({where: {email: req.body.email}});
+    const user = await User.findOne({
+      where: {email: req.body.email},
+    });
     if (!user) {
       console.log('No such user found:', req.body.email);
       res.status(401).send('Wrong username and/or password');
@@ -47,8 +49,20 @@ router.post('/logout', (req, res) => {
   res.redirect('/');
 });
 
-router.get('/me', (req, res) => {
-  res.json(req.user);
+router.get('/me', async (req, res) => {
+  const user = await User.findOne({
+    where: {
+      id: req.user.id,
+    },
+    attributes: ['id', 'firstName', 'lastName', 'email'],
+    include: {
+      model: Order,
+      where: {
+        userId: req.user.id,
+      },
+    },
+  });
+  res.json(user);
 });
 
 router.use('/google', require('./google'));

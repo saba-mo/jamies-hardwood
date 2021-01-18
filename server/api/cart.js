@@ -18,4 +18,14 @@ router.get('/:cartId', async (req, res, next) => {
   }
 });
 
+// add to cart is working, but not taking in quantity to be added
+router.post('/:cartId', async (req, res, next) => {
+  try {
+    const thisOrder = await Order.findByPk(req.params.cartId);
+    thisOrder.addProduct(req.body.id);
+  } catch (error) {
+    next(error);
+  }
+});
+
 module.exports = router;
