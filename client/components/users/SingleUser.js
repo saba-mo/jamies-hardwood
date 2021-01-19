@@ -22,10 +22,10 @@ class SingleUser extends React.Component {
     return (
       <div id="single-view">
         <p>
-          User name: {user.firstName} {user.lastName}
+          Name: {user.firstName} {user.lastName}
         </p>
-        <p>User email: {user.email}</p>
-        <p>User is Admin: {`${user.isAdmin}`}</p>
+        <p>Email: {user.email}</p>
+        <p>Is Admin: {`${user.isAdmin}`}</p>
       </div>
     );
   }
