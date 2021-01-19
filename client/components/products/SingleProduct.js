@@ -1,6 +1,7 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import {fetchSingleProduct} from '../../store/redux/products/singleProduct';
+import {addToCartThunk} from '../../store/redux/cart/cart';
 
 export class SingleProduct extends React.Component {
   constructor(props) {
@@ -8,8 +9,8 @@ export class SingleProduct extends React.Component {
     this.handleAddToCart = this.handleAddToCart.bind(this);
   }
 
-  handleAddToCart = () => {
-    console.log('add to cart clicked');
+  handleAddToCart = (orderId, item) => {
+    this.props.addToCart(orderId, item);
   };
 
   componentDidMount() {
@@ -18,6 +19,8 @@ export class SingleProduct extends React.Component {
 
   render() {
     const {product} = this.props;
+    const {user} = this.props;
+
     return (
       <div>
         <h1>{product.name}</h1>
@@ -28,10 +31,9 @@ export class SingleProduct extends React.Component {
         <img src={product.imageUrl} />
         <br />
         <label htmlFor="quantity">Quantity: </label>
-        {/* <input type="number" min="1" max="100" value="1"> */}
         <select
-          // value={props.fuelType}
-          // onChange={props.handleChange}
+          // need value={props...}
+          // need onChange={props.handleChange}
           name="quantity"
         >
           <option value="1">1</option>
@@ -46,7 +48,10 @@ export class SingleProduct extends React.Component {
           <option value="10">10</option>
         </select>
         <p>
-          <button type="submit" onClick={this.handleAddToCart}>
+          <button
+            type="submit"
+            onClick={() => this.handleAddToCart(user.order.id, product)}
+          >
             Add to Cart
           </button>
         </p>
@@ -58,12 +63,15 @@ export class SingleProduct extends React.Component {
 const mapState = (state) => {
   return {
     product: state.singleProduct,
+    user: state.user,
+    cart: state.cartReducer,
   };
 };
 
 const mapDispatch = (dispatch) => {
   return {
     loadSingleProduct: (id) => dispatch(fetchSingleProduct(id)),
+    addToCart: (id, item) => dispatch(addToCartThunk(id, item)),
   };
 };
 

@@ -15,6 +15,7 @@ module.exports = db.define('individual_product_order_details', {
     validate: {
       min: 0,
     },
+    defaultValue: 1,
   },
   //   product quantity * unit price
   totalPriceForThisProduct: {

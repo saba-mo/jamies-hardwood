@@ -2,11 +2,7 @@ import React from 'react';
 import {connect} from 'react-redux';
 import {fetchUser} from '../../store/redux/users/usersReducer';
 
-// user type is customer or admin
 class SingleUser extends React.Component {
-  constructor(props) {
-    super(props);
-  }
   componentDidMount() {
     this.props.loadUser(this.props.match.params.userId);
   }
@@ -22,7 +18,6 @@ class SingleUser extends React.Component {
     if (!user) {
       return 'No one to see here';
     }
-    console.log('the user is admin', user);
 
     return (
       <div id="single-view">
