@@ -1,6 +1,6 @@
 //ACTION TYPES
 const GET_USERS = 'GET_USERS';
-const GET_A_USER = 'GET_A_USER';
+const SEE_A_USER = 'SEE_A_USER';
 const DELETE_USER = 'DELETE_USER';
 
 //INITIAL STATE
@@ -12,7 +12,7 @@ export const destroyUser = (user) => ({
   user: user,
 });
 export const setUser = (user) => ({
-  type: GET_A_USER,
+  type: SEE_A_USER,
   user: user,
 });
 export const setUsers = (users) => ({
@@ -57,7 +57,7 @@ export default function (users = initialState, action) {
         (user) => parseInt(user.id) !== parseInt(action.user.id)
       );
       return users;
-    case GET_A_USER:
+    case SEE_A_USER:
       users = users.filter(
         (user) => parseInt(user.id) !== parseInt(action.user.id)
       );
