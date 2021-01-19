@@ -26,7 +26,7 @@ export class SingleProduct extends React.Component {
         <h1>{product.name}</h1>
         Description: {product.description}
         <br />
-        Price: ${product.price}
+        Price: ${product.price / 100}
         <br />
         <img src={product.imageUrl} />
         <br />
