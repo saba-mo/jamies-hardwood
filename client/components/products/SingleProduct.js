@@ -17,6 +17,7 @@ export class SingleProduct extends React.Component {
   }
 
   render() {
+    console.log('the prop', this.props);
     const {product} = this.props;
     return (
       <div>

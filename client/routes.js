@@ -33,25 +33,29 @@ class Routes extends Component {
         <Route exact path="/products/:productId" component={SingleProduct} />
         <Route path="/cart/:cartId" component={Cart} />
         <Route path="/confirmation" component={Confirmation} />
+        <Route exact path="/users" component={AllUsers} />
+        <Route exact path="/users/:userId" component={SingleUser} />
         {isLoggedIn && (
           <Switch>
             {/* Routes placed here are only available after logging in */}
             <Route path="/home" component={UserHome} />
           </Switch>
         )}
-        {isLoggedIn && isAdmin && (
-          <Switch>
-            {/* Routes placed here are only available after logging in AND user is admin*/}
-            <Route exact path="/users" component={AllUsers} />
-            <Route exact path="/users/:id" component={SingleUser} />
-          </Switch>
-        )}
+
         {/* Displays our Login component as a fallback */}
         <Route component={Login} />
       </Switch>
     );
   }
 }
+
+// {isLoggedIn && isAdmin && (
+//           <Switch>
+//             {/* Routes placed here are only available after logging in AND user is admin*/}
+//             <Route exact path="/users" component={AllUsers} />
+//             <Route exact path="/users/:id" component={SingleUser} />
+//           </Switch>
+//         )}
 
 /* * CONTAINER * */
 const mapState = (state) => {

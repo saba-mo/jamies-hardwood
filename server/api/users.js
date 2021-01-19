@@ -38,9 +38,9 @@ router.get('/', isAdmin, async (req, res, next) => {
 });
 
 // GET /users/:userId
-router.get('/:id', isAdmin, async (req, res, next) => {
+router.get('/:userId', isAdmin, async (req, res, next) => {
   try {
-    const id = parseInt(req.params.id);
+    const id = parseInt(req.params.userId);
     if (isNaN(id)) {
       res.status(400).end();
       return;

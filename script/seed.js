@@ -160,7 +160,7 @@ const users = async () => {
         User.create({
           firstName: first,
           lastName: last,
-          email: email,
+          email: email.toLowerCase(),
           isAdmin: true,
           password: 'password',
         }),
@@ -180,7 +180,7 @@ const users = async () => {
         User.create({
           firstName: first,
           lastName: last,
-          email: email,
+          email: email.toLowerCase(),
           password: 'password',
         }),
       ]);

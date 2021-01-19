@@ -1,6 +1,6 @@
 //ACTION TYPES
-const SET_USERS = 'SET_USERS';
-const SET_A_USER = 'SET_A_USER';
+const GET_USERS = 'GET_USERS';
+const GET_A_USER = 'GET_A_USER';
 const DELETE_USER = 'DELETE_USER';
 
 //INITIAL STATE
@@ -12,11 +12,11 @@ export const destroyUser = (user) => ({
   user: user,
 });
 export const setUser = (user) => ({
-  type: SET_A_USER,
+  type: GET_A_USER,
   user: user,
 });
 export const setUsers = (users) => ({
-  type: SET_USERS,
+  type: GET_USERS,
   users: users,
 });
 
@@ -31,9 +31,7 @@ export const deleteUser = (user) => async (dispatch, getState, {axios}) => {
   }
 };
 
-// removed getState from the variables of the async function fetchUser. Test to see if works. If it does, then remove getState from the other functions (deleteUser and fetchUsers).
-
-export const fetchUser = (userId) => async (dispatch, {axios}) => {
+export const fetchUser = (userId) => async (dispatch, getState, {axios}) => {
   try {
     const {data} = await axios.get(`/api/users/${userId}`);
     dispatch(setUser(data));
@@ -59,12 +57,12 @@ export default function (users = initialState, action) {
         (user) => parseInt(user.id) !== parseInt(action.user.id)
       );
       return users;
-    case SET_A_USER:
+    case GET_A_USER:
       users = users.filter(
         (user) => parseInt(user.id) !== parseInt(action.user.id)
       );
       return users.concat([action.user]);
-    case SET_USERS:
+    case GET_USERS:
       return action.users;
 
     default:
