@@ -1,6 +1,6 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import {fetchUsers, deleteUser} from '../../store/redux/users/usersReducer';
+import {fetchUsers, deleteUser} from '../../store/redux/users/usersView';
 import {Link} from 'react-router-dom';
 
 export class AllUsers extends React.Component {
@@ -17,7 +17,7 @@ export class AllUsers extends React.Component {
   };
 
   render() {
-    const userList = this.props.users;
+    const userList = this.props.usersView;
     return (
       <div>
         <main>
@@ -55,7 +55,7 @@ export class AllUsers extends React.Component {
 }
 
 const mapStateToProps = (state) => {
-  return {users: state.usersReducer};
+  return {usersView: state.usersView};
 };
 
 const mapDispatchToProps = (dispatch) => ({
