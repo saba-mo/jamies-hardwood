@@ -2,8 +2,9 @@ const router = require('express').Router();
 const Product = require('../db/models/product');
 const Order = require('../db/models/order');
 const Cart = require('../db/models/cart');
+const {isIdentity} = require('../express-gate-auth');
 
-router.get('/:cartId', async (req, res, next) => {
+router.get('/:cartId', isIdentity, async (req, res, next) => {
   try {
     const id = parseInt(req.params.cartId);
     if (isNaN(id)) {
