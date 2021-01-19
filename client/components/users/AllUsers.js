@@ -18,11 +18,22 @@ export class AllUsers extends React.Component {
 
   render() {
     const userList = this.props.usersView;
+
+    if (!userList.length) {
+      return 'No one to see here';
+    }
+    const admin = (user) => {
+      if (user.isAdmin) {
+        return `This person is also an Admin:`;
+      } else return '';
+    };
+
     return (
       <div>
         <main>
-          <h1>Jamie's Hard Wood and Heavy Metal </h1>
-          <h3>See all customers and admin users here.</h3>
+          <h3>
+            Hello Administrator! Check out all these folks that have signed up.
+          </h3>
           <p />
         </main>
         <div id="full-list-display">
@@ -33,8 +44,8 @@ export class AllUsers extends React.Component {
                   <div key={`user-${user.id}`}>
                     <Link to={`/users/${user.id}`}>
                       <h4>
-                        {user.firstName} {user.lastName} <p />
-                        {user.email}
+                        {admin(user)} <p />
+                        {user.firstName} {user.lastName}, {user.email} <p />
                       </h4>
                     </Link>
                     <button
