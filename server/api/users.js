@@ -29,7 +29,7 @@ router.get('/', isAdmin, async (req, res, next) => {
     const user = await User.findAll({
       // explicitly select only the id and email fields - even though users' passwords are encrypted, it is unnecessary to view more on the view all page
       // Also, it won't help if we just send everything to anyone who asks!
-      attributes: ['id', 'firstName', 'lastName', 'email'],
+      attributes: ['id', 'firstName', 'lastName', 'email', 'isAdmin'],
     });
     res.json(user);
   } catch (error) {
@@ -49,7 +49,7 @@ router.get('/:userId', isAdmin, async (req, res, next) => {
       where: {
         id: id,
       },
-      attributes: ['id', 'firstName', 'lastName', 'email'],
+      attributes: ['id', 'firstName', 'lastName', 'email', 'isAdmin'],
       // include: Cart,
     });
 

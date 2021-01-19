@@ -13,7 +13,6 @@ class SingleUser extends React.Component {
 
   render() {
     const userItem = this.props.userList;
-    console.log('the prop list', userItem);
     if (!userItem.length) {
       return 'No one to see here';
     }
@@ -23,14 +22,15 @@ class SingleUser extends React.Component {
     if (!user) {
       return 'No one to see here';
     }
+    console.log('the user is admin', user);
 
     return (
       <div id="single-view">
         <p>
-          User name: {user.firstName} {user.lastName}.
+          User name: {user.firstName} {user.lastName}
         </p>
         <p>User email: {user.email}</p>
-        <p>User is Admin: {user.isAdmin}</p>
+        <p>User is Admin: {`${user.isAdmin}`}</p>
       </div>
     );
   }
