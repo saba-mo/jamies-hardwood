@@ -157,7 +157,7 @@ const users = async () => {
             isAdmin: true,
             password: 'password',
             order: {
-              totalPrice: i * 20,
+              totalPrice: i * 2000,
             },
           },
           {
@@ -189,7 +189,7 @@ const users = async () => {
             email: email.toLowerCase(),
             password: 'password',
             order: {
-              totalPrice: i * 20,
+              totalPrice: i * 2000,
             },
           },
           {
@@ -214,7 +214,7 @@ const productEarrings = async () => {
     let name = `Earrings of ${adjective}`;
     let description = 'This is the next thing you need to own!';
     let quantity = Math.floor(Math.random() * 100);
-    let price = Math.random() * 100;
+    let price = Math.floor(Math.random() * 10000);
     try {
       await Promise.all([
         Product.create({
@@ -238,7 +238,7 @@ const productBowls = async () => {
     let name = `Bowls of ${adjective}`;
     let description = 'This is the next thing you need to own!';
     let quantity = Math.floor(Math.random() * 100);
-    let price = Math.random() * 100;
+    let price = Math.floor(Math.random() * 10000);
 
     try {
       await Promise.all([
@@ -263,7 +263,7 @@ async function associations() {
     where: {
       totalPrice: {
         [Op.or]: {
-          [Op.between]: [220, 700],
+          [Op.between]: [22000, 70000],
         },
       },
     },
