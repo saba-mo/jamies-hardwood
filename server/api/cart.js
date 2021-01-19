@@ -22,6 +22,17 @@ router.get('/:cartId', async (req, res, next) => {
 router.post('/:cartId', async (req, res, next) => {
   try {
     const thisOrder = await Order.findByPk(req.params.cartId);
+    // console.log('thisOrder: ', thisOrder);
+    // console.log(req.body);
+    // if (thisOrder.products && thisOrder.products.length) {
+    //   console.log('we have products');
+    //   for (let i = 0; i < thisOrder.products.length; i++) {
+    //     if (thisOrder.products[i].id === req.body.id) {
+    //       console.log('here');
+    //       thisOrder.products[i].individual_product_order_details.quantity++;
+    //     }
+    //   }
+    // }
     thisOrder.addProduct(req.body.id);
   } catch (error) {
     next(error);

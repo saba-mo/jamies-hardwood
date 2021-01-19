@@ -6,8 +6,14 @@ module.exports = router;
 router.post('/login', async (req, res, next) => {
   try {
     const user = await User.findOne({
-      where: {email: req.body.email},
+      where: {
+        email: req.body.email,
+      },
+      include: {
+        model: Order,
+      },
     });
+
     if (!user) {
       console.log('No such user found:', req.body.email);
       res.status(401).send('Wrong username and/or password');
@@ -22,6 +28,7 @@ router.post('/login', async (req, res, next) => {
   }
 });
 
+// add eager loading code here as well
 router.post('/signup', async (req, res, next) => {
   try {
     const user = await User.create(
@@ -50,6 +57,13 @@ router.post('/logout', (req, res) => {
 });
 
 router.get('/me', async (req, res) => {
+  if (!req.user) {
+    res.send({});
+    return;
+  }
+  // const order = req.user.getOrder();
+  // const user = req.user;
+  // user.order = order;
   const user = await User.findOne({
     where: {
       id: req.user.id,
@@ -57,9 +71,9 @@ router.get('/me', async (req, res) => {
     attributes: ['id', 'firstName', 'lastName', 'email'],
     include: {
       model: Order,
-      where: {
-        userId: req.user.id,
-      },
+      // where: {
+      //   userId: req.user.id,
+      // },
     },
   });
   res.json(user);

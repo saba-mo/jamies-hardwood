@@ -7,7 +7,7 @@ import {logout} from '../store';
 //approach: instead of "isLoggedIn", the ternary should be "isAdmin"
 //if yes, display a navbar that incudes links to a cart that is editable (which will happen on the cart end), and an additional users tab for the admin to view all-users (and single user from there, if we need/want). Both cart and users component should also have ternary operator, and show "Access denied" or whatever, if somehow a non-admin gets there.
 
-const Navbar = ({handleClick, isLoggedIn, isAdmin}) => {
+const Navbar = ({handleClick, isLoggedIn, isAdmin, orderId}) => {
   if (isAdmin && isLoggedIn) {
     return (
       <div>
@@ -36,7 +36,7 @@ const Navbar = ({handleClick, isLoggedIn, isAdmin}) => {
             {/* The navbar will show these links after you log in */}
             <Link to="/home">Home</Link>
             <Link to="/products">Shop</Link>
-            <Link to="/cart">Cart</Link>
+            <Link to={`/cart/${orderId}`}>Cart</Link>
             <a href="#" onClick={handleClick}>
               Logout
             </a>
@@ -69,9 +69,11 @@ const Navbar = ({handleClick, isLoggedIn, isAdmin}) => {
  * CONTAINER
  */
 const mapState = (state) => {
+  console.log('user: ', state.user);
   return {
     isLoggedIn: !!state.user.id,
     isAdmin: !!state.user.isAdmin,
+    orderId: state.user.order ? state.user.order.id : null,
   };
 };
 

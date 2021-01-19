@@ -10,7 +10,6 @@ export class SingleProduct extends React.Component {
   }
 
   handleAddToCart = (orderId, item) => {
-    console.log('add to cart clicked');
     this.props.addToCart(orderId, item);
   };
 
@@ -66,6 +65,7 @@ const mapState = (state) => {
   return {
     product: state.singleProduct,
     user: state.user,
+    cart: state.cartReducer,
   };
 };
 
