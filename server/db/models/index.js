@@ -3,6 +3,7 @@ const Product = require('./product');
 const Order = require('./order');
 const Cart = require('./cart');
 
+//Cart is renamed for local database to 'individual_product_order_details'
 Product.belongsToMany(Order, {through: Cart, foreignKey: 'product_id'});
 Order.belongsToMany(Product, {through: Cart, foreignKey: 'order_id'});
 
