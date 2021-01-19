@@ -4,9 +4,6 @@ import {connect} from 'react-redux';
 import {Link} from 'react-router-dom';
 import {logout} from '../store';
 
-//approach: instead of "isLoggedIn", the ternary should be "isAdmin"
-//if yes, display a navbar that incudes links to a cart that is editable (which will happen on the cart end), and an additional users tab for the admin to view all-users (and single user from there, if we need/want). Both cart and users component should also have ternary operator, and show "Access denied" or whatever, if somehow a non-admin gets there.
-
 const Navbar = ({handleClick, isLoggedIn, isAdmin, orderId}) => {
   if (isAdmin && isLoggedIn) {
     return (
@@ -69,15 +66,12 @@ const Navbar = ({handleClick, isLoggedIn, isAdmin, orderId}) => {
  * CONTAINER
  */
 const mapState = (state) => {
-  console.log('user: ', state.user);
   return {
     isLoggedIn: !!state.user.id,
     isAdmin: !!state.user.isAdmin,
     orderId: state.user.order ? state.user.order.id : null,
   };
 };
-
-//isAdmin needs to be imported here, and maybe also below with proptypes?
 
 const mapDispatch = (dispatch) => {
   return {

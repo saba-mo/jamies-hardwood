@@ -20,7 +20,7 @@ export class SingleProduct extends React.Component {
   render() {
     const {product} = this.props;
     const {user} = this.props;
-    console.log('props: ', this.props);
+
     return (
       <div>
         <h1>{product.name}</h1>
@@ -31,10 +31,9 @@ export class SingleProduct extends React.Component {
         <img src={product.imageUrl} />
         <br />
         <label htmlFor="quantity">Quantity: </label>
-        {/* <input type="number" min="1" max="100" value="1"> */}
         <select
-          // value={props.fuelType}
-          // onChange={props.handleChange}
+          // need value={props...}
+          // need onChange={props.handleChange}
           name="quantity"
         >
           <option value="1">1</option>

@@ -60,10 +60,7 @@ router.get('/me', async (req, res) => {
     res.send({});
     return;
   }
-  // unfinished code attempting 'lazy loading'
-  // const order = req.user.getOrder();
-  // const user = req.user;
-  // user.order = order;
+
   const user = await User.findOne({
     where: {
       id: req.user.id,
