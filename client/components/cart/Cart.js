@@ -1,6 +1,6 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import {fetchCart} from '../../store/redux/cart/cart';
+import {fetchCart, removeFromCartThunk} from '../../store/redux/cart/cart';
 
 class Cart extends React.Component {
   constructor() {
@@ -9,6 +9,7 @@ class Cart extends React.Component {
     this.handleCheckout = this.handleCheckout.bind(this);
     // this.decreaseQuantity = this.decreaseQuantity.bind(this);
     // this.increaseQuantity = this.increaseQuantity.bind(this);
+    // this.handleRemove = this.handleRemove.bind(this)
   }
 
   componentDidMount() {
@@ -23,15 +24,21 @@ class Cart extends React.Component {
   //   // increment quantity in cart in db by 1
   // }
 
+  handleRemove(orderId, id) {
+    // remove item from cart
+    this.props.removeFromCart(orderId, id);
+    this.props.loadCart(this.props.match.params.cartId);
+  }
+
   handleCheckout() {
     // update quantity (inventory) in db
     // empty cart
-    console.log('button works');
     window.location.href = '/confirmation';
   }
 
   render() {
     const {cart} = this.props;
+    console.log('cart: ', cart);
 
     let orderTotal;
     let totalItems;
@@ -73,6 +80,13 @@ class Cart extends React.Component {
                     +
                   </button>
                   <br />
+                  <button
+                    type="submit"
+                    onClick={() => this.handleRemove(cart.id, product.id)}
+                  >
+                    Remove
+                  </button>
+                  <br />
                   Item Price: ${(product.price / 100).toFixed(2)}
                   <br />
                   {/* Not pulling total price from db because no calculation set up */}
@@ -107,6 +121,7 @@ const mapState = (state) => {
 const mapDispatch = (dispatch) => {
   return {
     loadCart: (id) => dispatch(fetchCart(id)),
+    removeFromCart: (orderId, id) => dispatch(removeFromCartThunk(orderId, id)),
   };
 };
 
