@@ -76,13 +76,14 @@ class Cart extends React.Component {
                   <br />
                   {/* Not pulling total price from db because no calculation set up */}
                   Total Price: $
-                  {Number(product.price) *
-                    product.individual_product_order_details.quantity}
+                  {(Number(product.price) *
+                    product.individual_product_order_details.quantity) /
+                    100}
                 </div>
               );
             })}
             <h2>Total Items: {totalItems}</h2>
-            <h2>Order Total: {orderTotal}</h2>
+            <h2>Order Total: ${orderTotal / 100}</h2>
             <button type="submit" onClick={this.handleCheckout}>
               Proceed to Checkout
             </button>
