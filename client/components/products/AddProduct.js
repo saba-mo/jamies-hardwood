@@ -5,7 +5,7 @@ import {createProduct} from '../../store/redux/products/products';
 const AddProduct = (props) => {
   const {handleSubmit} = props;
 
-  //name, description, quantity, price
+  //name, description, quantity, price, image
 
   return (
     <div>
