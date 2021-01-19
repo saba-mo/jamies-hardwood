@@ -40,7 +40,7 @@ class Cart extends React.Component {
       // incorrect product price input, so orderTotal is wrong
       orderTotal = cart.products.reduce(
         (accumulator, currentValue) =>
-          accumulator + Number(currentValue.price / 100),
+          accumulator + Number(currentValue.price) / 100,
         0
       );
 
@@ -73,12 +73,14 @@ class Cart extends React.Component {
                     +
                   </button>
                   <br />
-                  Item Price: ${product.price / 100}
+                  Item Price: ${(product.price / 100).toFixed(2)}
                   <br />
                   {/* Not pulling total price from db because no calculation set up */}
                   Total Price: $
-                  {Number(product.price / 100) *
-                    product.individual_product_order_details.quantity}
+                  {(
+                    Number(product.price / 100) *
+                    product.individual_product_order_details.quantity
+                  ).toFixed(2)}
                 </div>
               );
             })}
