@@ -11,6 +11,7 @@ export class SingleProduct extends React.Component {
 
   handleAddToCart = (orderId, item) => {
     this.props.addToCart(orderId, item);
+    alert('Added to cart!');
   };
 
   componentDidMount() {

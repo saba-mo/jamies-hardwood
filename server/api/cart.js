@@ -38,6 +38,7 @@ router.post('/:cartId', async (req, res, next) => {
     if (productExistsInCart) {
       // Cart.quantity++
       productExistsInCart.quantity++;
+      res.json(productExistsInCart);
     }
 
     // If not (if zero results), create an instance with req.body.quantity
@@ -48,6 +49,8 @@ router.post('/:cartId', async (req, res, next) => {
         product_id: req.body.id,
         // quantity: req.body.quantity,
       });
+
+      res.json(newOrderItem);
     }
 
     // previous way of adding to cart
