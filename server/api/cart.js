@@ -50,18 +50,7 @@ router.post('/:cartId', async (req, res, next) => {
       });
     }
 
-    // console.log('thisOrder: ', thisOrder);
-    // console.log(req.body);
-    // if (thisOrder.products && thisOrder.products.length) {
-    //   console.log('we have products');
-    //   for (let i = 0; i < thisOrder.products.length; i++) {
-    //     if (thisOrder.products[i].id === req.body.id) {
-    //       console.log('here');
-    //       thisOrder.products[i].individual_product_order_details.quantity++;
-    //     }
-    //   }
-    // }
-
+    // previous way of adding to cart
     // const thisOrder = await Order.findByPk(req.params.cartId);
     // thisOrder.addProduct(req.body.id);
   } catch (error) {
