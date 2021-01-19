@@ -24,8 +24,8 @@ router.delete('/:id', async (req, res, next) => {
 router.get('/', isAdmin, async (req, res, next) => {
   try {
     const user = await User.findAll({
-      // explicitly select only the id and email fields - even though users' passwords are encrypted, it is unnecessary to view more on the view all page
-      // Also, it won't help if we just send everything to anyone who asks!
+      // Explicitly select only the id and email fields - even though users' passwords are encrypted, it is unnecessary to view more on the view all page
+      // Also, it's poor practice to just send everything to anyone who asks!
       attributes: ['id', 'firstName', 'lastName', 'email', 'isAdmin'],
     });
     res.json(user);
@@ -48,7 +48,7 @@ router.get('/:userId', isAdmin, async (req, res, next) => {
       },
 
       attributes: ['id', 'firstName', 'lastName', 'email', 'isAdmin'],
-      // include: Cart,
+      // later work after Tier 1: include Cart
     });
 
     if (!user) {

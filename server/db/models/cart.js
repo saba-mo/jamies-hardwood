@@ -17,7 +17,7 @@ module.exports = db.define('individual_product_order_details', {
     },
     defaultValue: 1,
   },
-  //   product quantity * unit price
+  // product quantity * unit price =
   totalPriceForThisProduct: {
     type: Sequelize.DECIMAL(10, 2),
   },

@@ -135,7 +135,7 @@ const emailHost = ['gmail', 'hotmail', 'yahoo'];
 const userCount = 200;
 const productCount = 200;
 
-// const images = [`images from either urls or csv files`]
+// alternative way of approaching this is creating a variable just like the names e.g. const images = [`images from either urls or csv files`]
 let bowlImage = `https://i.etsystatic.com/16976526/d/il/7d4b54/2344187124/il_340x270.2344187124_rxpb.jpg?version=0`;
 let earringImage = `https://cdn.shopify.com/s/files/1/0736/8211/products/Tear_Drop_Earring_Large_422x.png?v=1568803221`;
 
@@ -298,11 +298,6 @@ const seed = async () => {
   console.log(green('db synced!'));
   await Promise.all([productEarrings(), productBowls(), users()]);
   await associations();
-
-  // await users()
-  // await productEarrings()
-  // await productBowls()
-  // await associations();
 };
 
 async function runSeed() {
