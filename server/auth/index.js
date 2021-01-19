@@ -65,7 +65,7 @@ router.get('/me', async (req, res) => {
     where: {
       id: req.user.id,
     },
-    attributes: ['id', 'firstName', 'lastName', 'email'],
+    attributes: ['id', 'firstName', 'lastName', 'email', 'isAdmin'],
     include: {
       model: Order,
     },

@@ -153,7 +153,7 @@ const users = async () => {
             IdUser: i,
             firstName: first,
             lastName: last,
-            email: email,
+            email: email.toLowerCase(),
             isAdmin: true,
             password: 'password',
             order: {
@@ -186,7 +186,7 @@ const users = async () => {
             IdUser: i,
             firstName: first,
             lastName: last,
-            email: email,
+            email: email.toLowerCase(),
             password: 'password',
             order: {
               totalPrice: i * 20,

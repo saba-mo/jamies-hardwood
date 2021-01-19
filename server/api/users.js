@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const {User} = require('../db/models');
+const {User} = require('../db/models/');
 const isAdmin = require('../express-gate-auth');
 
 // DELETE /users/:userId
@@ -26,7 +26,7 @@ router.get('/', isAdmin, async (req, res, next) => {
     const user = await User.findAll({
       // explicitly select only the id and email fields - even though users' passwords are encrypted, it is unnecessary to view more on the view all page
       // Also, it won't help if we just send everything to anyone who asks!
-      attributes: ['id', 'firstName', 'lastName', 'email'],
+      attributes: ['id', 'firstName', 'lastName', 'email', 'isAdmin'],
     });
     res.json(user);
   } catch (error) {
@@ -35,9 +35,9 @@ router.get('/', isAdmin, async (req, res, next) => {
 });
 
 // GET /users/:userId
-router.get('/:id', isAdmin, async (req, res, next) => {
+router.get('/:userId', isAdmin, async (req, res, next) => {
   try {
-    const id = parseInt(req.params.id);
+    const id = parseInt(req.params.userId);
     if (isNaN(id)) {
       res.status(400).end();
       return;
@@ -46,7 +46,9 @@ router.get('/:id', isAdmin, async (req, res, next) => {
       where: {
         id: id,
       },
-      attributes: ['id', 'firstName', 'lastName', 'email'],
+
+      attributes: ['id', 'firstName', 'lastName', 'email', 'isAdmin'],
+      // include: Cart,
     });
 
     if (!user) {

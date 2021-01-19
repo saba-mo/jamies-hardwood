@@ -15,9 +15,7 @@ import {
 } from './components';
 import {me} from './store';
 
-/**
- * COMPONENT
- */
+/* * COMPONENT * */
 class Routes extends Component {
   componentDidMount() {
     this.props.loadInitialData();
@@ -35,19 +33,15 @@ class Routes extends Component {
         <Route exact path="/products/:productId" component={SingleProduct} />
         <Route path="/cart/:cartId" component={Cart} />
         <Route path="/confirmation" component={Confirmation} />
+        <Route exact path="/users" component={AllUsers} />
+        <Route exact path="/users/:userId" component={SingleUser} />
         {isLoggedIn && (
           <Switch>
             {/* Routes placed here are only available after logging in */}
             <Route path="/home" component={UserHome} />
           </Switch>
         )}
-        {isLoggedIn && isAdmin && (
-          <Switch>
-            {/* Routes placed here are only available after logging in AND user is admin*/}
-            <Route exact path="/users" component={AllUsers} />
-            <Route exact path="/users/:id" component={SingleUser} />
-          </Switch>
-        )}
+
         {/* Displays our Login component as a fallback */}
         <Route component={Login} />
       </Switch>
@@ -55,9 +49,15 @@ class Routes extends Component {
   }
 }
 
-/**
- * CONTAINER
- */
+// {isLoggedIn && isAdmin && (
+//           <Switch>
+//             {/* Routes placed here are only available after logging in AND user is admin*/}
+//             <Route exact path="/users" component={AllUsers} />
+//             <Route exact path="/users/:userId" component={SingleUser} />
+//           </Switch>
+//         )}
+
+/* * CONTAINER * */
 const mapState = (state) => {
   return {
     // Being 'logged in' for our purposes will be defined has having a state.user that has a truthy id.
@@ -75,13 +75,10 @@ const mapDispatch = (dispatch) => {
   };
 };
 
-// The `withRouter` wrapper makes sure that updates are not blocked
-// when the url changes
+// The `withRouter` wrapper makes sure that updates are not blocked when the url changes
 export default withRouter(connect(mapState, mapDispatch)(Routes));
 
-/**
- * PROP TYPES
- */
+/* * PROP TYPES * */
 Routes.propTypes = {
   loadInitialData: PropTypes.func.isRequired,
   isLoggedIn: PropTypes.bool.isRequired,
