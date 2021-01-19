@@ -2,6 +2,7 @@ import React from 'react';
 import {Link} from 'react-router-dom';
 import {connect} from 'react-redux';
 import {fetchProducts} from '../../store/redux/products/products';
+import AddProduct from './AddProduct';
 
 class AllProducts extends React.Component {
   componentDidMount() {
