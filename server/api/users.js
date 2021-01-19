@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const {User} = require('../db/models');
+const User = require('../db/models/user');
 const isAdmin = require('../express-gate-auth');
 // const { Cart } = require('../db/models')
 
@@ -20,6 +20,8 @@ router.delete('/:id', async (req, res, next) => {
     next(error);
   }
 });
+
+// ********** tell me about the isAdmin in this please ************
 
 // GET /users
 router.get('/', isAdmin, async (req, res, next) => {
