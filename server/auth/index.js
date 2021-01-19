@@ -28,7 +28,6 @@ router.post('/login', async (req, res, next) => {
   }
 });
 
-// add eager loading code here as well
 router.post('/signup', async (req, res, next) => {
   try {
     const user = await User.create(
@@ -61,6 +60,7 @@ router.get('/me', async (req, res) => {
     res.send({});
     return;
   }
+  // unfinished code attempting 'lazy loading'
   // const order = req.user.getOrder();
   // const user = req.user;
   // user.order = order;
@@ -71,9 +71,6 @@ router.get('/me', async (req, res) => {
     attributes: ['id', 'firstName', 'lastName', 'email'],
     include: {
       model: Order,
-      // where: {
-      //   userId: req.user.id,
-      // },
     },
   });
   res.json(user);
