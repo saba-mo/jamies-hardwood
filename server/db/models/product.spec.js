@@ -12,7 +12,7 @@ describe('Product Model', () => {
       name: 'earrings',
       description: 'wooden earrings',
       quantity: 40,
-      price: '24.22',
+      price: '2422',
       imageUrl:
         'https://scontent.fdet1-1.fna.fbcdn.net/v/t1.0-9/48355230_2197053220325955_285086455796072448_n.jpg?_nc_cat=107&ccb=2&_nc_sid=0debeb&_nc_ohc=rcAYcAw-5VcAX9ofu4G&_nc_ht=scontent.fdet1-1.fna&oh=f62b16590bd0087ebb4caeb154646940&oe=6023BD24',
     };
@@ -25,7 +25,7 @@ describe('Product Model', () => {
     expect(savedProduct.name).to.equal('earrings');
     expect(savedProduct.description).to.equal('wooden earrings');
     expect(savedProduct.quantity).to.equal(40);
-    expect(savedProduct.price).to.equal('24.22');
+    expect(savedProduct.price).to.equal('2422');
     expect(savedProduct.imageUrl).to.equal(
       'https://scontent.fdet1-1.fna.fbcdn.net/v/t1.0-9/48355230_2197053220325955_285086455796072448_n.jpg?_nc_cat=107&ccb=2&_nc_sid=0debeb&_nc_ohc=rcAYcAw-5VcAX9ofu4G&_nc_ht=scontent.fdet1-1.fna&oh=f62b16590bd0087ebb4caeb154646940&oe=6023BD24'
     );
