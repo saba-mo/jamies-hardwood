@@ -8,10 +8,15 @@ class AllProducts extends React.Component {
     this.props.getProducts();
   }
 
+  //make it so only admin can see this. if (isAdmin) - like in Navbar
+
   render() {
     return (
       <div>
-        {this.props.products.map(product => (
+        <div>
+          <AddProduct />
+        </div>
+        {this.props.products.map((product) => (
           <div key={product.id}>
             <Link to={`/products/${product.id}`}>
               <img src={product.imageUrl} />
@@ -25,15 +30,15 @@ class AllProducts extends React.Component {
   }
 }
 
-const mapState = state => {
+const mapState = (state) => {
   return {
-    products: state.productsReducer
+    products: state.productsReducer,
   };
 };
 
-const mapDispatch = dispatch => {
+const mapDispatch = (dispatch) => {
   return {
-    getProducts: () => dispatch(fetchProducts())
+    getProducts: () => dispatch(fetchProducts()),
   };
 };
 
