@@ -34,7 +34,7 @@ class Routes extends Component {
         <Route path="/cart/:cartId" component={Cart} />
         <Route path="/confirmation" component={Confirmation} />
         <Route exact path="/users" component={AllUsers} />
-        <Route exact path="/users/:id" component={SingleUser} />
+        <Route exact path="/users/:userId" component={SingleUser} />
         {isLoggedIn && (
           <Switch>
             {/* Routes placed here are only available after logging in */}
@@ -53,7 +53,7 @@ class Routes extends Component {
 //           <Switch>
 //             {/* Routes placed here are only available after logging in AND user is admin*/}
 //             <Route exact path="/users" component={AllUsers} />
-//             <Route exact path="/users/:id" component={SingleUser} />
+//             <Route exact path="/users/:userId" component={SingleUser} />
 //           </Switch>
 //         )}
 
