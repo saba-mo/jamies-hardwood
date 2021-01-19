@@ -1,6 +1,7 @@
 const router = require('express').Router();
 const {User} = require('../db/models/');
 const {isAdmin} = require('../express-gate-auth');
+const Order = require('../db/models/order');
 
 // DELETE /users/:userId
 router.delete('/:id', async (req, res, next) => {
@@ -48,6 +49,9 @@ router.get('/:userId', isAdmin, async (req, res, next) => {
       },
 
       attributes: ['id', 'firstName', 'lastName', 'email', 'isAdmin'],
+      include: {
+        model: Order,
+      },
       // include: Cart,
     });
 
