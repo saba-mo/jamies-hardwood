@@ -37,9 +37,7 @@ router.post('/:cartId', async (req, res, next) => {
     // If so (if one result), increment the quantity by req.body.quantity
     if (productExistsInCart) {
       // Cart.quantity++
-      console.log('quant before: ', productExistsInCart.quantity);
       productExistsInCart.quantity++;
-      console.log('quant after: ', productExistsInCart.quantity);
     }
 
     // If not (if zero results), create an instance with req.body.quantity
