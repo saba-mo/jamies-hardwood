@@ -32,7 +32,7 @@ class SingleUser extends React.Component {
 }
 
 const mapStateToProps = (state) => {
-  return {user: state.user, userList: state.usersReducer};
+  return {userList: state.usersReducer};
 };
 
 const mapDispatchToProps = (dispatch) => ({
