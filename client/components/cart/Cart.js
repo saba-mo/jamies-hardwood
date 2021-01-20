@@ -89,7 +89,7 @@ class Cart extends React.Component {
                   {(
                     Number(product.price / 100) *
                     product.individual_product_order_details.quantity
-                  ).toFixed(2)}
+                  ).toFixed(1)}
                   {totalsArray.push(
                     (
                       Number(product.price / 100) *
