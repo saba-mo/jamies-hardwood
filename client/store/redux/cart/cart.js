@@ -63,7 +63,6 @@ export default function cartReducer(state = initialState, action) {
       console.log('GET CART: ', action.cart.products);
       return action.cart.products;
     case ADD_TO_CART:
-      console.log('state: ', state);
       return [...state, action.item];
     case REMOVE_FROM_CART:
       return [...state.filter((item) => item.id !== action.id)];
