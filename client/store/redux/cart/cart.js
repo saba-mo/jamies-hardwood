@@ -36,7 +36,9 @@ export const addToCartThunk = (orderId, item) => {
   return async (dispatch) => {
     try {
       const {data} = await axios.put(`/api/cart/${orderId}`, item);
-      dispatch(addToCart(data));
+      if (data) {
+        dispatch(addToCart(data));
+      }
     } catch (err) {
       console.log('add to cart thunk error: ', err);
     }
@@ -60,7 +62,6 @@ const initialState = [];
 export default function cartReducer(state = initialState, action) {
   switch (action.type) {
     case GET_CART:
-      console.log('GET CART: ', action.cart.products);
       return action.cart.products;
     case ADD_TO_CART:
       return [...state, action.item];
