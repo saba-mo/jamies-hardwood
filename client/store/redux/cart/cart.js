@@ -35,7 +35,7 @@ export const fetchCart = (id) => {
 export const addToCartThunk = (orderId, item) => {
   return async (dispatch) => {
     try {
-      const {data} = await axios.post(`/api/cart/${orderId}`, item);
+      const {data} = await axios.put(`/api/cart/${orderId}`, item);
       dispatch(addToCart(data));
     } catch (err) {
       console.log('add to cart thunk error: ', err);
@@ -43,14 +43,29 @@ export const addToCartThunk = (orderId, item) => {
   };
 };
 
-const initialState = {};
+export const removeFromCartThunk = (orderId, id) => {
+  return async (dispatch) => {
+    try {
+      await axios.delete(`/api/cart/${orderId}`);
+      dispatch(removeFromCart(id));
+    } catch (err) {
+      console.log('delete from cart thunk error: ', err);
+    }
+  };
+};
+
+const initialState = [];
+// make state [] because we are only using products array anyway
 
 export default function cartReducer(state = initialState, action) {
   switch (action.type) {
     case GET_CART:
       return action.cart;
     case ADD_TO_CART:
-      return {...state, products: action.item};
+      // if state were {}, return {...state, products: [...state.products, action.item]};
+      return [...state, action.item];
+    case REMOVE_FROM_CART:
+      return [...state.filter((item) => item.id !== action.id)];
     default:
       return state;
   }
