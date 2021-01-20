@@ -135,9 +135,17 @@ const emailHost = ['gmail', 'hotmail', 'yahoo'];
 const userCount = 200;
 const productCount = 200;
 
-// const images = [`images from either urls or csv files`]
-let bowlImage = `https://i.etsystatic.com/16976526/d/il/7d4b54/2344187124/il_340x270.2344187124_rxpb.jpg?version=0`;
-let earringImage = `https://cdn.shopify.com/s/files/1/0736/8211/products/Tear_Drop_Earring_Large_422x.png?v=1568803221`;
+// alternative way of approaching this is creating a variable just like the names e.g. const images = [`images from either urls or csv files`]
+let bowlSmlImage = `https://i.pinimg.com/236x/ad/27/7c/ad277c3a5142ababf0ef14a81f91c168.jpg`;
+let earringImage = `https://i.pinimg.com/564x/3a/7f/2a/3a7f2ac4d233443cb8c3486c33e0a271.jpg`;
+let bowlLgImage = `https://i.pinimg.com/564x/30/6c/5e/306c5e4e0cc549575f623d176853bed6.jpg`;
+let plateImage = `https://i.pinimg.com/564x/b3/3f/ca/b33fcae182c585100c62d57a2fa61584.jpg`;
+let gobletImage = `https://i.pinimg.com/564x/ad/9a/b0/ad9ab0f61fca8b0629714c5ac6bb3826.jpg`;
+let wkspImage = `https://i.pinimg.com/564x/1a/1c/c8/1a1cc8504f00e134d91ac9aef2713623.jpg`;
+let ringImage = `https://i.pinimg.com/564x/fb/27/c3/fb27c35ab1981380eb871334c7ca820d.jpg`;
+let npkImage = `https://i.pinimg.com/564x/61/34/a1/6134a1f2a344cb8b39a426c88a617a5a.jpg`;
+let lightImage = `https://i.pinimg.com/236x/ca/6d/6b/ca6d6b623d6a7ce6ea99b3f64478ef59.jpg`;
+let shelfImage = `https://i.pinimg.com/564x/76/b5/10/76b510f4c8811cd8011904b81c69117f.jpg`;
 
 const users = async () => {
   for (let i = 0; i < 10; i++) {
@@ -150,14 +158,13 @@ const users = async () => {
       await Promise.all([
         User.create(
           {
-            IdUser: i,
             firstName: first,
             lastName: last,
             email: email.toLowerCase(),
             isAdmin: true,
             password: 'password',
             order: {
-              totalPrice: i * 20,
+              totalPrice: i * 2000,
             },
           },
           {
@@ -183,13 +190,12 @@ const users = async () => {
       await Promise.all([
         User.create(
           {
-            IdUser: i,
             firstName: first,
             lastName: last,
             email: email.toLowerCase(),
             password: 'password',
             order: {
-              totalPrice: i * 20,
+              totalPrice: i * 2000,
             },
           },
           {
@@ -208,13 +214,12 @@ const users = async () => {
 };
 
 const productEarrings = async () => {
-  for (let i = 0; i < productCount; i++) {
-    let adjective =
-      itemAdjective[Math.floor(Math.random() * 1000) % itemAdjective.length];
+  for (let i = 0; i < itemAdjective.length; i++) {
+    let adjective = itemAdjective[i];
     let name = `Earrings of ${adjective}`;
-    let description = 'This is the next thing you need to own!';
+    let description = 'Your ears will never be the same.';
     let quantity = Math.floor(Math.random() * 100);
-    let price = Math.random() * 100;
+    let price = Math.floor(Math.random() * 10000);
     try {
       await Promise.all([
         Product.create({
@@ -232,13 +237,12 @@ const productEarrings = async () => {
 };
 
 const productBowls = async () => {
-  for (let i = 0; i < productCount; i++) {
-    let adjective =
-      itemAdjective[Math.floor(Math.random() * 1000) % itemAdjective.length];
-    let name = `Bowls of ${adjective}`;
+  for (let i = 0; i < itemAdjective.length; i++) {
+    let adjective = itemAdjective[i];
+    let name = `Bowl of ${adjective}`;
     let description = 'This is the next thing you need to own!';
     let quantity = Math.floor(Math.random() * 100);
-    let price = Math.random() * 100;
+    let price = Math.floor(Math.random() * 10000);
 
     try {
       await Promise.all([
@@ -247,11 +251,195 @@ const productBowls = async () => {
           description: description,
           quantity: quantity,
           price: price,
-          imageUrl: bowlImage,
+          imageUrl: bowlSmlImage,
         }),
       ]);
     } catch (error) {
       console.log('Bowl Oops!', red(error));
+    }
+  }
+};
+
+const productLrgBowls = async () => {
+  for (let i = 0; i < itemAdjective.length; i++) {
+    let adjective = itemAdjective[i];
+    let name = `Large bowl of ${adjective}`;
+    let description = 'Is this enough?!';
+    let quantity = Math.floor(Math.random() * 100);
+    let price = Math.floor(Math.random() * 10000);
+    try {
+      await Promise.all([
+        Product.create({
+          name: name,
+          description: description,
+          quantity: quantity,
+          price: price,
+          imageUrl: bowlLgImage,
+        }),
+      ]);
+    } catch (error) {
+      console.log('Large Bowl Oops!', red(error));
+    }
+  }
+};
+const productPlates = async () => {
+  for (let i = 0; i < itemAdjective.length; i++) {
+    let adjective = itemAdjective[i];
+    let name = `Plate of ${adjective}`;
+    let description = 'Spread your food out here.';
+    let quantity = Math.floor(Math.random() * 100);
+    let price = Math.floor(Math.random() * 10000);
+
+    try {
+      await Promise.all([
+        Product.create({
+          name: name,
+          description: description,
+          quantity: quantity,
+          price: price,
+          imageUrl: plateImage,
+        }),
+      ]);
+    } catch (error) {
+      console.log('Plate Oops!', red(error));
+    }
+  }
+};
+const productGoblets = async () => {
+  for (let i = 0; i < itemAdjective.length; i++) {
+    let adjective = itemAdjective[i];
+    let name = `Goblet of ${adjective}`;
+    let description = 'Drink your tasty beverages in style!';
+    let quantity = Math.floor(Math.random() * 100);
+    let price = Math.floor(Math.random() * 10000);
+
+    try {
+      await Promise.all([
+        Product.create({
+          name: name,
+          description: description,
+          quantity: quantity,
+          price: price,
+          imageUrl: gobletImage,
+        }),
+      ]);
+    } catch (error) {
+      console.log('Goblet Oops!', red(error));
+    }
+  }
+};
+const productWorkSpace = async () => {
+  for (let i = 0; i < itemAdjective.length; i++) {
+    let adjective = itemAdjective[i];
+    let name = `Workspace of ${adjective}`;
+    let description = 'What do you need to do? Do it here!';
+    let quantity = Math.floor(Math.random() * 100);
+    let price = Math.floor(Math.random() * 10000);
+
+    try {
+      await Promise.all([
+        Product.create({
+          name: name,
+          description: description,
+          quantity: quantity,
+          price: price,
+          imageUrl: wkspImage,
+        }),
+      ]);
+    } catch (error) {
+      console.log('WorkSpace Oops!', red(error));
+    }
+  }
+};
+const productRing = async () => {
+  for (let i = 0; i < itemAdjective.length; i++) {
+    let adjective = itemAdjective[i];
+    let name = `Ring of ${adjective}`;
+    let description = 'Why only get one when you can get two?';
+    let quantity = Math.floor(Math.random() * 100);
+    let price = Math.floor(Math.random() * 10000);
+
+    try {
+      await Promise.all([
+        Product.create({
+          name: name,
+          description: description,
+          quantity: quantity,
+          price: price,
+          imageUrl: ringImage,
+        }),
+      ]);
+    } catch (error) {
+      console.log('Ring Oops!', red(error));
+    }
+  }
+};
+const productNapkinRing = async () => {
+  for (let i = 0; i < itemAdjective.length; i++) {
+    let adjective = itemAdjective[i];
+    let name = `Rings of ${adjective} for your napkins`;
+    let description = 'Jazz up that dinner table!';
+    let quantity = Math.floor(Math.random() * 100);
+    let price = Math.floor(Math.random() * 10000);
+
+    try {
+      await Promise.all([
+        Product.create({
+          name: name,
+          description: description,
+          quantity: quantity,
+          price: price,
+          imageUrl: npkImage,
+        }),
+      ]);
+    } catch (error) {
+      console.log('Napkin Ring Oops!', red(error));
+    }
+  }
+};
+const productLight = async () => {
+  for (let i = 0; i < itemAdjective.length; i++) {
+    let adjective = itemAdjective[i];
+    let name = `Light of ${adjective}`;
+    let description = `Not just any light for your darkness, it's light of ${adjective}!`;
+    let quantity = Math.floor(Math.random() * 100);
+    let price = Math.floor(Math.random() * 10000);
+
+    try {
+      await Promise.all([
+        Product.create({
+          name: name,
+          description: description,
+          quantity: quantity,
+          price: price,
+          imageUrl: lightImage,
+        }),
+      ]);
+    } catch (error) {
+      console.log('Light Oops!', red(error));
+    }
+  }
+};
+const productShelf = async () => {
+  for (let i = 0; i < itemAdjective.length; i++) {
+    let adjective = itemAdjective[i];
+    let name = `Shelf of ${adjective}`;
+    let description = `Records, books, towels, games, anything you want to store and display will fit perfectly on this shelf of ${adjective}.`;
+    let quantity = Math.floor(Math.random() * 100);
+    let price = Math.floor(Math.random() * 10000);
+
+    try {
+      await Promise.all([
+        Product.create({
+          name: name,
+          description: description,
+          quantity: quantity,
+          price: price,
+          imageUrl: shelfImage,
+        }),
+      ]);
+    } catch (error) {
+      console.log('Shelf Oops!', red(error));
     }
   }
 };
@@ -263,7 +451,7 @@ async function associations() {
     where: {
       totalPrice: {
         [Op.or]: {
-          [Op.between]: [220, 700],
+          [Op.between]: [22000, 80000],
         },
       },
     },
@@ -296,13 +484,21 @@ async function associations() {
 const seed = async () => {
   await db.sync({force: true});
   console.log(green('db synced!'));
-  await Promise.all([productEarrings(), productBowls(), users()]);
-  await associations();
 
-  // await users()
-  // await productEarrings()
-  // await productBowls()
-  // await associations();
+  await productRing();
+  await Promise.all([
+    users(),
+    productEarrings(),
+    productBowls(),
+    productLrgBowls(),
+    productPlates(),
+    productGoblets(),
+    productWorkSpace(),
+    productNapkinRing(),
+    productLight(),
+    productShelf(),
+  ]);
+  await associations();
 };
 
 async function runSeed() {

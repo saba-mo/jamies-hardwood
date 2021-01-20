@@ -36,7 +36,7 @@ export const fetchUser = (userId) => async (dispatch, getState, {axios}) => {
     const {data} = await axios.get(`/api/users/${userId}`);
     dispatch(setUser(data));
   } catch (error) {
-    console.log('unable to fetch user: ', error);
+    console.log('Unable to fetch user: ', error);
   }
 };
 

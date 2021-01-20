@@ -1,6 +1,6 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import {fetchUser} from '../../store/redux/users/usersReducer';
+import {fetchUser} from '../../store/redux/users/usersView';
 
 class SingleUser extends React.Component {
   componentDidMount() {
@@ -8,7 +8,7 @@ class SingleUser extends React.Component {
   }
 
   render() {
-    const userItem = this.props.userList;
+    const userItem = this.props.userView;
     if (!userItem.length) {
       return 'No one to see here';
     }
@@ -22,17 +22,17 @@ class SingleUser extends React.Component {
     return (
       <div id="single-view">
         <p>
-          User name: {user.firstName} {user.lastName}
+          Name: {user.firstName} {user.lastName}
         </p>
-        <p>User email: {user.email}</p>
-        <p>User is Admin: {`${user.isAdmin}`}</p>
+        <p>Email: {user.email}</p>
+        <p>Is Admin: {`${user.isAdmin}`}</p>
       </div>
     );
   }
 }
 
 const mapStateToProps = (state) => {
-  return {userList: state.usersReducer};
+  return {userView: state.usersView};
 };
 
 const mapDispatchToProps = (dispatch) => ({

@@ -12,6 +12,7 @@ import {
   SingleUser,
   Cart,
   Confirmation,
+  AddProduct,
 } from './components';
 import {me} from './store';
 
@@ -33,12 +34,14 @@ class Routes extends Component {
         <Route exact path="/products/:productId" component={SingleProduct} />
         <Route path="/cart/:cartId" component={Cart} />
         <Route path="/confirmation" component={Confirmation} />
-        <Route exact path="/users" component={AllUsers} />
-        <Route exact path="/users/:userId" component={SingleUser} />
+
         {isLoggedIn && (
           <Switch>
             {/* Routes placed here are only available after logging in */}
             <Route path="/home" component={UserHome} />
+            <Route exact path="/users" component={AllUsers} />
+            <Route exact path="/users/:userId" component={SingleUser} />
+            <Route exact path="/addproduct" component={AddProduct} />
           </Switch>
         )}
 
@@ -49,19 +52,10 @@ class Routes extends Component {
   }
 }
 
-// {isLoggedIn && isAdmin && (
-//           <Switch>
-//             {/* Routes placed here are only available after logging in AND user is admin*/}
-//             <Route exact path="/users" component={AllUsers} />
-//             <Route exact path="/users/:userId" component={SingleUser} />
-//           </Switch>
-//         )}
-
 /* * CONTAINER * */
 const mapState = (state) => {
   return {
-    // Being 'logged in' for our purposes will be defined has having a state.user that has a truthy id.
-    // Otherwise, state.user will be an empty object, and state.user.id will be falsey
+    // Being 'logged in' for our purposes will be defined has having a state.user that has a truthy id. Otherwise, state.user will be an empty object, and state.user.id will be falsey
     isLoggedIn: !!state.user.id,
     isAdmin: !!state.user.isAdmin,
   };
