@@ -136,9 +136,9 @@ const userCount = 200;
 const productCount = 200;
 
 // alternative way of approaching this is creating a variable just like the names e.g. const images = [`images from either urls or csv files`]
-let bowlSmlImage = `https://i.pinimg.com/564x/30/6c/5e/306c5e4e0cc549575f623d176853bed6.jpg`;
+let bowlSmlImage = `https://i.pinimg.com/236x/ad/27/7c/ad277c3a5142ababf0ef14a81f91c168.jpg`;
 let earringImage = `https://i.pinimg.com/564x/3a/7f/2a/3a7f2ac4d233443cb8c3486c33e0a271.jpg`;
-let bowlLgImage = `https://i.pinimg.com/236x/ad/27/7c/ad277c3a5142ababf0ef14a81f91c168.jpg`;
+let bowlLgImage = `https://i.pinimg.com/564x/30/6c/5e/306c5e4e0cc549575f623d176853bed6.jpg`;
 let plateImage = `https://i.pinimg.com/564x/b3/3f/ca/b33fcae182c585100c62d57a2fa61584.jpg`;
 let gobletImage = `https://i.pinimg.com/564x/ad/9a/b0/ad9ab0f61fca8b0629714c5ac6bb3826.jpg`;
 let wkspImage = `https://i.pinimg.com/564x/1a/1c/c8/1a1cc8504f00e134d91ac9aef2713623.jpg`;
@@ -158,7 +158,6 @@ const users = async () => {
       await Promise.all([
         User.create(
           {
-            IdUser: i,
             firstName: first,
             lastName: last,
             email: email.toLowerCase(),
@@ -191,7 +190,6 @@ const users = async () => {
       await Promise.all([
         User.create(
           {
-            IdUser: i,
             firstName: first,
             lastName: last,
             email: email.toLowerCase(),
@@ -216,11 +214,10 @@ const users = async () => {
 };
 
 const productEarrings = async () => {
-  for (let i = 0; i < productCount; i++) {
-    let adjective =
-      itemAdjective[Math.floor(Math.random() * 1000) % itemAdjective.length];
+  for (let i = 0; i < itemAdjective.length; i++) {
+    let adjective = itemAdjective[i];
     let name = `Earrings of ${adjective}`;
-    let description = 'This is the next thing you need to own!';
+    let description = 'Your ears will never be the same.';
     let quantity = Math.floor(Math.random() * 100);
     let price = Math.floor(Math.random() * 10000);
     try {
@@ -240,9 +237,8 @@ const productEarrings = async () => {
 };
 
 const productBowls = async () => {
-  for (let i = 0; i < productCount; i++) {
-    let adjective =
-      itemAdjective[Math.floor(Math.random() * 1000) % itemAdjective.length];
+  for (let i = 0; i < itemAdjective.length; i++) {
+    let adjective = itemAdjective[i];
     let name = `Bowl of ${adjective}`;
     let description = 'This is the next thing you need to own!';
     let quantity = Math.floor(Math.random() * 100);
@@ -265,9 +261,8 @@ const productBowls = async () => {
 };
 
 const productLrgBowls = async () => {
-  for (let i = 0; i < productCount; i++) {
-    let adjective =
-      itemAdjective[Math.floor(Math.random() * 1000) % itemAdjective.length];
+  for (let i = 0; i < itemAdjective.length; i++) {
+    let adjective = itemAdjective[i];
     let name = `Large bowl of ${adjective}`;
     let description = 'Is this enough?!';
     let quantity = Math.floor(Math.random() * 100);
@@ -288,9 +283,8 @@ const productLrgBowls = async () => {
   }
 };
 const productPlates = async () => {
-  for (let i = 0; i < productCount; i++) {
-    let adjective =
-      itemAdjective[Math.floor(Math.random() * 1000) % itemAdjective.length];
+  for (let i = 0; i < itemAdjective.length; i++) {
+    let adjective = itemAdjective[i];
     let name = `Plate of ${adjective}`;
     let description = 'Spread your food out here.';
     let quantity = Math.floor(Math.random() * 100);
@@ -312,9 +306,8 @@ const productPlates = async () => {
   }
 };
 const productGoblets = async () => {
-  for (let i = 0; i < productCount; i++) {
-    let adjective =
-      itemAdjective[Math.floor(Math.random() * 1000) % itemAdjective.length];
+  for (let i = 0; i < itemAdjective.length; i++) {
+    let adjective = itemAdjective[i];
     let name = `Goblet of ${adjective}`;
     let description = 'Drink your tasty beverages in style!';
     let quantity = Math.floor(Math.random() * 100);
@@ -336,9 +329,8 @@ const productGoblets = async () => {
   }
 };
 const productWorkSpace = async () => {
-  for (let i = 0; i < productCount; i++) {
-    let adjective =
-      itemAdjective[Math.floor(Math.random() * 1000) % itemAdjective.length];
+  for (let i = 0; i < itemAdjective.length; i++) {
+    let adjective = itemAdjective[i];
     let name = `Workspace of ${adjective}`;
     let description = 'What do you need to do? Do it here!';
     let quantity = Math.floor(Math.random() * 100);
@@ -360,9 +352,8 @@ const productWorkSpace = async () => {
   }
 };
 const productRing = async () => {
-  for (let i = 0; i < productCount; i++) {
-    let adjective =
-      itemAdjective[Math.floor(Math.random() * 1000) % itemAdjective.length];
+  for (let i = 0; i < itemAdjective.length; i++) {
+    let adjective = itemAdjective[i];
     let name = `Ring of ${adjective}`;
     let description = 'Why only get one when you can get two?';
     let quantity = Math.floor(Math.random() * 100);
@@ -384,9 +375,8 @@ const productRing = async () => {
   }
 };
 const productNapkinRing = async () => {
-  for (let i = 0; i < productCount; i++) {
-    let adjective =
-      itemAdjective[Math.floor(Math.random() * 1000) % itemAdjective.length];
+  for (let i = 0; i < itemAdjective.length; i++) {
+    let adjective = itemAdjective[i];
     let name = `Rings of ${adjective} for your napkins`;
     let description = 'Jazz up that dinner table!';
     let quantity = Math.floor(Math.random() * 100);
@@ -408,9 +398,8 @@ const productNapkinRing = async () => {
   }
 };
 const productLight = async () => {
-  for (let i = 0; i < productCount; i++) {
-    let adjective =
-      itemAdjective[Math.floor(Math.random() * 1000) % itemAdjective.length];
+  for (let i = 0; i < itemAdjective.length; i++) {
+    let adjective = itemAdjective[i];
     let name = `Light of ${adjective}`;
     let description = `Not just any light for your darkness, it's light of ${adjective}!`;
     let quantity = Math.floor(Math.random() * 100);
@@ -432,9 +421,8 @@ const productLight = async () => {
   }
 };
 const productShelf = async () => {
-  for (let i = 0; i < productCount; i++) {
-    let adjective =
-      itemAdjective[Math.floor(Math.random() * 1000) % itemAdjective.length];
+  for (let i = 0; i < itemAdjective.length; i++) {
+    let adjective = itemAdjective[i];
     let name = `Shelf of ${adjective}`;
     let description = `Records, books, towels, games, anything you want to store and display will fit perfectly on this shelf of ${adjective}.`;
     let quantity = Math.floor(Math.random() * 100);
@@ -463,7 +451,7 @@ async function associations() {
     where: {
       totalPrice: {
         [Op.or]: {
-          [Op.between]: [22000, 70000],
+          [Op.between]: [22000, 80000],
         },
       },
     },
@@ -486,25 +474,26 @@ async function associations() {
   });
 
   // associations loop
-  let orderIndex = 0;
-  for (let i = 0; i < ordersToAssoc.length; i++) {
-    await productsToAssoc[i].addOrders([ordersToAssoc[orderIndex]]);
-    orderIndex++;
+  let productIndex = 0;
+  for (let i = 0; i < productsToAssoc.length; i++) {
+    await ordersToAssoc[i].addProducts([productsToAssoc[productIndex]]);
+    productIndex++;
   }
 }
 
 const seed = async () => {
   await db.sync({force: true});
   console.log(green('db synced!'));
-  await users();
+
+  await productRing();
   await Promise.all([
+    users(),
     productEarrings(),
     productBowls(),
     productLrgBowls(),
     productPlates(),
     productGoblets(),
     productWorkSpace(),
-    productRing(),
     productNapkinRing(),
     productLight(),
     productShelf(),
