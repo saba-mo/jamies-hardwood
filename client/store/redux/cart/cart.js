@@ -35,7 +35,6 @@ export const fetchCart = (id) => {
 export const addToCartThunk = (orderId, item) => {
   return async (dispatch) => {
     try {
-      // change to put
       const {data} = await axios.put(`/api/cart/${orderId}`, item);
       dispatch(addToCart(data));
     } catch (err) {

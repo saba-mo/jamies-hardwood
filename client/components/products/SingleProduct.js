@@ -6,11 +6,23 @@ import {addToCartThunk} from '../../store/redux/cart/cart';
 export class SingleProduct extends React.Component {
   constructor(props) {
     super(props);
+    this.state = {
+      quantityToAdd: 1,
+    };
+
     this.handleAddToCart = this.handleAddToCart.bind(this);
+    this.handleChange = this.handleChange.bind(this);
+  }
+
+  handleChange(event) {
+    this.setState({[event.target.name]: event.target.value});
   }
 
   handleAddToCart = (orderId, item) => {
+    item.quantityToAdd = this.state.quantityToAdd;
+    console.log('item after: ', item);
     this.props.addToCart(orderId, item);
+    this.setState({quantityToAdd: 1});
     alert('Added to cart!');
   };
 
@@ -33,9 +45,9 @@ export class SingleProduct extends React.Component {
         <br />
         <label htmlFor="quantity">Quantity: </label>
         <select
-          // need value={props...}
-          // need onChange={props.handleChange}
-          name="quantity"
+          value={this.state.quantityToAdd}
+          onChange={this.handleChange}
+          name="quantityToAdd"
         >
           <option value="1">1</option>
           <option value="2">2</option>
