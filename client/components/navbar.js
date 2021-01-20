@@ -4,16 +4,17 @@ import {connect} from 'react-redux';
 import {Link} from 'react-router-dom';
 import {logout} from '../store';
 
+// see nav_hold.js for previous version
 class Navbar extends Component {
-  // const Navbar = (handleClick, isLoggedIn, isAdmin, orderId) => {
-
   render() {
     const {handleClick, isLoggedIn, isAdmin, orderId} = this.props;
     return (
-      <div>
-        <h1>Jamie's Hardwood and Heavy Metal</h1>
+      <div id="navbar">
+        <div id="store-name">
+          <h1>Jamie's Hardwood and Heavy Metal</h1>
+        </div>
         <nav>
-          <div>
+          <div id="pages">
             <Link to="/home">Home</Link>
             <Link to="/products">Shop</Link>
             {isAdmin && isLoggedIn && <Link to="/addproduct">Add Product</Link>}

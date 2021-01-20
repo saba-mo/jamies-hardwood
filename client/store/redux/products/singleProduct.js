@@ -48,7 +48,7 @@ export default function singleProductReducer(product = initialState, action) {
       return action.singleProduct;
     case DELETE_PRODUCT:
       product = product.filter(
-        (product) => parseInt(product.id) !== parseInt(action.product.id)
+        (aproduct) => parseInt(aproduct.id) !== parseInt(action.aproduct.id)
       );
       return product;
     default:

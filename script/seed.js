@@ -1,5 +1,5 @@
 const {green, red} = require('chalk');
-const {User, Product, Order, Cart} = require('../server/db/models');
+const {User, Product, Order} = require('../server/db/models');
 const db = require('../server/db/');
 const {Op} = require('sequelize');
 
@@ -133,7 +133,6 @@ const itemAdjective = [
 
 const emailHost = ['gmail', 'hotmail', 'yahoo'];
 const userCount = 200;
-const productCount = 200;
 
 // alternative way of approaching this is creating a variable just like the names e.g. const images = [`images from either urls or csv files`]
 let bowlSmlImage = `https://i.pinimg.com/236x/ad/27/7c/ad277c3a5142ababf0ef14a81f91c168.jpg`;
