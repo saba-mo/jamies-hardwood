@@ -44,7 +44,7 @@ class Cart extends React.Component {
 
   render() {
     const {cart} = this.props;
-    console.log('cart: ', cart);
+
     let totalsArray = [0];
 
     return (
