@@ -3,16 +3,16 @@ import {createLogger} from 'redux-logger';
 import axios from 'axios';
 import thunkMiddleware from 'redux-thunk';
 import {composeWithDevTools} from 'redux-devtools-extension';
-import user from './user';
+import user from './redux/users/userIdentity';
 import productsReducer from './redux/products/products';
 import singleProduct from './redux/products/singleProduct';
-import usersReducer from './redux/users/usersReducer';
+import usersView from './redux/users/usersView';
 import cartReducer from './redux/cart/cart';
 
 export const reducer = combineReducers({
   user,
   singleProduct,
-  usersReducer,
+  usersView,
   productsReducer,
   cartReducer,
 });
@@ -27,6 +27,6 @@ const middleware = composeWithDevTools(
 const store = createStore(reducer, middleware);
 
 export default store;
-export * from './user';
+export * from './redux/users/userIdentity';
 export * from './redux/products/singleProduct';
 export * from './redux/products/products';
