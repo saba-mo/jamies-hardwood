@@ -216,9 +216,8 @@ const users = async () => {
 };
 
 const productEarrings = async () => {
-  for (let i = 0; i < productCount; i++) {
-    let adjective =
-      itemAdjective[Math.floor(Math.random() * 1000) % itemAdjective.length];
+  for (let i = 0; i < itemAdjective; i++) {
+    let adjective = itemAdjective[i];
     let name = `Earrings of ${adjective}`;
     let description = 'This is the next thing you need to own!';
     let quantity = Math.floor(Math.random() * 100);
@@ -240,9 +239,8 @@ const productEarrings = async () => {
 };
 
 const productBowls = async () => {
-  for (let i = 0; i < productCount; i++) {
-    let adjective =
-      itemAdjective[Math.floor(Math.random() * 1000) % itemAdjective.length];
+  for (let i = 0; i < itemAdjective; i++) {
+    let adjective = itemAdjective[i];
     let name = `Bowl of ${adjective}`;
     let description = 'This is the next thing you need to own!';
     let quantity = Math.floor(Math.random() * 100);
@@ -265,9 +263,8 @@ const productBowls = async () => {
 };
 
 const productLrgBowls = async () => {
-  for (let i = 0; i < productCount; i++) {
-    let adjective =
-      itemAdjective[Math.floor(Math.random() * 1000) % itemAdjective.length];
+  for (let i = 0; i < itemAdjective; i++) {
+    let adjective = itemAdjective[i];
     let name = `Large bowl of ${adjective}`;
     let description = 'Is this enough?!';
     let quantity = Math.floor(Math.random() * 100);
@@ -288,9 +285,8 @@ const productLrgBowls = async () => {
   }
 };
 const productPlates = async () => {
-  for (let i = 0; i < productCount; i++) {
-    let adjective =
-      itemAdjective[Math.floor(Math.random() * 1000) % itemAdjective.length];
+  for (let i = 0; i < itemAdjective; i++) {
+    let adjective = itemAdjective[i];
     let name = `Plate of ${adjective}`;
     let description = 'Spread your food out here.';
     let quantity = Math.floor(Math.random() * 100);
@@ -312,9 +308,8 @@ const productPlates = async () => {
   }
 };
 const productGoblets = async () => {
-  for (let i = 0; i < productCount; i++) {
-    let adjective =
-      itemAdjective[Math.floor(Math.random() * 1000) % itemAdjective.length];
+  for (let i = 0; i < itemAdjective; i++) {
+    let adjective = itemAdjective[i];
     let name = `Goblet of ${adjective}`;
     let description = 'Drink your tasty beverages in style!';
     let quantity = Math.floor(Math.random() * 100);
@@ -336,9 +331,8 @@ const productGoblets = async () => {
   }
 };
 const productWorkSpace = async () => {
-  for (let i = 0; i < productCount; i++) {
-    let adjective =
-      itemAdjective[Math.floor(Math.random() * 1000) % itemAdjective.length];
+  for (let i = 0; i < itemAdjective; i++) {
+    let adjective = itemAdjective[i];
     let name = `Workspace of ${adjective}`;
     let description = 'What do you need to do? Do it here!';
     let quantity = Math.floor(Math.random() * 100);
@@ -360,9 +354,8 @@ const productWorkSpace = async () => {
   }
 };
 const productRing = async () => {
-  for (let i = 0; i < productCount; i++) {
-    let adjective =
-      itemAdjective[Math.floor(Math.random() * 1000) % itemAdjective.length];
+  for (let i = 0; i < itemAdjective; i++) {
+    let adjective = itemAdjective[i];
     let name = `Ring of ${adjective}`;
     let description = 'Why only get one when you can get two?';
     let quantity = Math.floor(Math.random() * 100);
@@ -384,9 +377,8 @@ const productRing = async () => {
   }
 };
 const productNapkinRing = async () => {
-  for (let i = 0; i < productCount; i++) {
-    let adjective =
-      itemAdjective[Math.floor(Math.random() * 1000) % itemAdjective.length];
+  for (let i = 0; i < itemAdjective[i]; i++) {
+    let adjective = itemAdjective[i];
     let name = `Rings of ${adjective} for your napkins`;
     let description = 'Jazz up that dinner table!';
     let quantity = Math.floor(Math.random() * 100);
@@ -408,9 +400,8 @@ const productNapkinRing = async () => {
   }
 };
 const productLight = async () => {
-  for (let i = 0; i < productCount; i++) {
-    let adjective =
-      itemAdjective[Math.floor(Math.random() * 1000) % itemAdjective.length];
+  for (let i = 0; i < itemAdjective; i++) {
+    let adjective = itemAdjective[i];
     let name = `Light of ${adjective}`;
     let description = `Not just any light for your darkness, it's light of ${adjective}!`;
     let quantity = Math.floor(Math.random() * 100);
@@ -432,9 +423,8 @@ const productLight = async () => {
   }
 };
 const productShelf = async () => {
-  for (let i = 0; i < productCount; i++) {
-    let adjective =
-      itemAdjective[Math.floor(Math.random() * 1000) % itemAdjective.length];
+  for (let i = 0; i < itemAdjective[i]; i++) {
+    let adjective = itemAdjective[i];
     let name = `Shelf of ${adjective}`;
     let description = `Records, books, towels, games, anything you want to store and display will fit perfectly on this shelf of ${adjective}.`;
     let quantity = Math.floor(Math.random() * 100);
