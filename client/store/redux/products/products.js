@@ -26,7 +26,6 @@ export const fetchProducts = () => async (dispatch) => {
 };
 
 export const createProduct = (name, description) => {
-  console.log('product', (name, description));
   return async (dispatch) => {
     try {
       const {data: newProduct} = await axios.post('/api/products', {
