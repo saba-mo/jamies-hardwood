@@ -136,8 +136,8 @@ const userCount = 200;
 const productCount = 200;
 
 // alternative way of approaching this is creating a variable just like the names e.g. const images = [`images from either urls or csv files`]
-let bowlImage = `https://i.etsystatic.com/16976526/d/il/7d4b54/2344187124/il_340x270.2344187124_rxpb.jpg?version=0`;
-let earringImage = `https://cdn.shopify.com/s/files/1/0736/8211/products/Tear_Drop_Earring_Large_422x.png?v=1568803221`;
+let bowlImage = `https://i.pinimg.com/564x/30/6c/5e/306c5e4e0cc549575f623d176853bed6.jpg`;
+let earringImage = `https://i.pinimg.com/564x/3a/7f/2a/3a7f2ac4d233443cb8c3486c33e0a271.jpg`;
 
 const users = async () => {
   for (let i = 0; i < 10; i++) {
