@@ -27,23 +27,26 @@ router.put('/:cartId', async (req, res, next) => {
     // 3. Quantity
 
     // Does this order have an instance of this product?
-    // Get one from Cart model where (orderId = req.params.cartId AND productId = req.body.id)
     const productExistsInCart = await Cart.findOne({
       where: {
         product_id: req.body.id,
         order_id: req.params.cartId,
       },
     });
+
+    let currentQuantity = 0;
     // If so (if one result), increment the quantity by req.body.quantity
     if (productExistsInCart) {
-      productExistsInCart.quantity += Number(req.body.quantityToAdd);
+      currentQuantity += Number(productExistsInCart.quantity);
+      currentQuantity += Number(req.body.quantityToAdd);
+      await productExistsInCart.update({
+        quantity: currentQuantity,
+      });
       res.json(productExistsInCart);
-    }
-
-    // If not (if zero results), create an instance with req.body.quantity
-    else {
+    } else {
+      // If not (if zero results), create an instance with req.body.quantity
       // create association
-      const newOrderItem = await Cart.create({
+      await Cart.create({
         order_id: req.params.cartId,
         product_id: req.body.id,
         quantity: Number(req.body.quantityToAdd),

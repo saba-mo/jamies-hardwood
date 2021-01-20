@@ -97,12 +97,13 @@ class Cart extends React.Component {
                     Remove
                   </button>
                   <br />
-                  Item Price: ${(product.price / 100).toFixed(2)}
+                  Item Price: ${product.price / 100}
                   <br />
                   Total Price: $
                   {(
-                    Number(product.price / 100) *
-                    product.individual_product_order_details.quantity
+                    (product.price *
+                      product.individual_product_order_details.quantity) /
+                    100
                   ).toFixed(1)}
                   {totalsArray.push(
                     (
