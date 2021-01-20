@@ -11,7 +11,6 @@ const PORT = process.env.PORT || 8080;
 const app = express();
 const socketio = require('socket.io');
 module.exports = app;
-// const isAdmin = require('./express-gate-auth');
 
 // This is a global Mocha hook, used for resource cleanup.
 // Otherwise, Mocha v4+ never quits after tests.
