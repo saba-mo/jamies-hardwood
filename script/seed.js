@@ -496,15 +496,16 @@ async function associations() {
 const seed = async () => {
   await db.sync({force: true});
   console.log(green('db synced!'));
-  await users();
+
+  await productRing();
   await Promise.all([
+    users(),
     productEarrings(),
     productBowls(),
     productLrgBowls(),
     productPlates(),
     productGoblets(),
     productWorkSpace(),
-    productRing(),
     productNapkinRing(),
     productLight(),
     productShelf(),
