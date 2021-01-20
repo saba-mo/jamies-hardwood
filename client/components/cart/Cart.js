@@ -1,5 +1,6 @@
 import React from 'react';
 import {connect} from 'react-redux';
+import {Link} from 'react-router-dom';
 import {fetchCart, removeFromCartThunk} from '../../store/redux/cart/cart';
 
 class Cart extends React.Component {
@@ -40,17 +41,10 @@ class Cart extends React.Component {
     const {cart} = this.props;
     console.log('cart: ', cart);
 
-    let orderTotal;
     let totalItems;
+    let totalsArray = [];
 
     if (cart.products && cart.products.length) {
-      // incorrect product price input, so orderTotal is wrong
-      orderTotal = cart.products.reduce(
-        (accumulator, currentValue) =>
-          accumulator + Number(currentValue.price) / 100,
-        0
-      );
-
       totalItems = cart.products.reduce(
         (accumulator, currentValue) =>
           accumulator + currentValue.individual_product_order_details.quantity,
@@ -66,9 +60,11 @@ class Cart extends React.Component {
             {cart.products.map((product) => {
               return (
                 <div key={product.id}>
-                  <h3>{product.name}</h3>
-                  <br />
-                  <img src={product.imageUrl} />
+                  <Link to={`/products/${product.id}`}>
+                    <h3>{product.name}</h3>
+                    <br />
+                    <img src={product.imageUrl} />
+                  </Link>
                   <br />
                   Quantity:
                   <br />
@@ -89,17 +85,29 @@ class Cart extends React.Component {
                   <br />
                   Item Price: ${(product.price / 100).toFixed(2)}
                   <br />
-                  {/* Not pulling total price from db because no calculation set up */}
                   Total Price: $
                   {(
                     Number(product.price / 100) *
                     product.individual_product_order_details.quantity
                   ).toFixed(2)}
+                  {totalsArray.push(
+                    (
+                      Number(product.price / 100) *
+                      product.individual_product_order_details.quantity
+                    ).toFixed(2)
+                  )}
                 </div>
               );
             })}
             <h2>Total Items: {totalItems}</h2>
-            <h2>Order Total: ${orderTotal}</h2>
+            <h2>
+              Order Total: $
+              {totalsArray
+                .reduce(function (a, b) {
+                  return Number(a) + Number(b);
+                })
+                .toFixed(2)}
+            </h2>
             <button type="submit" onClick={this.handleCheckout}>
               Proceed to Checkout
             </button>
