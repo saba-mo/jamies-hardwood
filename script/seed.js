@@ -216,7 +216,7 @@ const users = async () => {
 };
 
 const productEarrings = async () => {
-  for (let i = 0; i < itemAdjective; i++) {
+  for (let i = 0; i < itemAdjective.length; i++) {
     let adjective = itemAdjective[i];
     let name = `Earrings of ${adjective}`;
     let description = 'This is the next thing you need to own!';
@@ -239,7 +239,7 @@ const productEarrings = async () => {
 };
 
 const productBowls = async () => {
-  for (let i = 0; i < itemAdjective; i++) {
+  for (let i = 0; i < itemAdjective.length; i++) {
     let adjective = itemAdjective[i];
     let name = `Bowl of ${adjective}`;
     let description = 'This is the next thing you need to own!';
@@ -263,7 +263,7 @@ const productBowls = async () => {
 };
 
 const productLrgBowls = async () => {
-  for (let i = 0; i < itemAdjective; i++) {
+  for (let i = 0; i < itemAdjective.length; i++) {
     let adjective = itemAdjective[i];
     let name = `Large bowl of ${adjective}`;
     let description = 'Is this enough?!';
@@ -285,7 +285,7 @@ const productLrgBowls = async () => {
   }
 };
 const productPlates = async () => {
-  for (let i = 0; i < itemAdjective; i++) {
+  for (let i = 0; i < itemAdjective.length; i++) {
     let adjective = itemAdjective[i];
     let name = `Plate of ${adjective}`;
     let description = 'Spread your food out here.';
@@ -308,7 +308,7 @@ const productPlates = async () => {
   }
 };
 const productGoblets = async () => {
-  for (let i = 0; i < itemAdjective; i++) {
+  for (let i = 0; i < itemAdjective.length; i++) {
     let adjective = itemAdjective[i];
     let name = `Goblet of ${adjective}`;
     let description = 'Drink your tasty beverages in style!';
@@ -331,7 +331,7 @@ const productGoblets = async () => {
   }
 };
 const productWorkSpace = async () => {
-  for (let i = 0; i < itemAdjective; i++) {
+  for (let i = 0; i < itemAdjective.length; i++) {
     let adjective = itemAdjective[i];
     let name = `Workspace of ${adjective}`;
     let description = 'What do you need to do? Do it here!';
@@ -354,7 +354,7 @@ const productWorkSpace = async () => {
   }
 };
 const productRing = async () => {
-  for (let i = 0; i < itemAdjective; i++) {
+  for (let i = 0; i < itemAdjective.length; i++) {
     let adjective = itemAdjective[i];
     let name = `Ring of ${adjective}`;
     let description = 'Why only get one when you can get two?';
@@ -377,7 +377,7 @@ const productRing = async () => {
   }
 };
 const productNapkinRing = async () => {
-  for (let i = 0; i < itemAdjective[i]; i++) {
+  for (let i = 0; i < itemAdjective.length; i++) {
     let adjective = itemAdjective[i];
     let name = `Rings of ${adjective} for your napkins`;
     let description = 'Jazz up that dinner table!';
@@ -400,7 +400,7 @@ const productNapkinRing = async () => {
   }
 };
 const productLight = async () => {
-  for (let i = 0; i < itemAdjective; i++) {
+  for (let i = 0; i < itemAdjective.length; i++) {
     let adjective = itemAdjective[i];
     let name = `Light of ${adjective}`;
     let description = `Not just any light for your darkness, it's light of ${adjective}!`;
@@ -423,7 +423,7 @@ const productLight = async () => {
   }
 };
 const productShelf = async () => {
-  for (let i = 0; i < itemAdjective[i]; i++) {
+  for (let i = 0; i < itemAdjective.length; i++) {
     let adjective = itemAdjective[i];
     let name = `Shelf of ${adjective}`;
     let description = `Records, books, towels, games, anything you want to store and display will fit perfectly on this shelf of ${adjective}.`;
@@ -453,7 +453,7 @@ async function associations() {
     where: {
       totalPrice: {
         [Op.or]: {
-          [Op.between]: [22000, 70000],
+          [Op.between]: [22000, 80000],
         },
       },
     },
@@ -476,10 +476,13 @@ async function associations() {
   });
 
   // associations loop
-  let orderIndex = 0;
-  for (let i = 0; i < ordersToAssoc.length; i++) {
-    await productsToAssoc[i].addOrders([ordersToAssoc[orderIndex]]);
-    orderIndex++;
+  console.log('products', productsToAssoc.length);
+  console.log('orders', ordersToAssoc.length);
+
+  let productIndex = 0;
+  for (let i = 0; i < productsToAssoc.length; i++) {
+    await ordersToAssoc[i].addProducts([productsToAssoc[productIndex]]);
+    productIndex++;
   }
 }
 
