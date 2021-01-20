@@ -47,4 +47,17 @@ router.get('/:productId', async (req, res, next) => {
   }
 });
 
+// POST /products
+router.post('/', async (req, res, next) => {
+  try {
+    const newProduct = await Product.create(req.body);
+    res.send(newProduct);
+  } catch (error) {
+    next(error);
+  }
+});
+
+// PUT /products/:productId
+// DELETE /products/:productId
+
 module.exports = router;
