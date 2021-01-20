@@ -42,7 +42,7 @@ class Cart extends React.Component {
     console.log('cart: ', cart);
 
     let totalItems;
-    let totalsArray = [];
+    let totalsArray = [0];
 
     if (cart.products && cart.products.length) {
       totalItems = cart.products.reduce(
