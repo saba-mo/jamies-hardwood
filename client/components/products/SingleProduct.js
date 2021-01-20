@@ -20,7 +20,6 @@ export class SingleProduct extends React.Component {
 
   handleAddToCart = (orderId, item) => {
     item.quantityToAdd = this.state.quantityToAdd;
-    console.log('item after: ', item);
     this.props.addToCart(orderId, item);
     this.setState({quantityToAdd: 1});
     alert('Added to cart!');

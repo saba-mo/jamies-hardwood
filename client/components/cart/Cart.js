@@ -26,7 +26,6 @@ class Cart extends React.Component {
   // }
 
   async handleRemove(orderId, id) {
-    console.log('orderId and id: ', orderId, id);
     await this.props.removeFromCart(orderId, id);
     this.props.loadCart(this.props.match.params.cartId);
   }
@@ -39,7 +38,6 @@ class Cart extends React.Component {
 
   render() {
     const {cart} = this.props;
-    console.log('cart: ', cart);
 
     let totalItems;
     let totalsArray = [0];
