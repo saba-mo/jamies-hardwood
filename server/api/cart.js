@@ -54,23 +54,16 @@ router.put('/:cartId', async (req, res, next) => {
   }
 });
 
-router.delete('/:cartId', async (req, res, next) => {
+router.delete('/:cartId/:productId', async (req, res, next) => {
   try {
-    const thisOrder = await Order.findByPk(req.params.cartId);
+    const cartId = parseInt(req.params.cartId);
+    if (isNaN(cartId)) return res.status(404).end();
 
-    const thisCart = await Cart.findOne({
-      where: {
-        order_id: req.params.cartId,
-      },
-    });
+    const productId = parseInt(req.params.productId);
+    if (isNaN(productId)) return res.status(404).end();
 
-    const thisProduct = await Product.findOne({
-      where: {
-        id: thisCart.product_id,
-      },
-    });
-
-    thisOrder.removeProduct(thisProduct.id);
+    const thisOrder = await Order.findByPk(cartId);
+    thisOrder.removeProduct(productId);
     res.sendStatus(204);
   } catch (error) {
     next(error);
