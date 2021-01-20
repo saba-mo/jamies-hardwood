@@ -136,8 +136,8 @@ const userCount = 200;
 const productCount = 200;
 
 // alternative way of approaching this is creating a variable just like the names e.g. const images = [`images from either urls or csv files`]
-let bowlSmlImage = `https://i.etsystatic.com/16976526/d/il/7d4b54/2344187124/il_340x270.2344187124_rxpb.jpg?version=0`;
-let earringImage = `https://cdn.shopify.com/s/files/1/0736/8211/products/Tear_Drop_Earring_Large_422x.png?v=1568803221`;
+let bowlSmlImage = `https://i.pinimg.com/564x/30/6c/5e/306c5e4e0cc549575f623d176853bed6.jpg`;
+let earringImage = `https://i.pinimg.com/564x/3a/7f/2a/3a7f2ac4d233443cb8c3486c33e0a271.jpg`;
 let bowlLgImage = `https://i.pinimg.com/236x/ad/27/7c/ad277c3a5142ababf0ef14a81f91c168.jpg`;
 let plateImage = `https://i.pinimg.com/564x/b3/3f/ca/b33fcae182c585100c62d57a2fa61584.jpg`;
 let gobletImage = `https://i.pinimg.com/564x/ad/9a/b0/ad9ab0f61fca8b0629714c5ac6bb3826.jpg`;
@@ -486,13 +486,6 @@ async function associations() {
   });
 
   // associations loop
-  // let productIndex = 0;
-  // for (let i = 0; i < productsToAssoc.length; i++) {
-  //   console.log('products', productsToAssoc.length)
-
-  //   await ordersToAssoc[i].addProducts([productsToAssoc[productIndex]]);
-  //   productIndex++;
-  // }
   let orderIndex = 0;
   for (let i = 0; i < ordersToAssoc.length; i++) {
     await productsToAssoc[i].addOrders([ordersToAssoc[orderIndex]]);
