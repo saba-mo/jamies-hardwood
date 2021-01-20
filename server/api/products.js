@@ -1,5 +1,6 @@
 const router = require('express').Router();
 const Product = require('../db/models/product');
+const isAdmin = require('../express-gate-auth');
 
 // GET /products
 router.get('/', async (req, res, next) => {
@@ -28,7 +29,7 @@ router.get('/:productId', async (req, res, next) => {
 });
 
 // POST /products
-router.post('/', async (req, res, next) => {
+router.post('/', isAdmin, async (req, res, next) => {
   try {
     const newProduct = await Product.create(req.body);
     res.send(newProduct);
@@ -38,6 +39,9 @@ router.post('/', async (req, res, next) => {
 });
 
 // PUT /products/:productId
+//include isAdmin
+
 // DELETE /products/:productId
+//include isAdmin
 
 module.exports = router;
