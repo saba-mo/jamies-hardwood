@@ -28,3 +28,11 @@ form div {
   height: 80px;
   padding: 10px;
 }
+
+#pages {
+  align-items: center;
+  background-color: #8ea8c3;
+  display: flex;
+  height: 20px;
+  padding: 10px;
+}
