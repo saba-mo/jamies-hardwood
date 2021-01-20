@@ -60,12 +60,13 @@ const initialState = [];
 export default function cartReducer(state = initialState, action) {
   switch (action.type) {
     case GET_CART:
-      return action.cart;
+      console.log('GET CART: ', action.cart.products);
+      return action.cart.products;
     case ADD_TO_CART:
-      // return {...state, products: [...state.products, action.item]};
-      return [...state.products, action.item];
+      console.log('state: ', state);
+      return [...state, action.item];
     case REMOVE_FROM_CART:
-      return [...state.products.filter((item) => item.id !== action.id)];
+      return [...state.filter((item) => item.id !== action.id)];
     default:
       return state;
   }

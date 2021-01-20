@@ -8,8 +8,8 @@ class Cart extends React.Component {
     super();
 
     this.handleCheckout = this.handleCheckout.bind(this);
-    // this.decreaseQuantity = this.decreaseQuantity.bind(this);
-    // this.increaseQuantity = this.increaseQuantity.bind(this);
+    this.decreaseQuantity = this.decreaseQuantity.bind(this);
+    this.increaseQuantity = this.increaseQuantity.bind(this);
     this.handleRemove = this.handleRemove.bind(this);
   }
 
@@ -17,13 +17,19 @@ class Cart extends React.Component {
     this.props.loadCart(this.props.match.params.cartId);
   }
 
-  // decreaseQuantity() {
-  //   // decrement quantity in cart in db by 1
-  // }
+  decreaseQuantity(quantity) {
+    // decrement quantity in cart in db by 1
+    console.log('decrease button clicked');
+    quantity -= 1;
+    return quantity;
+  }
 
-  // increaseQuantity() {
-  //   // increment quantity in cart in db by 1
-  // }
+  increaseQuantity(quantity) {
+    // increment quantity in cart in db by 1
+    console.log('increase button clicked');
+    quantity += 1;
+    return quantity;
+  }
 
   async handleRemove(orderId, id) {
     await this.props.removeFromCart(orderId, id);
@@ -38,24 +44,15 @@ class Cart extends React.Component {
 
   render() {
     const {cart} = this.props;
-
-    let totalItems;
+    console.log('cart: ', cart);
     let totalsArray = [0];
-
-    if (cart.products && cart.products.length) {
-      totalItems = cart.products.reduce(
-        (accumulator, currentValue) =>
-          accumulator + currentValue.individual_product_order_details.quantity,
-        0
-      );
-    }
 
     return (
       <div>
         <h1>Shopping Cart</h1>
-        {cart.products && cart.products.length ? (
+        {cart && cart.length ? (
           <div>
-            {cart.products.map((product) => {
+            {cart.map((product) => {
               return (
                 <div key={product.id}>
                   <Link to={`/products/${product.id}`}>
@@ -66,17 +63,36 @@ class Cart extends React.Component {
                   <br />
                   Quantity:
                   <br />
-                  <button type="submit" onClick={this.decreaseQuantity}>
+                  <button
+                    type="submit"
+                    onClick={() =>
+                      this.decreaseQuantity(
+                        product.individual_product_order_details.quantity
+                      )
+                    }
+                  >
                     -
                   </button>
                   {product.individual_product_order_details.quantity}
-                  <button type="submit" onClick={this.increaseQuantity}>
+                  <button
+                    type="submit"
+                    onClick={() =>
+                      this.increaseQuantity(
+                        product.individual_product_order_details.quantity
+                      )
+                    }
+                  >
                     +
                   </button>
                   <br />
                   <button
                     type="submit"
-                    onClick={() => this.handleRemove(cart.id, product.id)}
+                    onClick={() =>
+                      this.handleRemove(
+                        this.props.match.params.cartId,
+                        product.id
+                      )
+                    }
                   >
                     Remove
                   </button>
@@ -97,7 +113,15 @@ class Cart extends React.Component {
                 </div>
               );
             })}
-            <h2>Total Items: {totalItems}</h2>
+            <h2>
+              Total Items:{' '}
+              {cart.reduce(
+                (accumulator, currentValue) =>
+                  accumulator +
+                  currentValue.individual_product_order_details.quantity,
+                0
+              )}
+            </h2>
             <h2>
               Order Total: $
               {totalsArray

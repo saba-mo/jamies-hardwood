@@ -42,12 +42,19 @@ router.put('/:cartId', async (req, res, next) => {
 
     // If not (if zero results), create an instance with req.body.quantity
     else {
+      // create association
       const newOrderItem = await Cart.create({
         order_id: req.params.cartId,
         product_id: req.body.id,
         quantity: Number(req.body.quantityToAdd),
       });
-      res.json(newOrderItem);
+
+      // take last element of products array in order so that it has same fields as what GET CART sends back
+      const thisCart = await Order.findByPk(req.params.cartId, {
+        include: {model: Product},
+      });
+
+      res.json(thisCart.products[thisCart.products.length - 1]);
     }
   } catch (error) {
     next(error);
