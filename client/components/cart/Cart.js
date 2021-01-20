@@ -9,7 +9,7 @@ class Cart extends React.Component {
     this.handleCheckout = this.handleCheckout.bind(this);
     // this.decreaseQuantity = this.decreaseQuantity.bind(this);
     // this.increaseQuantity = this.increaseQuantity.bind(this);
-    // this.handleRemove = this.handleRemove.bind(this)
+    this.handleRemove = this.handleRemove.bind(this);
   }
 
   componentDidMount() {
@@ -24,9 +24,9 @@ class Cart extends React.Component {
   //   // increment quantity in cart in db by 1
   // }
 
-  handleRemove(orderId, id) {
-    // remove item from cart
-    this.props.removeFromCart(orderId, id);
+  async handleRemove(orderId, id) {
+    console.log('orderId and id: ', orderId, id);
+    await this.props.removeFromCart(orderId, id);
     this.props.loadCart(this.props.match.params.cartId);
   }
 

@@ -22,7 +22,7 @@ router.get('/:cartId', async (req, res, next) => {
 router.delete('/:cartId', async (req, res, next) => {
   try {
     const thisOrder = await Order.findByPk(req.params.cartId);
-    // find product we want to remove
+
     const thisCart = await Cart.findOne({
       where: {
         order_id: req.params.cartId,
@@ -36,16 +36,6 @@ router.delete('/:cartId', async (req, res, next) => {
     });
 
     thisOrder.removeProduct(thisProduct.id);
-
-    // const productToDelete = await Product.findByPk(req.body.id);
-    // if (!productToDelete) {
-    //   res.sendStatus(404);
-    // }
-    // await Cart.destroy({
-    //   where: {
-    //     id: req.body.id,
-    //   },
-    // });
     res.sendStatus(204);
   } catch (error) {
     next(error);
@@ -61,6 +51,7 @@ router.put('/:cartId', async (req, res, next) => {
 
     // Does this order have an instance of this product?
     // Get one from Cart model where (orderId = req.params.cartId AND productId = req.body.id)
+
     const productExistsInCart = await Cart.findOne({
       where: {
         product_id: req.body.id,
