@@ -2,21 +2,15 @@ import React from 'react';
 import {Link} from 'react-router-dom';
 import {connect} from 'react-redux';
 import {fetchProducts} from '../../store/redux/products/products';
-import AddProduct from './AddProduct';
 
 class AllProducts extends React.Component {
   componentDidMount() {
     this.props.getProducts();
   }
 
-  //make it so only admin can see this. if (isAdmin) - like in Navbar
-
   render() {
     return (
       <div>
-        <div>
-          <AddProduct />
-        </div>
         {this.props.products.map((product) => (
           <div key={product.id}>
             <Link to={`/products/${product.id}`}>

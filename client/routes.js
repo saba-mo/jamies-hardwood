@@ -12,6 +12,7 @@ import {
   SingleUser,
   Cart,
   Confirmation,
+  AddProduct,
 } from './components';
 import {me} from './store';
 
@@ -33,12 +34,14 @@ class Routes extends Component {
         <Route exact path="/products/:productId" component={SingleProduct} />
         <Route path="/cart/:cartId" component={Cart} />
         <Route path="/confirmation" component={Confirmation} />
-        <Route exact path="/users" component={AllUsers} />
-        <Route exact path="/users/:userId" component={SingleUser} />
+
         {isLoggedIn && (
           <Switch>
             {/* Routes placed here are only available after logging in */}
             <Route path="/home" component={UserHome} />
+            <Route exact path="/users" component={AllUsers} />
+            <Route exact path="/users/:userId" component={SingleUser} />
+            <Route exact path="/addproduct" component={AddProduct} />
           </Switch>
         )}
 

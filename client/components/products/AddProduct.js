@@ -30,10 +30,6 @@ const AddProduct = (props) => {
   );
 };
 
-// const mapState = (state) => {
-
-// }
-
 const mapDispatch = (dispatch) => {
   return {
     handleSubmit(evt) {
