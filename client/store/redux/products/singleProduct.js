@@ -39,19 +39,19 @@ export const fetchSingleProduct = (id) => {
   };
 };
 
-const initialState = {};
+const initialState = [];
 
 //reducer
-export default function singleProductReducer(state = initialState, action) {
+export default function singleProductReducer(product = initialState, action) {
   switch (action.type) {
     case GET_SINGLE_PRODUCT:
       return action.singleProduct;
     case DELETE_PRODUCT:
-      state = state.filter(
+      product = product.filter(
         (product) => parseInt(product.id) !== parseInt(action.product.id)
       );
-      return state;
+      return product;
     default:
-      return state;
+      return product;
   }
 }
