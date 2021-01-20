@@ -19,7 +19,7 @@ router.get('/:cartId', async (req, res, next) => {
   }
 });
 
-router.post('/:cartId', async (req, res, next) => {
+router.put('/:cartId', async (req, res, next) => {
   try {
     // This request comes along with:
     // 1. Cart id
@@ -36,26 +36,42 @@ router.post('/:cartId', async (req, res, next) => {
     });
     // If so (if one result), increment the quantity by req.body.quantity
     if (productExistsInCart) {
-      // Cart.quantity++
-      productExistsInCart.quantity++;
+      productExistsInCart.quantity += Number(req.body.quantityToAdd);
       res.json(productExistsInCart);
     }
 
     // If not (if zero results), create an instance with req.body.quantity
     else {
-      // Create new Cart entry with (orderId = req.params.cartId AND productId = req.body.id) params, also quantity
       const newOrderItem = await Cart.create({
         order_id: req.params.cartId,
         product_id: req.body.id,
-        // quantity: req.body.quantity,
+        quantity: Number(req.body.quantityToAdd),
       });
-
       res.json(newOrderItem);
     }
+  } catch (error) {
+    next(error);
+  }
+});
 
-    // previous way of adding to cart
-    // const thisOrder = await Order.findByPk(req.params.cartId);
-    // thisOrder.addProduct(req.body.id);
+router.delete('/:cartId', async (req, res, next) => {
+  try {
+    const thisOrder = await Order.findByPk(req.params.cartId);
+
+    const thisCart = await Cart.findOne({
+      where: {
+        order_id: req.params.cartId,
+      },
+    });
+
+    const thisProduct = await Product.findOne({
+      where: {
+        id: thisCart.product_id,
+      },
+    });
+
+    thisOrder.removeProduct(thisProduct.id);
+    res.sendStatus(204);
   } catch (error) {
     next(error);
   }
