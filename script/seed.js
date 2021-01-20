@@ -158,7 +158,6 @@ const users = async () => {
       await Promise.all([
         User.create(
           {
-            IdUser: i,
             firstName: first,
             lastName: last,
             email: email.toLowerCase(),
@@ -191,7 +190,6 @@ const users = async () => {
       await Promise.all([
         User.create(
           {
-            IdUser: i,
             firstName: first,
             lastName: last,
             email: email.toLowerCase(),
@@ -219,7 +217,7 @@ const productEarrings = async () => {
   for (let i = 0; i < itemAdjective.length; i++) {
     let adjective = itemAdjective[i];
     let name = `Earrings of ${adjective}`;
-    let description = 'This is the next thing you need to own!';
+    let description = 'Your ears will never be the same.';
     let quantity = Math.floor(Math.random() * 100);
     let price = Math.floor(Math.random() * 10000);
     try {
@@ -476,9 +474,6 @@ async function associations() {
   });
 
   // associations loop
-  console.log('products', productsToAssoc.length);
-  console.log('orders', ordersToAssoc.length);
-
   let productIndex = 0;
   for (let i = 0; i < productsToAssoc.length; i++) {
     await ordersToAssoc[i].addProducts([productsToAssoc[productIndex]]);
