@@ -59,7 +59,7 @@ export default function productsReducer(products = initialState, action) {
     case ADD_PRODUCT:
       return [...products, action.product];
     case DELETE_PRODUCT:
-      state = state.filter(
+      products = products.filter(
         (aproduct) => parseInt(aproduct.id) !== parseInt(action.aproduct.id)
       );
       return products;
