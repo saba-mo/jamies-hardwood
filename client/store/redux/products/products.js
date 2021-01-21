@@ -1,5 +1,3 @@
-import axios from 'axios';
-
 //action type
 const SET_PRODUCTS = 'SET_PRODUCTS';
 const ADD_PRODUCT = 'ADD_PRODUCT';
@@ -7,7 +5,7 @@ const ADD_PRODUCT = 'ADD_PRODUCT';
 //action creator
 const setProducts = (products) => ({
   type: SET_PRODUCTS,
-  products,
+  products: products,
 });
 
 const addProduct = (product) => ({
@@ -16,17 +14,17 @@ const addProduct = (product) => ({
 });
 
 //thunk creator
-export const fetchProducts = () => async (dispatch) => {
+export const fetchProducts = () => async (dispatch, getState, {axios}) => {
   try {
     const {data} = await axios.get('/api/products');
     dispatch(setProducts(data));
   } catch (error) {
-    console.log('Whoops!', error);
+    console.log('Whoops! Unable to fetch all products:', error);
   }
 };
 
 export const createProduct = (name, description) => {
-  return async (dispatch) => {
+  return async (dispatch, getState, {axios}) => {
     try {
       const {data: newProduct} = await axios.post('/api/products', {
         name,

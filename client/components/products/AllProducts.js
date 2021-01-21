@@ -3,6 +3,7 @@ import {Link} from 'react-router-dom';
 import {connect} from 'react-redux';
 import {fetchProducts} from '../../store/redux/products/products';
 import {deleteProduct} from '../../store/redux/products/singleProduct';
+import Button from '@material-ui/core/Button';
 
 class AllProducts extends React.Component {
   constructor(props) {
@@ -35,9 +36,13 @@ class AllProducts extends React.Component {
               <h2>{product.name}</h2>
               <h4>${(product.price / 100).toFixed(2)}</h4>
             </Link>
-            <button type="button" onClick={() => this.handleDelete(product)}>
+            <Button
+              variant="contained"
+              size="small"
+              onClick={() => this.handleDelete(product)}
+            >
               Delete this product
-            </button>
+            </Button>
           </div>
         ))}
       </div>
