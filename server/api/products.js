@@ -23,7 +23,7 @@ router.delete('/:productId', isAdmin, async (req, res, next) => {
 });
 
 // GET /products
-router.get('/', isAdmin, async (req, res, next) => {
+router.get('/', async (req, res, next) => {
   try {
     const productList = await Product.findAll();
     res.json(productList);
@@ -49,7 +49,7 @@ router.get('/:productId', async (req, res, next) => {
 });
 
 // POST /products
-router.post('/', async (req, res, next) => {
+router.post('/', isAdmin, async (req, res, next) => {
   try {
     const newProduct = await Product.create(req.body);
     res.send(newProduct);
