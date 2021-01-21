@@ -21,6 +21,10 @@ form div {
   display: inline-block;
 }
 
+img {
+  border-radius: 20px;
+}
+
 #store-name {
   align-items: center;
   background-color: #485665;
@@ -36,8 +40,4 @@ form div {
   display: flex;
   height: 20px;
   padding: 10px;
-}
-
-img {
-  border-radius: 20px;
 }
