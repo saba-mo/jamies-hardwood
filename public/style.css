@@ -21,6 +21,10 @@ form div {
   display: inline-block;
 }
 
+img {
+  border-radius: 20px;
+}
+
 #store-name {
   align-items: center;
   background-color: #485665;

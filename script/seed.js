@@ -110,7 +110,6 @@ const itemAdjective = [
   'assistance',
   'sense',
   'romance',
-  'power',
   'manners',
   'being marvelous',
   'engagement',
@@ -136,7 +135,7 @@ const emailHost = ['gmail', 'hotmail', 'yahoo'];
 const userCount = 200;
 
 // alternative way of approaching this is creating a variable just like the names e.g. const images = [`images from either urls or csv files`]
-let bowlSmlImage = `https://i.pinimg.com/236x/ad/27/7c/ad277c3a5142ababf0ef14a81f91c168.jpg`;
+let bowlSmlImage = `https://i.pinimg.com/564x/ad/27/7c/ad277c3a5142ababf0ef14a81f91c168.jpg`;
 let earringImage = `https://i.pinimg.com/564x/3a/7f/2a/3a7f2ac4d233443cb8c3486c33e0a271.jpg`;
 let bowlLgImage = `https://i.pinimg.com/564x/30/6c/5e/306c5e4e0cc549575f623d176853bed6.jpg`;
 let plateImage = `https://i.pinimg.com/564x/b3/3f/ca/b33fcae182c585100c62d57a2fa61584.jpg`;
@@ -144,7 +143,7 @@ let gobletImage = `https://i.pinimg.com/564x/ad/9a/b0/ad9ab0f61fca8b0629714c5ac6
 let wkspImage = `https://i.pinimg.com/564x/1a/1c/c8/1a1cc8504f00e134d91ac9aef2713623.jpg`;
 let ringImage = `https://i.pinimg.com/564x/fb/27/c3/fb27c35ab1981380eb871334c7ca820d.jpg`;
 let npkImage = `https://i.pinimg.com/564x/61/34/a1/6134a1f2a344cb8b39a426c88a617a5a.jpg`;
-let lightImage = `https://i.pinimg.com/236x/ca/6d/6b/ca6d6b623d6a7ce6ea99b3f64478ef59.jpg`;
+let lightImage = `https://i.pinimg.com/564x/ca/6d/6b/ca6d6b623d6a7ce6ea99b3f64478ef59.jpg`;
 let shelfImage = `https://i.pinimg.com/564x/76/b5/10/76b510f4c8811cd8011904b81c69117f.jpg`;
 
 const users = async () => {
