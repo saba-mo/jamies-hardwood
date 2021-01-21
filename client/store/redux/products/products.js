@@ -59,11 +59,14 @@ export default function productsReducer(products = initialState, action) {
     case ADD_PRODUCT:
       return [...products, action.product];
     case DELETE_PRODUCT:
+      console.log('state of products', products);
       products = products.filter(
         (aproduct) => parseInt(aproduct.id) !== parseInt(action.aproduct.id)
       );
       return products;
     case SET_PRODUCTS:
+      console.log('state of products', products);
+      console.log('products after action to find all', action.products);
       return action.products;
     default:
       return products;

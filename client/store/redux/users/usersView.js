@@ -53,6 +53,7 @@ const initialState = [];
 export default function (users = initialState, action) {
   switch (action.type) {
     case DELETE_USER:
+      console.log('state users', users);
       users = users.filter(
         (user) => parseInt(user.id) !== parseInt(action.user.id)
       );
@@ -63,6 +64,9 @@ export default function (users = initialState, action) {
       );
       return users.concat([action.user]);
     case GET_USERS:
+      console.log('state of users', users);
+      console.log('users after action to find all', action.users);
+
       return action.users;
     default:
       return users;
