@@ -77,9 +77,16 @@ router.delete('/:cartId', async (req, res, next) => {
       include: {model: Product},
     });
 
-    thisOrder.products.forEach((product) =>
-      thisOrder.removeProduct(product.id)
-    );
+    thisOrder.products.forEach((product) => {
+      // decrement product inventory by quantity in cart
+      product.quantity -= product.individual_product_order_details.quantity;
+      // update product inventory in db
+      product.update({
+        quantity: product.quantity,
+      });
+      // disassociate product and order
+      thisOrder.removeProduct(product.id);
+    });
   } catch (error) {
     next(error);
   }
