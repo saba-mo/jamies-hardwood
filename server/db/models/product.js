@@ -24,8 +24,11 @@ module.exports = db.define('product', {
 
   price: {
     type: Sequelize.INTEGER,
+    allowNull: false,
     validate: {
       min: 0,
+      notEmpty: true,
+      notNull: true,
     },
   },
 
