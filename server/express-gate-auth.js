@@ -3,4 +3,4 @@ const isAdmin = async (req, res, next) =>
 
 //req.user comes from passport. Contains an object of information about a logged in user, which allows us to access "isAdmin" etc.
 
-module.exports = isAdmin;
+module.exports = {isAdmin};

@@ -1,9 +1,9 @@
 const router = require('express').Router();
 const Product = require('../db/models/product');
-const isAdmin = require('../express-gate-auth');
+const {isAdmin} = require('../express-gate-auth');
 
 // DELETE /products/:productId
-router.delete('/:productId', async (req, res, next) => {
+router.delete('/:productId', isAdmin, async (req, res, next) => {
   try {
     const id = parseInt(req.params.productId);
     if (isNaN(id)) {
@@ -23,7 +23,7 @@ router.delete('/:productId', async (req, res, next) => {
 });
 
 // GET /products
-router.get('/', async (req, res, next) => {
+router.get('/', isAdmin, async (req, res, next) => {
   try {
     const productList = await Product.findAll();
     res.json(productList);
@@ -59,9 +59,6 @@ router.post('/', isAdmin, async (req, res, next) => {
 });
 
 // PUT /products/:productId
-//include isAdmin
-
-// DELETE /products/:productId
 //include isAdmin
 
 module.exports = router;
