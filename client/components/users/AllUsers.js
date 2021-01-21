@@ -19,7 +19,7 @@ export class AllUsers extends React.Component {
 
   noUsers = (userList) => {
     if (userList.length < 2) {
-      return `Looks like you're the only one here. Get get marketing!`;
+      return `Looks like you're the only one here. Go get marketing!`;
     }
   };
 
@@ -43,6 +43,7 @@ export class AllUsers extends React.Component {
           <p />
         </main>
         <div id="full-list-display">
+          {this.noUsers(userList)}
           <div id="list">
             <ul>
               {userList.map((user) => {
