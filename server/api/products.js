@@ -49,7 +49,7 @@ router.get('/:productId', async (req, res, next) => {
 });
 
 // POST /products
-router.post('/', isAdmin, async (req, res, next) => {
+router.post('/', async (req, res, next) => {
   try {
     const newProduct = await Product.create(req.body);
     res.send(newProduct);
