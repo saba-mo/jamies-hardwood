@@ -54,18 +54,18 @@ export const fetchProducts = () => async (dispatch, getState, {axios}) => {
 const initialState = [];
 
 //reducer
-export default function productsReducer(state = initialState, action) {
+export default function productsReducer(products = initialState, action) {
   switch (action.type) {
     case ADD_PRODUCT:
-      return [...state, action.product];
+      return [...products, action.product];
     case DELETE_PRODUCT:
-      state = state.filter(
+      products = products.filter(
         (aproduct) => parseInt(aproduct.id) !== parseInt(action.aproduct.id)
       );
-      return state;
+      return products;
     case SET_PRODUCTS:
       return action.products;
     default:
-      return state;
+      return products;
   }
 }
