@@ -3,9 +3,6 @@ const GET_USERS = 'GET_USERS';
 const SEE_A_USER = 'SEE_A_USER';
 const DELETE_USER = 'DELETE_USER';
 
-//INITIAL STATE
-const initialState = [];
-
 //ACTION CREATORS
 export const destroyUser = (user) => ({
   type: DELETE_USER,
@@ -49,6 +46,9 @@ export const fetchUsers = () => async (dispatch, getState, {axios}) => {
   }
 };
 
+//INITIAL STATE
+const initialState = [];
+
 //REDUCER
 export default function (users = initialState, action) {
   switch (action.type) {
@@ -64,7 +64,6 @@ export default function (users = initialState, action) {
       return users.concat([action.user]);
     case GET_USERS:
       return action.users;
-
     default:
       return users;
   }

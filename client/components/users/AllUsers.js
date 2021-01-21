@@ -1,7 +1,8 @@
 import React from 'react';
+import {Link} from 'react-router-dom';
 import {connect} from 'react-redux';
 import {fetchUsers, deleteUser} from '../../store/redux/users/usersView';
-import {Link} from 'react-router-dom';
+import Button from '@material-ui/core/Button';
 
 export class AllUsers extends React.Component {
   constructor(props) {
@@ -16,9 +17,14 @@ export class AllUsers extends React.Component {
     this.props.deleteUser(userToDelete);
   };
 
+  noUsers = (userList) => {
+    if (userList.length === 1) {
+      return `Looks like you're the only one here. Go get marketing!`;
+    }
+  };
+
   render() {
     const userList = this.props.usersView;
-
     if (!userList.length) {
       return 'No one to see here';
     }
@@ -37,6 +43,7 @@ export class AllUsers extends React.Component {
           <p />
         </main>
         <div id="full-list-display">
+          {this.noUsers(userList)}
           <div id="list">
             <ul>
               {userList.map((user) => {
@@ -48,12 +55,13 @@ export class AllUsers extends React.Component {
                         {user.firstName} {user.lastName}, {user.email} <p />
                       </h4>
                     </Link>
-                    <button
-                      type="button"
+                    <Button
+                      variant="contained"
+                      size="small"
                       onClick={() => this.handleDelete(user)}
                     >
                       Delete this account
-                    </button>
+                    </Button>
                   </div>
                 );
               })}

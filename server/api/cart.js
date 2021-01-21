@@ -38,6 +38,14 @@ router.put('/:cartId', async (req, res, next) => {
     let currentQuantity = 0;
     // If so (if one result), increment the quantity by req.body.quantity
     if (productExistsInCart) {
+      // add a check to see if we are just incrementing/decrementing or submitting new quantity from dropdown
+      if (req.body.editButtonClicked) {
+        await productExistsInCart.update({
+          quantity: Number(req.body.individual_product_order_details.quantity),
+        });
+        res.end();
+      }
+
       currentQuantity += Number(productExistsInCart.quantity);
       currentQuantity += Number(req.body.quantityToAdd);
       await productExistsInCart.update({

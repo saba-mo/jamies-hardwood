@@ -5,6 +5,7 @@ import {
   fetchCart,
   removeFromCartThunk,
   emptyCartThunk,
+  addToCartThunk,
 } from '../../store/redux/cart/cart';
 
 class Cart extends React.Component {
@@ -15,24 +16,29 @@ class Cart extends React.Component {
     this.decreaseQuantity = this.decreaseQuantity.bind(this);
     this.increaseQuantity = this.increaseQuantity.bind(this);
     this.handleRemove = this.handleRemove.bind(this);
+    this.handleChange = this.handleChange.bind(this);
   }
 
   componentDidMount() {
     this.props.loadCart(this.props.match.params.cartId);
   }
 
-  decreaseQuantity(quantity) {
-    // decrement quantity in cart in db by 1
-    console.log('decrease button clicked');
-    quantity -= 1;
-    return quantity;
+  decreaseQuantity(product) {
+    product.individual_product_order_details.quantity =
+      Number(product.individual_product_order_details.quantity) - 1;
+    this.handleChange(product);
   }
 
-  increaseQuantity(quantity) {
-    // increment quantity in cart in db by 1
-    console.log('increase button clicked');
-    quantity += 1;
-    return quantity;
+  increaseQuantity(product) {
+    product.individual_product_order_details.quantity =
+      Number(product.individual_product_order_details.quantity) + 1;
+    this.handleChange(product);
+  }
+
+  handleChange(product) {
+    product.editButtonClicked = true;
+    this.props.addToCart(this.props.match.params.cartId, product);
+    this.props.loadCart(this.props.match.params.cartId);
   }
 
   async handleRemove(orderId, id) {
@@ -68,22 +74,14 @@ class Cart extends React.Component {
                   <br />
                   <button
                     type="submit"
-                    onClick={() =>
-                      this.decreaseQuantity(
-                        product.individual_product_order_details.quantity
-                      )
-                    }
+                    onClick={() => this.decreaseQuantity(product)}
                   >
                     -
                   </button>
                   {product.individual_product_order_details.quantity}
                   <button
                     type="submit"
-                    onClick={() =>
-                      this.increaseQuantity(
-                        product.individual_product_order_details.quantity
-                      )
-                    }
+                    onClick={() => this.increaseQuantity(product)}
                   >
                     +
                   </button>
@@ -157,6 +155,7 @@ const mapDispatch = (dispatch) => {
     loadCart: (id) => dispatch(fetchCart(id)),
     removeFromCart: (orderId, id) => dispatch(removeFromCartThunk(orderId, id)),
     emptyCart: (orderId) => dispatch(emptyCartThunk(orderId)),
+    addToCart: (orderId, item) => dispatch(addToCartThunk(orderId, item)),
   };
 };
 
