@@ -4,7 +4,7 @@ const {isAdmin} = require('../express-gate-auth');
 const Order = require('../db/models/order');
 
 // DELETE /users/:userId
-router.delete('/:id', async (req, res, next) => {
+router.delete('/:id', isAdmin, async (req, res, next) => {
   try {
     const id = parseInt(req.params.id);
     if (isNaN(id)) return res.status(404).end();
@@ -13,7 +13,7 @@ router.delete('/:id', async (req, res, next) => {
       where: {id: id},
     });
 
-    if (!user) return res.status(404).end();
+    if (!user) return res.sendStatus(404).end();
     await user.destroy();
     res.status(204).send();
   } catch (error) {

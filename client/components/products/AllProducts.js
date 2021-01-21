@@ -1,8 +1,13 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
 import {connect} from 'react-redux';
-import {fetchProducts} from '../../store/redux/products/products';
-import {deleteProduct} from '../../store/redux/products/singleProduct';
+import PropTypes from 'prop-types';
+import {
+  fetchProducts,
+  deleteProduct,
+} from '../../store/redux/products/products';
+
+import Button from '@material-ui/core/Button';
 
 class AllProducts extends React.Component {
   constructor(props) {
@@ -25,6 +30,7 @@ class AllProducts extends React.Component {
 
   render() {
     const products = this.props.products;
+    const {isLoggedIn, isAdmin} = this.props;
     return (
       <div>
         {this.noProducts(products)}
@@ -35,9 +41,15 @@ class AllProducts extends React.Component {
               <h2>{product.name}</h2>
               <h4>${(product.price / 100).toFixed(2)}</h4>
             </Link>
-            <button type="button" onClick={() => this.handleDelete(product)}>
-              Delete this product
-            </button>
+            {isAdmin && isLoggedIn && (
+              <Button
+                variant="contained"
+                size="small"
+                onClick={() => this.handleDelete(product)}
+              >
+                Delete this product
+              </Button>
+            )}
           </div>
         ))}
       </div>
@@ -54,6 +66,8 @@ class AllProducts extends React.Component {
 const mapState = (state) => {
   return {
     products: state.productsReducer,
+    isLoggedIn: !!state.user.id,
+    isAdmin: !!state.user.isAdmin,
   };
 };
 
@@ -65,3 +79,8 @@ const mapDispatch = (dispatch) => {
 };
 
 export default connect(mapState, mapDispatch)(AllProducts);
+
+AllProducts.propTypes = {
+  isLoggedIn: PropTypes.bool.isRequired,
+  isAdmin: PropTypes.bool.isRequired,
+};

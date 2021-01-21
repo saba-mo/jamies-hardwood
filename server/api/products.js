@@ -6,10 +6,8 @@ const {isAdmin} = require('../express-gate-auth');
 router.delete('/:productId', isAdmin, async (req, res, next) => {
   try {
     const id = parseInt(req.params.productId);
-    if (isNaN(id)) {
-      res.status(404).end();
-      return;
-    }
+    if (isNaN(id)) return res.status(404).end();
+
     const thisProduct = await Product.findOne({
       where: {id: id},
     });
