@@ -22,6 +22,7 @@ class AddProduct extends React.Component {
   handleSubmit(event) {
     event.preventDefault();
     try {
+      // const price = parseInt(this.state.price) / 100;
       this.props.addProduct(this.state.name, this.state.description);
       this.setState(defaultState);
     } catch (error) {
@@ -56,6 +57,22 @@ class AddProduct extends React.Component {
               onChange={this.handleChange}
             />
           </div>
+          {/* <div>
+            <label htmlFor="price">
+              <small>Price</small>
+            </label>
+            <input
+              name="price"
+              type="number"
+              placeholder="0.00"
+              min="0"
+              value="0"
+              step="0.01"
+              pattern="^\d+(?:\.\d{1,2})?$"
+              value={price}
+              onChange={this.handleChange}
+            />
+          </div> */}
           <div>
             <button type="submit">Add Product</button>
           </div>
