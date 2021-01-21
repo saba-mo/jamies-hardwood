@@ -41,7 +41,6 @@ class Cart extends React.Component {
   }
 
   handleCheckout() {
-    // update quantity (inventory) in db
     this.props.emptyCart(this.props.match.params.cartId);
     window.location.href = '/confirmation';
   }
