@@ -66,6 +66,34 @@ router.put('/:cartId', async (req, res, next) => {
   }
 });
 
+// empty cart at checkout
+router.delete('/:cartId', async (req, res, next) => {
+  try {
+    const id = parseInt(req.params.cartId);
+    if (isNaN(id)) {
+      res.sendStatus(400);
+    }
+
+    const thisOrder = await Order.findByPk(id, {
+      include: {model: Product},
+    });
+
+    thisOrder.products.forEach((product) => {
+      // decrement product inventory by quantity in cart
+      product.quantity -= product.individual_product_order_details.quantity;
+      // update product inventory in db
+      product.update({
+        quantity: product.quantity,
+      });
+      // disassociate product and order
+      thisOrder.removeProduct(product.id);
+    });
+  } catch (error) {
+    next(error);
+  }
+});
+
+// remove an item from cart
 router.delete('/:cartId/:productId', async (req, res, next) => {
   try {
     const cartId = parseInt(req.params.cartId);
