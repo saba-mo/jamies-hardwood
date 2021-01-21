@@ -18,7 +18,7 @@ export class AllUsers extends React.Component {
   };
 
   noUsers = (userList) => {
-    if (userList.length < 2) {
+    if (userList.length === 1) {
       return `Looks like you're the only one here. Go get marketing!`;
     }
   };
