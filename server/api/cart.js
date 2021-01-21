@@ -43,7 +43,8 @@ router.put('/:cartId', async (req, res, next) => {
       await productExistsInCart.update({
         quantity: currentQuantity,
       });
-      res.json(productExistsInCart);
+      // add check that quantity updated
+      res.end();
     } else {
       // If not (if zero results), create an instance with req.body.quantity
       // create association

@@ -1,5 +1,5 @@
 const {green, red} = require('chalk');
-const {User, Product, Order, Cart} = require('../server/db/models');
+const {User, Product, Order} = require('../server/db/models');
 const db = require('../server/db/');
 const {Op} = require('sequelize');
 
@@ -90,7 +90,13 @@ const lastNames = [
 
 const itemAdjective = [
   'fullness',
+  'being plucky',
+  'love',
+  'power',
   'stickiness',
+  'lustor',
+  'vivacity',
+  'ravishing',
   'beauty',
   'rad!',
   'bodaciousness',
@@ -106,7 +112,6 @@ const itemAdjective = [
   'romance',
   'power',
   'manners',
-  'being plucky',
   'being marvelous',
   'engagement',
   'mirth',
@@ -115,25 +120,20 @@ const itemAdjective = [
   'glistening',
   'dazzle',
   'twinkling',
-  'lustor',
   'vibrance',
-  'vivacity',
   'glow',
   'gleaming',
   'sparkles',
   'brilliance',
   'elegance',
   'enchantment',
-  'ravishing',
   'magnificence',
   'captivation',
-  'love',
   'charisma',
 ];
 
 const emailHost = ['gmail', 'hotmail', 'yahoo'];
 const userCount = 200;
-const productCount = 200;
 
 // alternative way of approaching this is creating a variable just like the names e.g. const images = [`images from either urls or csv files`]
 let bowlSmlImage = `https://i.pinimg.com/236x/ad/27/7c/ad277c3a5142ababf0ef14a81f91c168.jpg`;
@@ -352,7 +352,7 @@ const productWorkSpace = async () => {
   }
 };
 const productRing = async () => {
-  for (let i = 0; i < itemAdjective.length; i++) {
+  for (let i = 1; i < 8; i++) {
     let adjective = itemAdjective[i];
     let name = `Ring of ${adjective}`;
     let description = 'Why only get one when you can get two?';
@@ -484,18 +484,17 @@ async function associations() {
 const seed = async () => {
   await db.sync({force: true});
   console.log(green('db synced!'));
-
   await productRing();
   await Promise.all([
     users(),
-    productEarrings(),
     productBowls(),
     productLrgBowls(),
-    productPlates(),
     productGoblets(),
+    productEarrings(),
+    productLight(),
+    productPlates(),
     productWorkSpace(),
     productNapkinRing(),
-    productLight(),
     productShelf(),
   ]);
   await associations();
