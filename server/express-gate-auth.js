@@ -1,6 +1,24 @@
+const User = require('./db/models/user');
+const Order = require('./db/models/order');
+
+//checking if the user is an admin
 const isAdmin = async (req, res, next) =>
   req.user.isAdmin ? next() : res.send("You don't have permission");
 
-//req.user comes from passport. Contains an object of information about a logged in user, which allows us to access "isAdmin" etc.
+//checking if the user identity is the identity associated with this order
+const isIdentity = async (req, res, next) => {
+  const user = await User.findOne({
+    where: {
+      id: req.user.id,
+    },
+    include: {
+      model: Order,
+    },
+  });
 
-module.exports = {isAdmin};
+  user.order.id == req.params.cartId
+    ? next()
+    : res.send("You don't have permission");
+};
+
+module.exports = {isAdmin, isIdentity};
