@@ -1,6 +1,6 @@
 const router = require('express').Router();
 const {User} = require('../db/models/');
-const isAdmin = require('../express-gate-auth');
+const {isAdmin} = require('../express-gate-auth');
 
 // DELETE /users/:userId
 router.delete('/:id', isAdmin, async (req, res, next) => {
