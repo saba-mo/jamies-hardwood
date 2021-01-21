@@ -57,12 +57,6 @@ class AllProducts extends React.Component {
   }
 }
 
-// the button above cannot be here because this is viewable by all users. We need to address this isSecureContext, to only be viewable for admin. Should we have an entirely different product view for admin?
-
-//<button type="button" onClick={() => this.handleDelete(product)}>
-//   Delete this product
-// </button>
-
 const mapState = (state) => {
   return {
     products: state.productsReducer,
