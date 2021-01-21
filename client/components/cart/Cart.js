@@ -16,6 +16,7 @@ class Cart extends React.Component {
     this.decreaseQuantity = this.decreaseQuantity.bind(this);
     this.increaseQuantity = this.increaseQuantity.bind(this);
     this.handleRemove = this.handleRemove.bind(this);
+    this.handleChange = this.handleChange.bind(this);
   }
 
   componentDidMount() {
@@ -25,14 +26,16 @@ class Cart extends React.Component {
   decreaseQuantity(product) {
     product.individual_product_order_details.quantity =
       Number(product.individual_product_order_details.quantity) - 1;
-    product.editButtonClicked = true;
-    this.props.addToCart(this.props.match.params.cartId, product);
-    this.props.loadCart(this.props.match.params.cartId);
+    this.handleChange(product);
   }
 
   increaseQuantity(product) {
     product.individual_product_order_details.quantity =
       Number(product.individual_product_order_details.quantity) + 1;
+    this.handleChange(product);
+  }
+
+  handleChange(product) {
     product.editButtonClicked = true;
     this.props.addToCart(this.props.match.params.cartId, product);
     this.props.loadCart(this.props.match.params.cartId);

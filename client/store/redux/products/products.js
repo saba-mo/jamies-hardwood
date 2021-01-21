@@ -59,16 +59,11 @@ export default function productsReducer(state = initialState, action) {
     case ADD_PRODUCT:
       return [...state, action.product];
     case DELETE_PRODUCT:
-      console.log('state', state);
       state = state.filter(
-        (aproduct) => console.log('aproduct', aproduct),
-        parseInt(aproduct.id) !== parseInt(action.aproduct.id)
+        (aproduct) => parseInt(aproduct.id) !== parseInt(action.aproduct.id)
       );
       return state;
     case SET_PRODUCTS:
-      console.log('state', state);
-      console.log('products', action.products);
-
       return action.products;
     default:
       return state;
