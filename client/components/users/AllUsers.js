@@ -17,6 +17,12 @@ export class AllUsers extends React.Component {
     this.props.deleteUser(userToDelete);
   };
 
+  noUsers = (userList) => {
+    if (userList.length < 2) {
+      return `Looks like you're the only one here. Get get marketing!`;
+    }
+  };
+
   render() {
     const userList = this.props.usersView;
     if (!userList.length) {
