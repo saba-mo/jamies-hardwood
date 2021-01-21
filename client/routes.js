@@ -23,7 +23,7 @@ class Routes extends Component {
   }
 
   render() {
-    const {isLoggedIn, isAdmin} = this.props;
+    const {isLoggedIn} = this.props;
 
     return (
       <Switch>
@@ -32,7 +32,6 @@ class Routes extends Component {
         <Route path="/signup" component={Signup} />
         <Route exact path="/products" component={AllProducts} />
         <Route exact path="/products/:productId" component={SingleProduct} />
-        <Route path="/cart/:cartId" component={Cart} />
         <Route path="/confirmation" component={Confirmation} />
 
         {isLoggedIn && (
@@ -41,6 +40,7 @@ class Routes extends Component {
             <Route path="/home" component={UserHome} />
             <Route exact path="/users" component={AllUsers} />
             <Route exact path="/users/:userId" component={SingleUser} />
+            <Route path="/cart/:cartId" component={Cart} />
             <Route exact path="/addproduct" component={AddProduct} />
           </Switch>
         )}

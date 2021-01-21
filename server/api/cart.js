@@ -27,50 +27,54 @@ router.put('/:cartId', async (req, res, next) => {
     // 3. Quantity
 
     // Does this order have an instance of this product?
-    // Get one from Cart model where (orderId = req.params.cartId AND productId = req.body.id)
     const productExistsInCart = await Cart.findOne({
       where: {
         product_id: req.body.id,
         order_id: req.params.cartId,
       },
     });
+
+    let currentQuantity = 0;
     // If so (if one result), increment the quantity by req.body.quantity
     if (productExistsInCart) {
-      productExistsInCart.quantity += Number(req.body.quantityToAdd);
-      res.json(productExistsInCart);
-    }
-
-    // If not (if zero results), create an instance with req.body.quantity
-    else {
-      const newOrderItem = await Cart.create({
+      currentQuantity += Number(productExistsInCart.quantity);
+      currentQuantity += Number(req.body.quantityToAdd);
+      await productExistsInCart.update({
+        quantity: currentQuantity,
+      });
+      // add check that quantity updated
+      res.end();
+    } else {
+      // If not (if zero results), create an instance with req.body.quantity
+      // create association
+      await Cart.create({
         order_id: req.params.cartId,
         product_id: req.body.id,
         quantity: Number(req.body.quantityToAdd),
       });
-      res.json(newOrderItem);
+
+      // take last element of products array in order so that it has same fields as what GET CART sends back
+      const thisCart = await Order.findByPk(req.params.cartId, {
+        include: {model: Product},
+      });
+
+      res.json(thisCart.products[thisCart.products.length - 1]);
     }
   } catch (error) {
     next(error);
   }
 });
 
-router.delete('/:cartId', async (req, res, next) => {
+router.delete('/:cartId/:productId', async (req, res, next) => {
   try {
-    const thisOrder = await Order.findByPk(req.params.cartId);
+    const cartId = parseInt(req.params.cartId);
+    if (isNaN(cartId)) return res.status(404).end();
 
-    const thisCart = await Cart.findOne({
-      where: {
-        order_id: req.params.cartId,
-      },
-    });
+    const productId = parseInt(req.params.productId);
+    if (isNaN(productId)) return res.status(404).end();
 
-    const thisProduct = await Product.findOne({
-      where: {
-        id: thisCart.product_id,
-      },
-    });
-
-    thisOrder.removeProduct(thisProduct.id);
+    const thisOrder = await Order.findByPk(cartId);
+    thisOrder.removeProduct(productId);
     res.sendStatus(204);
   } catch (error) {
     next(error);
