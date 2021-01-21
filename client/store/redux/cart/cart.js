@@ -57,6 +57,16 @@ export const removeFromCartThunk = (orderId, id) => {
   };
 };
 
+export const emptyCartThunk = (orderId) => {
+  return async () => {
+    try {
+      await axios.delete(`/api/cart/${orderId}`);
+    } catch (err) {
+      console.log('empty cart thunk error: ', err);
+    }
+  };
+};
+
 const initialState = [];
 
 export default function cartReducer(state = initialState, action) {

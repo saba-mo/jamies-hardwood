@@ -1,7 +1,11 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import {Link} from 'react-router-dom';
-import {fetchCart, removeFromCartThunk} from '../../store/redux/cart/cart';
+import {
+  fetchCart,
+  removeFromCartThunk,
+  emptyCartThunk,
+} from '../../store/redux/cart/cart';
 
 class Cart extends React.Component {
   constructor() {
@@ -38,7 +42,7 @@ class Cart extends React.Component {
 
   handleCheckout() {
     // update quantity (inventory) in db
-    // empty cart
+    this.props.emptyCart(this.props.match.params.cartId);
     window.location.href = '/confirmation';
   }
 
@@ -153,6 +157,7 @@ const mapDispatch = (dispatch) => {
   return {
     loadCart: (id) => dispatch(fetchCart(id)),
     removeFromCart: (orderId, id) => dispatch(removeFromCartThunk(orderId, id)),
+    emptyCart: (orderId) => dispatch(emptyCartThunk(orderId)),
   };
 };
 
