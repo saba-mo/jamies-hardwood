@@ -5,7 +5,6 @@ import PropTypes from 'prop-types';
 import {
   Login,
   Signup,
-  UserHome,
   AllProducts,
   SingleProduct,
   AllUsers,
@@ -13,6 +12,7 @@ import {
   Cart,
   Confirmation,
   AddProduct,
+  LandingPage,
 } from './components';
 import {me} from './store';
 
@@ -28,6 +28,7 @@ class Routes extends Component {
     return (
       <Switch>
         {/* Routes placed here are available to all visitors */}
+        <Route exact path="/" component={LandingPage} />
         <Route path="/login" component={Login} />
         <Route path="/signup" component={Signup} />
         <Route exact path="/products" component={AllProducts} />
@@ -37,7 +38,7 @@ class Routes extends Component {
         {isLoggedIn && (
           <Switch>
             {/* Routes placed here are only available after logging in */}
-            <Route path="/home" component={UserHome} />
+            <Route path="/home" component={LandingPage} />
             <Route path="/cart/:cartId" component={Cart} />
             {isAdmin && (
               <Switch>
@@ -50,7 +51,7 @@ class Routes extends Component {
         )}
 
         {/* Displays our Login component as a fallback */}
-        <Route component={Login} />
+        <Route component={LandingPage} />
       </Switch>
     );
   }

@@ -18,10 +18,7 @@ export const reducer = combineReducers({
 });
 
 const middleware = composeWithDevTools(
-  applyMiddleware(
-    thunkMiddleware.withExtraArgument({axios}),
-    createLogger({collapsed: true})
-  )
+  applyMiddleware(thunkMiddleware.withExtraArgument({axios}))
 );
 
 const store = createStore(reducer, middleware);

@@ -7,7 +7,13 @@ import {logout} from '../store';
 // see nav_hold.js for previous version
 class Navbar extends Component {
   render() {
-    const {handleClick, isLoggedIn, isAdmin, orderId} = this.props;
+    const {handleClick, isLoggedIn, isAdmin, orderId, cart} = this.props;
+    let cartTotal = 0;
+    if (cart.length) {
+      cart.forEach(
+        (item) => (cartTotal += item.individual_product_order_details.quantity)
+      );
+    }
     return (
       <div id="navbar">
         <div id="store-name">
@@ -23,7 +29,9 @@ class Navbar extends Component {
                 Users
               </Link>
             )}
-            {isLoggedIn && <Link to={`/cart/${orderId}`}>Cart</Link>}
+            {isLoggedIn && (
+              <Link to={`/cart/${orderId}`}>{`Cart (${cartTotal})`}</Link>
+            )}
             {isLoggedIn && (
               <a href="#" onClick={handleClick}>
                 Logout
@@ -45,6 +53,7 @@ const mapState = (state) => {
     isLoggedIn: !!state.user.id,
     isAdmin: !!state.user.isAdmin,
     orderId: state.user.order ? state.user.order.id : null,
+    cart: state.cartReducer,
   };
 };
 

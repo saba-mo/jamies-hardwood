@@ -1,5 +1,5 @@
 body {
-  font-family: sans-serif;
+  font-family: Optima;
 }
 
 a {
@@ -8,10 +8,6 @@ a {
 
 label {
   display: block;
-}
-
-nav {
-  color: white;
 }
 
 nav a {
@@ -91,4 +87,24 @@ img {
 
 #quantity {
   max-width: fit-content;
+}
+
+#landing-page {
+  width: 100%;
+  height: 100%;
+}
+
+.frontPageText {
+  color: #284564;
+  font-size: x-large;
+}
+
+#welcomeMsg {
+  text-align: center;
+  padding: 15px;
+}
+
+#cart-welcome {
+  text-align: right;
+  margin-right: 1em;
 }

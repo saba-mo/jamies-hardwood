@@ -58,6 +58,7 @@ class Cart extends React.Component {
 
     return (
       <div>
+        <h4 id="cart-welcome">Welcome, {this.props.email}</h4>
         <h1>Shopping Cart</h1>
         {cart && cart.length ? (
           <div>
@@ -147,6 +148,7 @@ class Cart extends React.Component {
 const mapState = (state) => {
   return {
     cart: state.cartReducer,
+    email: state.user.email,
   };
 };
 
