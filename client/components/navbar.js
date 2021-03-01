@@ -22,7 +22,7 @@ class Navbar extends Component {
         <nav>
           <div id="pages">
             <Link to="/home">Home</Link>
-            <Link to="/products">Shop</Link>
+            <Link to="/products">{isLoggedIn ? 'Shop' : 'Products'}</Link>
             {isAdmin && isLoggedIn && <Link to="/addproduct">Add Product</Link>}
             {isAdmin && isLoggedIn && (
               <Link to="/users" className="admin-nav">
@@ -38,7 +38,7 @@ class Navbar extends Component {
               </a>
             )}
             {!isLoggedIn && <Link to="/signup">Sign Up</Link>}
-            {!isLoggedIn && <Link to="/home">Sign In</Link>}
+            {!isLoggedIn && <Link to="/login">Sign In</Link>}
           </div>
         </nav>
       </div>

@@ -67,7 +67,6 @@ class Cart extends React.Component {
                 <div key={product.id}>
                   <Link to={`/products/${product.id}`}>
                     <h3>{product.name}</h3>
-                    <br />
                     <img src={product.imageUrl} />
                   </Link>
                   <br />
