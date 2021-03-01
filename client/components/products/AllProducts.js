@@ -32,14 +32,14 @@ class AllProducts extends React.Component {
     const products = this.props.products;
     const {isLoggedIn, isAdmin} = this.props;
     return (
-      <div>
+      <div className="products-container">
         {this.noProducts(products)}
         {products.map((product) => (
-          <div key={product.id}>
+          <div key={product.id} className="card">
             <Link to={`/products/${product.id}`}>
-              <img src={product.imageUrl} />
+              <img className="all-products-img" src={product.imageUrl} />
               <h2>{product.name}</h2>
-              <h4>${(product.price / 100).toFixed(2)}</h4>
+              <h4 className="price">${(product.price / 100).toFixed(2)}</h4>
             </Link>
             {isAdmin && isLoggedIn && (
               <Button

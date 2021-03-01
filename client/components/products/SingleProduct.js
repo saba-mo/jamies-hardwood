@@ -34,19 +34,18 @@ export class SingleProduct extends React.Component {
     const {user} = this.props;
 
     return (
-      <div>
-        <h1>{product.name}</h1>
-        Description: {product.description}
-        <br />
-        Price: ${(product.price / 100).toFixed(2)}
-        <br />
+      <div className="single-product">
+        <h1 className="single-product-name">{product.name}</h1>
         <img src={product.imageUrl} />
         <br />
-        <label htmlFor="quantity">Quantity: </label>
+        <h3>{product.description}</h3>
+        <h4>${(product.price / 100).toFixed(2)}</h4>
+        <label htmlFor="quantity" />
         <select
           value={this.state.quantityToAdd}
           onChange={this.handleChange}
           name="quantityToAdd"
+          id="quantity"
         >
           <option value="1">1</option>
           <option value="2">2</option>
